@@ -14,6 +14,11 @@ export default defineConfig({
       manifest: './src/manifest.json',
       watchFilePaths: ['src/**/*'],
       disableAutoLaunch: true,
+      additionalInputs: [
+        'src/icons/icon-16.svg',
+        'src/icons/icon-48.svg',
+        'src/icons/icon-128.svg',
+      ],
     }),
   ],
   resolve: {
