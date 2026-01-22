@@ -3,126 +3,152 @@
  * 显示用户信息、同步状态、账号操作
  */
 
-import { useState, useEffect } from 'react';
-import { authService } from '../../shared/services/auth-service';
-import type { User } from '../../shared/types/auth';
-import { t } from '../../shared/utils/i18n';
-import './AccountSettings.css';
+import { useState, useEffect } from 'react'
+import { authService } from '../../shared/services/auth-service'
+import type { User } from '../../shared/types/auth'
+import { t } from '../../shared/utils/i18n'
+import './AccountSettings.css'
 
 export function AccountSettings() {
-  const [user, setUser] = useState<User | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [editingName, setEditingName] = useState(false);
-  const [displayName, setDisplayName] = useState('');
-  const [savingName, setSavingName] = useState(false);
-
-  useEffect(() => {
-    loadUserInfo();
-
-    // 监听认证状态变化
-    const unsubscribe = authService.onAuthStateChanged((state) => {
-      setUser(state.user);
-      if (state.user) {
-        loadDisplayName(state.user.uid);
-      }
-    });
-
-    return () => unsubscribe();
-  }, []);
-
-  const loadUserInfo = async () => {
-    try {
-      setLoading(true);
-      const currentUser = authService.getCurrentUser();
-      setUser(currentUser);
-      if (currentUser) {
-        await loadDisplayName(currentUser.uid);
-      }
-    } catch (error) {
-      console.error('[AccountSettings] Load user info failed:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
+  const [user, setUser] = useState<User | null>(null)
+  const [loading, setLoading] = useState(true)
+  const [editingName, setEditingName] = useState(false)
+  const [displayName, setDisplayName] = useState('')
+  const [savingName, setSavingName] = useState(false)
 
   const loadDisplayName = async (uid: string) => {
     try {
       // 从 Firestore 加载自定义显示名称
-      const { firestoreService } = await import('../../shared/services/firestore-service');
-      const userData = await firestoreService.getUserData(uid);
+      const { firestoreService } = await import('../../shared/services/firestore-service')
+      const userData = await firestoreService.getUserData(uid)
       if (userData?.displayName) {
-        setDisplayName(userData.displayName);
+        setDisplayName(userData.displayName)
       } else if (user?.displayName) {
         // 如果没有自定义名称，使用 Google 账号的显示名称
-        setDisplayName(user.displayName);
+        setDisplayName(user.displayName)
       }
     } catch (error) {
-      console.error('[AccountSettings] Load display name failed:', error);
+      console.error('[AccountSettings] Load display name failed:', error)
     }
-  };
+  }
+
+  const loadUserInfo = async () => {
+    try {
+      setLoading(true)
+      const currentUser = authService.getCurrentUser()
+      setUser(currentUser)
+      if (currentUser) {
+        await loadDisplayName(currentUser.uid)
+      }
+    } catch (error) {
+      console.error('[AccountSettings] Load user info failed:', error)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  useEffect(() => {
+    loadUserInfo()
+
+    // 监听认证状态变化
+    const unsubscribe = authService.onAuthStateChanged((state) => {
+      setUser(state.user)
+      if (state.user) {
+        loadDisplayName(state.user.uid)
+      }
+    })
+
+    return () => unsubscribe()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   const handleEditName = () => {
-    setEditingName(true);
-  };
+    setEditingName(true)
+  }
 
   const handleCancelEdit = () => {
-    setEditingName(false);
+    setEditingName(false)
     // 恢复原来的名称
     if (user) {
-      loadDisplayName(user.uid);
+      loadDisplayName(user.uid)
     }
-  };
+  }
 
   const handleSaveName = async () => {
     if (!user || !displayName.trim()) {
-      return;
+      return
     }
 
     try {
-      setSavingName(true);
-      const { firestoreService } = await import('../../shared/services/firestore-service');
-      await firestoreService.updateDisplayName(user.uid, displayName.trim());
-      setEditingName(false);
-      alert(t('account_nameUpdated'));
+      setSavingName(true)
+
+      // 1. 保存到 Firestore
+      const { firestoreService } = await import('../../shared/services/firestore-service')
+      await firestoreService.updateDisplayName(user.uid, displayName.trim())
+
+      // 2. 更新本地 UserData
+      const result = await chrome.storage.local.get('userData')
+      if (result.userData) {
+        const updatedUserData = {
+          ...result.userData,
+          displayName: displayName.trim(),
+          updatedAt: Date.now(),
+        }
+        await chrome.storage.local.set({ userData: updatedUserData })
+        console.log('[AccountSettings] Local userData updated with displayName')
+      }
+
+      // 3. 触发同步
+      try {
+        const { syncService } = await import('../../shared/services/sync-service')
+        await syncService.syncUserData()
+        console.log('[AccountSettings] User data synced after displayName update')
+      } catch (syncError) {
+        console.error('[AccountSettings] Failed to sync after displayName update:', syncError)
+        // 同步失败不影响保存成功的提示
+      }
+
+      setEditingName(false)
+      window.alert(t('account_nameUpdated'))
     } catch (error) {
-      console.error('[AccountSettings] Save display name failed:', error);
-      alert(t('account_nameUpdateFailed'));
+      console.error('[AccountSettings] Save display name failed:', error)
+      window.alert(t('account_nameUpdateFailed'))
     } finally {
-      setSavingName(false);
+      setSavingName(false)
     }
-  };
+  }
 
   const handleSignOut = async () => {
-    if (!confirm(t('confirmSignOut'))) {
-      return;
+    if (!window.confirm(t('confirmSignOut'))) {
+      return
     }
 
     try {
-      await authService.signOut();
-      setUser(null);
+      await authService.signOut()
+      setUser(null)
     } catch (error) {
-      console.error('[AccountSettings] Sign out failed:', error);
-      alert(t('account_signOutFailed'));
+      console.error('[AccountSettings] Sign out failed:', error)
+      window.alert(t('account_signOutFailed'))
     }
-  };
+  }
 
   const handleDeleteAccount = async () => {
-    const confirmed = confirm(t('account_confirmDelete'));
-    if (!confirmed) return;
+    const confirmed = window.confirm(t('account_confirmDelete'))
+    if (!confirmed) return
 
-    const doubleConfirmed = confirm(t('account_confirmDeleteWarning'));
-    if (!doubleConfirmed) return;
+    const doubleConfirmed = window.confirm(t('account_confirmDeleteWarning'))
+    if (!doubleConfirmed) return
 
-    alert(t('account_deleteNotImplemented'));
+    window.alert(t('account_deleteNotImplemented'))
     // TODO: 实现账号删除功能
-  };
+  }
 
   if (loading) {
     return (
       <div className="account-settings">
         <div className="loading">{t('loading')}</div>
       </div>
-    );
+    )
   }
 
   if (!user) {
@@ -134,7 +160,7 @@ export function AccountSettings() {
           <p className="empty-hint">{t('account_signInHint')}</p>
         </div>
       </div>
-    );
+    )
   }
 
   return (
@@ -214,17 +240,11 @@ export function AccountSettings() {
       <div className="account-card">
         <h3 className="card-title">{t('account_actions')}</h3>
         <div className="account-actions">
-          <button
-            className="btn-action btn-sign-out"
-            onClick={handleSignOut}
-          >
+          <button className="btn-action btn-sign-out" onClick={handleSignOut}>
             <span className="btn-icon">🚪</span>
             {t('signOut')}
           </button>
-          <button
-            className="btn-action btn-delete"
-            onClick={handleDeleteAccount}
-          >
+          <button className="btn-action btn-delete" onClick={handleDeleteAccount}>
             <span className="btn-icon">⚠️</span>
             {t('account_deleteAccount')}
           </button>
@@ -234,5 +254,5 @@ export function AccountSettings() {
         </div>
       </div>
     </div>
-  );
+  )
 }

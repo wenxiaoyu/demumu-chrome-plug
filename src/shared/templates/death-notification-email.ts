@@ -1,26 +1,70 @@
 /**
  * 死亡通知邮件模板
- * 
+ *
  * 支持中英文双语
  * 使用 Chrome i18n API 根据用户语言自动选择
  */
 
-import { EmailTemplate } from '../types';
-import { t, isChineseLanguage } from '../utils/i18n';
+import { EmailTemplate } from '../types'
+import { t, isChineseLanguage } from '../utils/i18n'
+import { storage } from '../storage'
 
 /**
  * 获取死亡通知邮件模板
  * @param userName 用户名（用于替换主题中的占位符）
  * @returns 邮件模板（根据当前语言）
  */
-export function getDeathNotificationTemplate(userName: string): EmailTemplate {
-  const isChinese = isChineseLanguage();
-  
-  return {
-    subject: t('emailSubject', userName),
-    htmlBody: isChinese ? getChineseHtmlBody() : getEnglishHtmlBody(),
-    textBody: isChinese ? getChineseTextBody() : getEnglishTextBody(),
-  };
+export async function getDeathNotificationTemplate(userName: string): Promise<EmailTemplate> {
+  try {
+    // 尝试从存储中获取自定义模板
+    const customTemplate = await storage.get<Record<string, unknown>>('customEmailTemplate')
+
+    if (customTemplate) {
+      console.log('[getDeathNotificationTemplate] Found custom template:', customTemplate)
+
+      // 检查是否为新的多语言格式
+      if (customTemplate.zh_CN && customTemplate.en) {
+        // 使用多语言模板
+        const isChinese = isChineseLanguage()
+        const template = isChinese ? customTemplate.zh_CN : customTemplate.en
+
+        // 验证模板完整性
+        if (template && template.subject && template.htmlBody && template.textBody) {
+          console.log('[getDeathNotificationTemplate] Using multi-language template')
+          return template
+        } else {
+          console.warn('[getDeathNotificationTemplate] Invalid multi-language template format')
+        }
+      }
+      // 检查是否为旧的单语言格式
+      else if (customTemplate.subject && customTemplate.htmlBody && customTemplate.textBody) {
+        console.warn('[getDeathNotificationTemplate] Found old single-language template, using it')
+        return customTemplate
+      }
+
+      console.warn(
+        '[getDeathNotificationTemplate] Custom template format not recognized, using default'
+      )
+    }
+
+    // 如果没有自定义模板或格式不正确，使用默认模板
+    console.log('[getDeathNotificationTemplate] Using default template')
+    const isChinese = isChineseLanguage()
+    return {
+      subject: t('emailSubject', userName),
+      htmlBody: isChinese ? getChineseHtmlBody() : getEnglishHtmlBody(),
+      textBody: isChinese ? getChineseTextBody() : getEnglishTextBody(),
+    }
+  } catch (error) {
+    console.error('[getDeathNotificationTemplate] Error loading template:', error)
+    // 返回默认模板作为后备
+    const isChinese = isChineseLanguage()
+    return {
+      subject: t('emailSubject', userName),
+      htmlBody: isChinese ? getChineseHtmlBody() : getEnglishHtmlBody(),
+      textBody: isChinese ? getChineseTextBody() : getEnglishTextBody(),
+    }
+  }
 }
 
 /**
@@ -155,7 +199,7 @@ function getChineseHtmlBody(): string {
   </div>
 </body>
 </html>
-  `.trim();
+  `.trim()
 }
 
 /**
@@ -290,7 +334,7 @@ function getEnglishHtmlBody(): string {
   </div>
 </body>
 </html>
-  `.trim();
+  `.trim()
 }
 
 /**
@@ -321,7 +365,7 @@ function getChineseTextBody(): string {
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 此邮件由"还活着吗"扩展自动发送
 © 2025 还活着吗 | 关心每一个生命
-  `.trim();
+  `.trim()
 }
 
 /**
@@ -352,5 +396,5 @@ If you're concerned about their safety, we recommend contacting them as soon as 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 This email was automatically sent by "Are You Still Alive" extension
 © 2025 Are You Still Alive | Caring for Every Life
-  `.trim();
+  `.trim()
 }
