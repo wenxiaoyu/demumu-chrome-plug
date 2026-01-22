@@ -1,44 +1,44 @@
-import { useState, useEffect } from 'react';
-import { StatsPage } from './components/StatsPage';
-import { ContactsPage } from './components/ContactsPage';
-import { SettingsPage } from './components/SettingsPage';
-import { AccountSettings } from './components/AccountSettings';
-import { HelpPage } from './components/HelpPage';
-import { useContacts } from './hooks/useContacts';
-import { t, initLanguage } from '../shared/utils/i18n';
-import woodenFishIcon from '../icons/wooden-fish.svg';
-import './Options.css';
+import { useState, useEffect } from 'react'
+import { StatsPage } from './components/StatsPage'
+import { ContactsPage } from './components/ContactsPage'
+import { SettingsPage } from './components/SettingsPage'
+import { AccountSettings } from './components/AccountSettings'
+import { HelpPage } from './components/HelpPage'
+import { useContacts } from './hooks/useContacts'
+import { t, initLanguage } from '../shared/utils/i18n'
+import woodenFishIcon from '../icons/wooden-fish.svg'
+import './options.css'
 
-type Tab = 'stats' | 'contacts' | 'settings' | 'account' | 'help';
+type Tab = 'stats' | 'contacts' | 'settings' | 'account' | 'help'
 
 /**
  * Options 页面主组件
  */
 export function Options() {
-  const [activeTab, setActiveTab] = useState<Tab>('stats');
-  const [langReady, setLangReady] = useState(false);
-  const { contacts, loading, addContact, updateContact, deleteContact } = useContacts();
+  const [activeTab, setActiveTab] = useState<Tab>('stats')
+  const [langReady, setLangReady] = useState(false)
+  const { contacts, loading, addContact, updateContact, deleteContact } = useContacts()
 
   // 初始化语言
   useEffect(() => {
-    initLanguage().then(() => setLangReady(true));
-  }, []);
+    initLanguage().then(() => setLangReady(true))
+  }, [])
 
   // 支持从 URL 参数指定默认标签
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const tab = params.get('tab') as Tab;
+    const params = new URLSearchParams(window.location.search)
+    const tab = params.get('tab') as Tab
     if (tab && ['stats', 'contacts', 'settings', 'account', 'help'].includes(tab)) {
-      setActiveTab(tab);
+      setActiveTab(tab)
     }
-  }, []);
+  }, [])
 
   if (!langReady) {
     return (
       <div className="options-container">
         <div className="options-loading">Loading...</div>
       </div>
-    );
+    )
   }
 
   return (
@@ -48,7 +48,7 @@ export function Options() {
           <img src={woodenFishIcon} alt={t('woodenFish')} className="title-icon-svg" />
           {t('appName')}
         </h1>
-        
+
         <nav className="options-tabs">
           <button
             className={`tab-button ${activeTab === 'stats' ? 'active' : ''}`}
@@ -99,5 +99,5 @@ export function Options() {
         {activeTab === 'help' && <HelpPage />}
       </main>
     </div>
-  );
+  )
 }
