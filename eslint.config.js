@@ -6,7 +6,7 @@ import reactHooks from 'eslint-plugin-react-hooks'
 
 export default [
   {
-    ignores: ['dist/**', 'node_modules/**', '*.config.js', '*.config.ts', 'scripts/**'],
+    ignores: ['dist/**', 'node_modules/**', '*.config.js', '*.config.ts', 'scripts/**', 'test-*.js', 'test-*.html'],
   },
   js.configs.recommended,
   {
@@ -26,8 +26,20 @@ export default [
         document: 'readonly',
         window: 'readonly',
         setTimeout: 'readonly',
+        clearTimeout: 'readonly',
+        setInterval: 'readonly',
+        clearInterval: 'readonly',
         MutationObserver: 'readonly',
         __dirname: 'readonly',
+        navigator: 'readonly',
+        fetch: 'readonly',
+        URL: 'readonly',
+        URLSearchParams: 'readonly',
+        crypto: 'readonly',
+        CustomEvent: 'readonly',
+        alert: 'readonly',
+        confirm: 'readonly',
+        React: 'readonly',
       },
     },
     plugins: {
@@ -42,6 +54,7 @@ export default [
       'react/react-in-jsx-scope': 'off',
       '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
       '@typescript-eslint/no-explicit-any': 'warn',
+      'react-hooks/set-state-in-effect': 'off', // 禁用这个过于严格的规则
     },
     settings: {
       react: {

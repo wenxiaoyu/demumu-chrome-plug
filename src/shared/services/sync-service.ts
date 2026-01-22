@@ -317,7 +317,6 @@ export class SyncService {
       return { success: false, error: 'Sync already in progress' }
     }
 
-    // eslint-disable-next-line no-undef
     if (typeof navigator !== 'undefined' && !navigator.onLine) {
       console.log('[SyncService] Offline, skipping sync')
       this.syncStatus = SyncStatus.Offline

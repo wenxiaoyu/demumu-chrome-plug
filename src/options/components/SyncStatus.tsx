@@ -3,115 +3,115 @@
  * 显示数据同步状态和最后同步时间
  */
 
-import React, { useState, useEffect } from 'react';
-import { syncService, SyncStatus as SyncStatusEnum } from '../../shared/services/sync-service';
-import { authService } from '../../shared/services/auth-service';
-import { t } from '../../shared/utils/i18n';
-import './SyncStatus.css';
+import React, { useState, useEffect } from 'react'
+import { syncService, SyncStatus as SyncStatusEnum } from '../../shared/services/sync-service'
+import { authService } from '../../shared/services/auth-service'
+import { t } from '../../shared/utils/i18n'
+import './SyncStatus.css'
 
 export const SyncStatus: React.FC = () => {
-  const [syncStatus, setSyncStatus] = useState<SyncStatusEnum>(SyncStatusEnum.Idle);
-  const [lastSyncTime, setLastSyncTime] = useState<number>(0);
-  const [isSyncing, setIsSyncing] = useState(false);
-  const [isSignedIn, setIsSignedIn] = useState(false);
+  const [syncStatus, setSyncStatus] = useState<SyncStatusEnum>(SyncStatusEnum.Idle)
+  const [lastSyncTime, setLastSyncTime] = useState<number>(0)
+  const [isSyncing, setIsSyncing] = useState(false)
+  const [isSignedIn, setIsSignedIn] = useState(false)
 
   useEffect(() => {
     // 加载初始状态
-    loadSyncStatus();
+    loadSyncStatus()
 
     // 检查登录状态
-    const user = authService.getCurrentUser();
-    setIsSignedIn(!!user);
+    const user = authService.getCurrentUser()
+    setIsSignedIn(!!user)
 
     // 监听认证状态变化
     const unsubscribe = authService.onAuthStateChanged((state) => {
-      setIsSignedIn(state.isSignedIn);
+      setIsSignedIn(state.isSignedIn)
       if (state.isSignedIn) {
-        loadSyncStatus();
+        loadSyncStatus()
       }
-    });
+    })
 
     // 定时刷新状态
-    const interval = setInterval(loadSyncStatus, 5000);
+    const interval = window.setInterval(loadSyncStatus, 5000)
 
     return () => {
-      unsubscribe();
-      clearInterval(interval);
-    };
-  }, []);
+      unsubscribe()
+      window.clearInterval(interval)
+    }
+  }, [])
 
   const loadSyncStatus = async () => {
-    const status = syncService.getSyncStatus();
-    await syncService.loadLastSyncTime();
-    
-    setSyncStatus(status);
-    setLastSyncTime(syncService.getLastSyncTime());
-  };
+    const status = syncService.getSyncStatus()
+    await syncService.loadLastSyncTime()
+
+    setSyncStatus(status)
+    setLastSyncTime(syncService.getLastSyncTime())
+  }
 
   const handleSyncNow = async () => {
-    if (isSyncing || !isSignedIn) return;
+    if (isSyncing || !isSignedIn) return
 
-    setIsSyncing(true);
+    setIsSyncing(true)
     try {
-      const result = await syncService.syncAll();
+      const result = await syncService.syncAll()
       if (result.success) {
-        await loadSyncStatus();
+        await loadSyncStatus()
       }
     } catch (error) {
-      console.error('[SyncStatus] Manual sync failed:', error);
+      console.error('[SyncStatus] Manual sync failed:', error)
     } finally {
-      setIsSyncing(false);
+      setIsSyncing(false)
     }
-  };
+  }
 
   const getStatusIcon = () => {
     switch (syncStatus) {
       case SyncStatusEnum.Idle:
-        return '⚪';
+        return '⚪'
       case SyncStatusEnum.Syncing:
-        return '🔄';
+        return '🔄'
       case SyncStatusEnum.Success:
-        return '✅';
+        return '✅'
       case SyncStatusEnum.Error:
-        return '❌';
+        return '❌'
       case SyncStatusEnum.Offline:
-        return '📴';
+        return '📴'
       default:
-        return '⚪';
+        return '⚪'
     }
-  };
+  }
 
   const getStatusText = () => {
     switch (syncStatus) {
       case SyncStatusEnum.Idle:
-        return t('sync_idle');
+        return t('sync_idle')
       case SyncStatusEnum.Syncing:
-        return t('sync_syncing');
+        return t('sync_syncing')
       case SyncStatusEnum.Success:
-        return t('sync_success');
+        return t('sync_success')
       case SyncStatusEnum.Error:
-        return t('sync_error');
+        return t('sync_error')
       case SyncStatusEnum.Offline:
-        return t('sync_offline');
+        return t('sync_offline')
       default:
-        return t('sync_idle');
+        return t('sync_idle')
     }
-  };
+  }
 
   const formatLastSyncTime = () => {
-    if (!lastSyncTime) return t('sync_never');
+    if (!lastSyncTime) return t('sync_never')
 
-    const now = Date.now();
-    const diff = now - lastSyncTime;
-    const minutes = Math.floor(diff / 60000);
-    const hours = Math.floor(minutes / 60);
-    const days = Math.floor(hours / 24);
+    const now = Date.now()
+    const diff = now - lastSyncTime
+    const minutes = Math.floor(diff / 60000)
+    const hours = Math.floor(minutes / 60)
+    const days = Math.floor(hours / 24)
 
-    if (days > 0) return t('sync_daysAgo', String(days));
-    if (hours > 0) return t('sync_hoursAgo', String(hours));
-    if (minutes > 0) return t('sync_minutesAgo', String(minutes));
-    return t('sync_justNow');
-  };
+    if (days > 0) return t('sync_daysAgo', String(days))
+    if (hours > 0) return t('sync_hoursAgo', String(hours))
+    if (minutes > 0) return t('sync_minutesAgo', String(minutes))
+    return t('sync_justNow')
+  }
 
   if (!isSignedIn) {
     return (
@@ -123,7 +123,7 @@ export const SyncStatus: React.FC = () => {
           <p className="sync-status-message">{t('sync_loginRequired')}</p>
         </div>
       </div>
-    );
+    )
   }
 
   return (
@@ -159,5 +159,5 @@ export const SyncStatus: React.FC = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
