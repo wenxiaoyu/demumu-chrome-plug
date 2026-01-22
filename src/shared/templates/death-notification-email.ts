@@ -29,17 +29,27 @@ export async function getDeathNotificationTemplate(userName: string): Promise<Em
         const template = isChinese ? customTemplate.zh_CN : customTemplate.en
 
         // 验证模板完整性
-        if (template && template.subject && template.htmlBody && template.textBody) {
+        if (
+          template &&
+          typeof template === 'object' &&
+          'subject' in template &&
+          'htmlBody' in template &&
+          'textBody' in template
+        ) {
           console.log('[getDeathNotificationTemplate] Using multi-language template')
-          return template
+          return template as EmailTemplate
         } else {
           console.warn('[getDeathNotificationTemplate] Invalid multi-language template format')
         }
       }
       // 检查是否为旧的单语言格式
-      else if (customTemplate.subject && customTemplate.htmlBody && customTemplate.textBody) {
+      else if (
+        'subject' in customTemplate &&
+        'htmlBody' in customTemplate &&
+        'textBody' in customTemplate
+      ) {
         console.warn('[getDeathNotificationTemplate] Found old single-language template, using it')
-        return customTemplate
+        return customTemplate as unknown as EmailTemplate
       }
 
       console.warn(
