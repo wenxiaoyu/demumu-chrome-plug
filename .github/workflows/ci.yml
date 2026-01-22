@@ -40,6 +40,11 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Create Firebase config
+        run: |
+          cp src/shared/config/firebase.example.ts src/shared/config/firebase.ts
+          echo "Created firebase.ts from example"
+
       - name: Run linter
         run: pnpm lint
 

@@ -13,7 +13,9 @@ build
 .env.*.local
 
 # Firebase configuration (contains sensitive API keys)
+# Keep firebase.example.ts in git, but ignore the actual firebase.ts
 src/shared/config/firebase.ts
+!src/shared/config/firebase.example.ts
 
 # IDE
 .vscode/*
