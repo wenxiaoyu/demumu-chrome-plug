@@ -21,15 +21,32 @@ let isInitialized = false
  */
 async function loadTranslations(lang: LanguageCode): Promise<void> {
   try {
+    // 检查 chrome.runtime 是否可用
+    if (typeof chrome === 'undefined' || !chrome.runtime || !chrome.runtime.getURL) {
+      console.warn('[i18n] Chrome runtime not available, using fallback')
+      currentLanguage = lang
+      return
+    }
+
     const url = chrome.runtime.getURL(`_locales/${lang}/messages.json`)
     const response = await fetch(url)
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`)
+    }
+
     translations = await response.json()
     currentLanguage = lang
+    console.log(`[i18n] Loaded translations for ${lang}`)
   } catch (error) {
     console.error(`[i18n] Failed to load translations for ${lang}:`, error)
     // 如果加载失败，尝试加载英文作为后备
     if (lang !== 'en') {
       await loadTranslations('en')
+    } else {
+      // 如果英文也加载失败，使用空对象
+      translations = {}
+      currentLanguage = lang
     }
   }
 }
@@ -41,11 +58,20 @@ export async function initLanguage(): Promise<void> {
   if (isInitialized) return
 
   try {
+    // 检查 chrome.storage 是否可用
+    if (typeof chrome === 'undefined' || !chrome.storage || !chrome.storage.local) {
+      console.warn('[i18n] Chrome storage not available, using default language')
+      await loadTranslations('en')
+      isInitialized = true
+      return
+    }
+
     const result = await chrome.storage.local.get(STORAGE_KEYS.LANGUAGE)
     const savedLang = result[STORAGE_KEYS.LANGUAGE] as LanguageCode | undefined
     const lang = savedLang || 'en' // 默认英文
     await loadTranslations(lang)
     isInitialized = true
+    console.log(`[i18n] Initialized with language: ${lang}`)
   } catch (error) {
     console.error('[i18n] Failed to initialize language:', error)
     await loadTranslations('en')
@@ -133,7 +159,15 @@ export function getCurrentLanguage(): LanguageCode {
  * @returns 浏览器语言代码
  */
 export function getBrowserLanguage(): string {
-  return chrome.i18n.getUILanguage()
+  try {
+    if (typeof chrome !== 'undefined' && chrome.i18n && chrome.i18n.getUILanguage) {
+      return chrome.i18n.getUILanguage()
+    }
+  } catch (error) {
+    console.warn('[i18n] Failed to get browser language:', error)
+  }
+  // 后备方案：使用 navigator.language
+  return navigator.language || 'en'
 }
 
 /**
