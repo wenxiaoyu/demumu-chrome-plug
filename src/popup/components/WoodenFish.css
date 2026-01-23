@@ -9,7 +9,7 @@
 .wooden-fish-scene {
   position: relative;
   width: 220px;
-  height: 160px;
+  height: 180px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -100,10 +100,10 @@
 /* 木鱼棍 */
 .wooden-stick {
   position: absolute;
-  top: -10px;
-  right: 15px;
-  width: 50px;
-  height: 50px;
+  top: -5px;
+  right: 5px;
+  width: 65px;
+  height: 65px;
   z-index: 15;
   pointer-events: none;
   transform-origin: 75% 75%;
@@ -140,8 +140,8 @@
 /* 木鱼按钮 */
 .wooden-fish-button {
   position: relative;
-  width: 60px;
-  height: 60px;
+  width: 100px;
+  height: 100px;
   background: none;
   border: none;
   cursor: pointer;
@@ -238,16 +238,18 @@
 @media (max-width: 400px) {
   .wooden-fish-scene {
     width: 200px;
-    height: 140px;
+    height: 160px;
   }
 
   .wooden-fish-button {
-    width: 50px;
-    height: 50px;
+    width: 85px;
+    height: 85px;
   }
 
   .wooden-stick {
-    width: 40px;
-    height: 40px;
+    width: 55px;
+    height: 55px;
+    top: -3px;
+    right: 3px;
   }
 }
