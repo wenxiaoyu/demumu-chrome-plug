@@ -97,44 +97,9 @@
   }
 }
 
-/* 木鱼棍 */
+/* 木鱼棍 - 已禁用 */
 .wooden-stick {
-  position: absolute;
-  top: -5px;
-  right: 5px;
-  width: 65px;
-  height: 65px;
-  z-index: 15;
-  pointer-events: none;
-  transform-origin: 75% 75%;
-  transform: rotate(-35deg);
-  transition: transform 0.2s ease;
-}
-
-.wooden-stick-icon {
-  width: 100%;
-  height: 100%;
-  filter: drop-shadow(0 2px 6px rgba(74, 64, 53, 0.3));
-}
-
-/* 木鱼棍敲击动画 */
-.wooden-stick.knocking {
-  animation: stick-knock 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-@keyframes stick-knock {
-  0% {
-    transform: rotate(-35deg);
-  }
-  35% {
-    transform: rotate(5deg) translateY(8px) translateX(-3px);
-  }
-  65% {
-    transform: rotate(-10deg) translateY(3px) translateX(-1px);
-  }
-  100% {
-    transform: rotate(-35deg);
-  }
+  display: none;
 }
 
 /* 木鱼按钮 */
@@ -244,12 +209,5 @@
   .wooden-fish-button {
     width: 85px;
     height: 85px;
-  }
-
-  .wooden-stick {
-    width: 55px;
-    height: 55px;
-    top: -3px;
-    right: 3px;
   }
 }

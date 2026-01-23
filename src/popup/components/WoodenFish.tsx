@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import './WoodenFish.css'
 import woodenFishIcon from '../../icons/muyu.png'
-import woodenStickIcon from '../../icons/wooden-stick.svg'
 
 interface WoodenFishProps {
   onClick: () => void
@@ -56,11 +55,6 @@ export function WoodenFish({ onClick, disabled = false }: WoodenFishProps) {
         {ripples.map((ripple) => (
           <div key={ripple.id} className="ripple-effect"></div>
         ))}
-
-        {/* 木鱼棍 */}
-        <div className={`wooden-stick ${isKnocking ? 'knocking' : ''}`}>
-          <img src={woodenStickIcon} alt="木鱼棍" className="wooden-stick-icon" />
-        </div>
 
         {/* 木鱼主体 */}
         <button
