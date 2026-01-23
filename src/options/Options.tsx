@@ -6,7 +6,7 @@ import { AccountSettings } from './components/AccountSettings'
 import { HelpPage } from './components/HelpPage'
 import { useContacts } from './hooks/useContacts'
 import { t, initLanguage } from '../shared/utils/i18n'
-import woodenFishIcon from '../icons/wooden-fish.svg'
+import woodenFishIcon from '../icons/muyu.png'
 import './options.css'
 
 type Tab = 'stats' | 'contacts' | 'settings' | 'account' | 'help'

@@ -1,50 +1,50 @@
-import { useState } from 'react';
-import './WoodenFish.css';
-import woodenFishIcon from '../../icons/wooden-fish.svg';
-import woodenStickIcon from '../../icons/wooden-stick.svg';
+import { useState } from 'react'
+import './WoodenFish.css'
+import woodenFishIcon from '../../icons/muyu.png'
+import woodenStickIcon from '../../icons/wooden-stick.svg'
 
 interface WoodenFishProps {
-  onClick: () => void;
-  disabled?: boolean;
+  onClick: () => void
+  disabled?: boolean
 }
 
 /**
  * 木鱼组件 - 使用真实木鱼图标
  */
 export function WoodenFish({ onClick, disabled = false }: WoodenFishProps) {
-  const [isKnocking, setIsKnocking] = useState(false);
-  const [showImpact, setShowImpact] = useState(false);
-  const [ripples, setRipples] = useState<{ id: number }[]>([]);
+  const [isKnocking, setIsKnocking] = useState(false)
+  const [showImpact, setShowImpact] = useState(false)
+  const [ripples, setRipples] = useState<{ id: number }[]>([])
 
   const handleClick = () => {
-    if (disabled || isKnocking) return;
+    if (disabled || isKnocking) return
 
     // 触发木鱼棍敲击动画
-    setIsKnocking(true);
+    setIsKnocking(true)
 
     // 延迟140ms后触发撞击效果（木鱼棍敲到木鱼的时刻）
     setTimeout(() => {
-      setShowImpact(true);
-      
+      setShowImpact(true)
+
       // 生成涟漪效果
-      const rippleId = Date.now();
-      setRipples([...ripples, { id: rippleId }]);
+      const rippleId = Date.now()
+      setRipples([...ripples, { id: rippleId }])
 
       // 调用父组件的 onClick
-      onClick();
+      onClick()
 
       // 移除涟漪
       setTimeout(() => {
-        setRipples((prev) => prev.filter((item) => item.id !== rippleId));
-      }, 1000);
-    }, 140);
+        setRipples((prev) => prev.filter((item) => item.id !== rippleId))
+      }, 1000)
+    }, 140)
 
     // 重置动画状态
     setTimeout(() => {
-      setIsKnocking(false);
-      setShowImpact(false);
-    }, 400);
-  };
+      setIsKnocking(false)
+      setShowImpact(false)
+    }, 400)
+  }
 
   return (
     <div className="wooden-fish-container">
@@ -59,11 +59,7 @@ export function WoodenFish({ onClick, disabled = false }: WoodenFishProps) {
 
         {/* 木鱼棍 */}
         <div className={`wooden-stick ${isKnocking ? 'knocking' : ''}`}>
-          <img 
-            src={woodenStickIcon} 
-            alt="木鱼棍" 
-            className="wooden-stick-icon"
-          />
+          <img src={woodenStickIcon} alt="木鱼棍" className="wooden-stick-icon" />
         </div>
 
         {/* 木鱼主体 */}
@@ -73,13 +69,9 @@ export function WoodenFish({ onClick, disabled = false }: WoodenFishProps) {
           disabled={disabled}
           aria-label="敲木鱼"
         >
-          <img 
-            src={woodenFishIcon} 
-            alt="木鱼" 
-            className="wooden-fish-icon"
-          />
+          <img src={woodenFishIcon} alt="木鱼" className="wooden-fish-icon" />
         </button>
       </div>
     </div>
-  );
+  )
 }
