@@ -21,12 +21,6 @@
     "service_worker": "src/background/index.ts",
     "type": "module"
   },
-  "content_scripts": [
-    {
-      "matches": ["<all_urls>"],
-      "js": ["src/content/index.ts"]
-    }
-  ],
   "options_page": "src/options/index.html",
   "permissions": ["storage", "notifications", "alarms", "identity"],
   "host_permissions": [
