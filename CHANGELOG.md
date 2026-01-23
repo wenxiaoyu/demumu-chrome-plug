@@ -5,11 +5,45 @@
 格式基于 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.0.0/)，
 版本号遵循 [语义化版本](https://semver.org/lang/zh-CN/)。
 
+## [1.1.0] - 2026-01-23
+
+### 移除 🗑️
+
+- **Chrome 通知功能**
+  - 移除了死亡警告通知
+  - 移除了 HP 警告通知
+  - 移除了首次敲击通知
+  - 删除了 `notification-service.ts`
+  - 从 manifest.json 移除 `notifications` 权限
+
+- **Chrome Alarms 定时任务**
+  - 移除了自动定时状态检查（原每小时一次）
+  - 移除了自动定时数据同步（原每 30 分钟一次）
+  - 删除了 `alarm-handler.ts`
+  - 从 manifest.json 移除 `alarms` 权限
+  - 简化了 `sync-scheduler.ts`
+
+### 优化 ⚡
+
+- **权限精简**
+  - 仅保留必要的 `storage` 和 `identity` 权限
+  - 减少了扩展的权限请求，提升用户信任度
+
+- **后台服务优化**
+  - 简化了 background service worker 的职责
+  - 状态检查仍在以下时机触发：
+    - 插件安装/更新时
+    - 浏览器启动时
+    - 用户敲击木鱼后
+    - 手动触发检查时
+  - 数据同步仍可手动触发或在网络恢复时触发
+
 ## [0.1.0] - 2025-01-15
 
 ### 新增 ✨
 
 #### 核心功能
+
 - 🪵 **敲木鱼系统**
   - 俯视视角的3D木鱼设计
   - 点击动画和声波效果
@@ -41,6 +75,7 @@
   - 连续打卡天数
 
 #### UI设计
+
 - 🎨 **禅意美学**
   - 温暖的米色/茶色系背景
   - 毛玻璃效果（backdrop-filter）
@@ -62,6 +97,7 @@
   - 所有元素在一屏内显示
 
 #### 技术实现
+
 - ⚙️ **项目架构**
   - React 19 + TypeScript
   - Vite 7 构建工具
@@ -76,12 +112,14 @@
   - 常量配置管理
 
 ### 文档 📖
+
 - README.md - 项目介绍和快速开始
 - docs/USER_GUIDE.md - 详细的用户使用指南
 - docs/MERIT_SYSTEM.md - 功德值系统详解
 - CHANGELOG.md - 更新日志
 
 ### 技术细节 🔧
+
 - 功德值计算器：`src/shared/utils/merit-calculator.ts`
 - HP计算器：`src/shared/utils/hp-calculator.ts`
 - 日期工具：`src/shared/utils/date.ts`
@@ -91,26 +129,31 @@
 ## [未来计划]
 
 ### [0.2.0] - 音效和动画增强
+
 - 木鱼敲击音效
 - 更多动画效果
 - 音效开关设置
 
 ### [0.3.0] - 数据可视化
+
 - 活跃日历
 - 统计图表
 - 趋势分析
 
 ### [0.4.0] - 成就系统
+
 - 成就列表
 - 成就解锁
 - 成就展示
 
 ### [0.5.0] - 主题系统
+
 - 多种主题可选
 - 自定义主题
 - 主题商店
 
 ### [1.0.0] - 云端同步
+
 - 用户账号系统
 - 数据云端同步
 - 多设备同步
