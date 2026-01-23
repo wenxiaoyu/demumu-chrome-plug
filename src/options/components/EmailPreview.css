@@ -1,0 +1,215 @@
+/**
+ * 邮件预览组件样式
+ */
+
+.email-preview {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 24px;
+}
+
+.email-preview-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 2px solid #f0e6d2;
+}
+
+.email-preview-header h3 {
+  margin: 0;
+  color: #8b7355;
+  font-size: 20px;
+}
+
+.email-preview-controls {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.view-mode-toggle {
+  display: flex;
+  gap: 0;
+  background-color: #f8f5ed;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.view-mode-toggle button {
+  padding: 8px 16px;
+  border: none;
+  background-color: transparent;
+  color: #666;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s;
+  min-width: 120px; /* 固定最小宽度，防止文本长度变化导致布局抖动 */
+  white-space: nowrap; /* 防止文本换行 */
+}
+
+.view-mode-toggle button:hover {
+  background-color: #e8e5dd;
+}
+
+.view-mode-toggle button.active {
+  background-color: #8b7355;
+  color: #ffffff;
+}
+
+.send-test-button {
+  padding: 8px 16px;
+  background-color: #5bc0de;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s;
+}
+
+.send-test-button:hover:not(:disabled) {
+  background-color: #46b8da;
+  transform: translateY(-1px);
+}
+
+.send-test-button:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.send-test-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.email-preview-warning {
+  padding: 12px 16px;
+  background-color: #fff3cd;
+  border: 1px solid #ffc107;
+  border-radius: 8px;
+  color: #856404;
+  margin-bottom: 16px;
+  font-size: 14px;
+}
+
+.email-preview-info {
+  padding: 12px 16px;
+  background-color: #d4edda;
+  border: 1px solid #28a745;
+  border-radius: 8px;
+  color: #155724;
+  margin-bottom: 16px;
+  font-size: 14px;
+}
+
+.email-preview-content {
+  margin-bottom: 20px;
+}
+
+.email-subject {
+  padding: 12px;
+  background-color: #f8f5ed;
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+
+.email-subject strong {
+  color: #8b7355;
+  margin-right: 8px;
+}
+
+.email-subject span {
+  color: #333;
+}
+
+.email-body {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.email-html-view {
+  padding: 20px;
+  background-color: #ffffff;
+  min-height: 400px;
+  max-height: 600px;
+  overflow-y: auto;
+  /* 隔离邮件内容样式，防止影响外部 */
+  isolation: isolate;
+  contain: layout style;
+}
+
+.email-text-view {
+  padding: 20px;
+  background-color: #f5f5f5;
+  font-family: 'Courier New', monospace;
+  font-size: 13px;
+  line-height: 1.6;
+  color: #333;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  min-height: 400px;
+  max-height: 600px;
+  overflow-y: auto;
+  margin: 0;
+  /* 隔离文本内容样式 */
+  isolation: isolate;
+  contain: layout style;
+}
+
+.email-preview-footer {
+  padding-top: 16px;
+  border-top: 1px solid #e0e0e0;
+}
+
+.preview-note {
+  margin: 0;
+  font-size: 13px;
+  color: #999;
+  text-align: center;
+}
+
+.email-preview-loading {
+  text-align: center;
+  padding: 40px;
+  color: #999;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .email-preview {
+    padding: 16px;
+  }
+
+  .email-preview-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .email-preview-controls {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .view-mode-toggle {
+    width: 100%;
+  }
+
+  .view-mode-toggle button {
+    flex: 1;
+  }
+
+  .send-test-button {
+    width: 100%;
+  }
+
+  .email-html-view,
+  .email-text-view {
+    max-height: 400px;
+  }
+}

@@ -1,0 +1,147 @@
+.help-page {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.help-header {
+  margin-bottom: 32px;
+  text-align: center;
+}
+
+.help-header h1 {
+  margin: 0 0 12px 0;
+  font-size: 32px;
+  color: #4a4035;
+  font-weight: 600;
+}
+
+.help-intro {
+  margin: 0;
+  font-size: 16px;
+  color: #8b7355;
+  line-height: 1.6;
+}
+
+.help-section {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 12px;
+  padding: 32px;
+  border: 1px solid rgba(139, 115, 85, 0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.help-item {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 32px;
+  padding-bottom: 32px;
+  border-bottom: 1px solid rgba(139, 115, 85, 0.1);
+}
+
+.help-item:last-of-type {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.help-icon {
+  font-size: 48px;
+  flex-shrink: 0;
+  width: 64px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(35, 154, 59, 0.05);
+  border-radius: 12px;
+}
+
+.help-content {
+  flex: 1;
+}
+
+.help-content h2 {
+  margin: 0 0 12px 0;
+  font-size: 22px;
+  color: #4a4035;
+  font-weight: 600;
+}
+
+.help-content p {
+  margin: 0 0 16px 0;
+  font-size: 15px;
+  color: #4a4035;
+  line-height: 1.7;
+}
+
+.help-list {
+  margin: 0;
+  padding-left: 24px;
+  list-style: disc;
+}
+
+.help-list li {
+  margin: 10px 0;
+  font-size: 15px;
+  color: #4a4035;
+  line-height: 1.7;
+}
+
+.help-tips {
+  margin-top: 32px;
+  padding: 24px;
+  background: linear-gradient(135deg, #f8f5ed 0%, #fff9f0 100%);
+  border-radius: 12px;
+  border-left: 4px solid #239a3b;
+}
+
+.help-tips h2 {
+  margin: 0 0 16px 0;
+  font-size: 20px;
+  color: #4a4035;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.help-tips h2::before {
+  content: '💡';
+  font-size: 24px;
+}
+
+/* 响应式 */
+@media (max-width: 768px) {
+  .help-page {
+    padding: 16px;
+  }
+
+  .help-header h1 {
+    font-size: 24px;
+  }
+
+  .help-section {
+    padding: 20px;
+  }
+
+  .help-item {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .help-icon {
+    font-size: 40px;
+    width: 56px;
+    height: 56px;
+  }
+
+  .help-content h2 {
+    font-size: 18px;
+  }
+
+  .help-content p,
+  .help-list li {
+    font-size: 14px;
+  }
+}

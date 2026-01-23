@@ -1,0 +1,180 @@
+/* 日历容器 */
+.calendar-container {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 16px;
+  padding: 32px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+/* 日历头部 */
+.calendar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.calendar-title {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+  color: #4a4035;
+}
+
+.month-nav-button {
+  width: 36px;
+  height: 36px;
+  border: none;
+  background: rgba(139, 115, 85, 0.1);
+  color: #8b7355;
+  font-size: 24px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.month-nav-button:hover {
+  background: rgba(139, 115, 85, 0.2);
+  color: #6b5845;
+}
+
+/* 加载状态 */
+.calendar-loading {
+  text-align: center;
+  padding: 60px 20px;
+  color: #8b7355;
+  font-size: 16px;
+}
+
+/* 日历网格 */
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+/* 星期标题 */
+.calendar-weekday {
+  text-align: center;
+  font-size: 14px;
+  font-weight: 600;
+  color: #8b7355;
+  padding: 12px 0;
+}
+
+/* 日期格子 */
+.calendar-day {
+  aspect-ratio: 1;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 2px solid transparent;
+}
+
+.calendar-day.empty {
+  background: transparent !important;
+  cursor: default;
+}
+
+.calendar-day:not(.empty):hover {
+  transform: scale(1.05);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.calendar-day.today {
+  border-color: #4a90e2;
+  box-shadow: 0 0 0 1px #4a90e2;
+}
+
+.day-number {
+  font-size: 14px;
+  font-weight: 600;
+  color: #4a4035;
+}
+
+.day-knocks {
+  font-size: 11px;
+  color: #6b5845;
+  margin-top: 2px;
+}
+
+/* 图例 */
+.calendar-legend {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(139, 115, 85, 0.1);
+}
+
+.legend-label {
+  font-size: 14px;
+  color: #8b7355;
+  font-weight: 500;
+}
+
+.legend-items {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: #6b5845;
+}
+
+.legend-color {
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* 响应式 */
+@media (max-width: 768px) {
+  .calendar-container {
+    padding: 20px;
+  }
+
+  .calendar-title {
+    font-size: 18px;
+  }
+
+  .calendar-grid {
+    gap: 4px;
+  }
+
+  .calendar-weekday {
+    font-size: 12px;
+    padding: 8px 0;
+  }
+
+  .day-number {
+    font-size: 12px;
+  }
+
+  .day-knocks {
+    font-size: 10px;
+  }
+
+  .legend-label {
+    font-size: 13px;
+  }
+
+  .legend-item {
+    font-size: 12px;
+  }
+}

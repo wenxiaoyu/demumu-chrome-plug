@@ -1,0 +1,1560 @@
+{
+  "extensionName": {
+    "message": "Demumu",
+    "description": "Extension name"
+  },
+  "extensionDescription": {
+    "message": "Stay active by knocking wooden fish, accumulate merit",
+    "description": "Extension description"
+  },
+  "common_ok": {
+    "message": "OK",
+    "description": "OK button"
+  },
+  "common_cancel": {
+    "message": "Cancel",
+    "description": "Cancel button"
+  },
+  "common_save": {
+    "message": "Save",
+    "description": "Save button"
+  },
+  "common_delete": {
+    "message": "Delete",
+    "description": "Delete button"
+  },
+  "common_edit": {
+    "message": "Edit",
+    "description": "Edit button"
+  },
+  "common_add": {
+    "message": "Add",
+    "description": "Add button"
+  },
+  "common_loading": {
+    "message": "Loading...",
+    "description": "Loading text"
+  },
+  "common_saving": {
+    "message": "Saving...",
+    "description": "Saving text"
+  },
+  "common_error": {
+    "message": "Error",
+    "description": "Error text"
+  },
+  "common_success": {
+    "message": "Success",
+    "description": "Success text"
+  },
+  "loading": {
+    "message": "Loading...",
+    "description": "Loading state"
+  },
+  "today": {
+    "message": "Today",
+    "description": "Today label"
+  },
+  "merit": {
+    "message": "Merit",
+    "description": "Merit label"
+  },
+  "total": {
+    "message": "Total",
+    "description": "Total label"
+  },
+  "appName": {
+    "message": "Are You Still Alive",
+    "description": "App name"
+  },
+  "settings": {
+    "message": "Settings",
+    "description": "Settings"
+  },
+  "woodenFish": {
+    "message": "Wooden Fish",
+    "description": "Wooden fish"
+  },
+  "tabStats": {
+    "message": "Statistics",
+    "description": "Stats tab"
+  },
+  "tabContacts": {
+    "message": "Emergency Contacts",
+    "description": "Contacts tab"
+  },
+  "tabAccount": {
+    "message": "Account",
+    "description": "Account tab"
+  },
+  "tabSettings": {
+    "message": "Settings",
+    "description": "Settings tab"
+  },
+  "tabHelp": {
+    "message": "Help",
+    "description": "Help tab"
+  },
+  "help": {
+    "message": "Help",
+    "description": "Help button"
+  },
+  "help_title": {
+    "message": "How to Play",
+    "description": "Help page title"
+  },
+  "help_intro": {
+    "message": "Welcome to 'Are You Still Alive'! Stay active by knocking the wooden fish daily, accumulate merit, and maintain your HP.",
+    "description": "Help page introduction"
+  },
+  "help_knock_title": {
+    "message": "How to Play",
+    "description": "How to play title"
+  },
+  "help_knock_desc": {
+    "message": "Click the wooden fish icon in the popup to knock. Each knock increases your merit. The first knock of each day earns bonus rewards.",
+    "description": "How to play description"
+  },
+  "help_merit_title": {
+    "message": "Merit System",
+    "description": "Merit system title"
+  },
+  "help_merit_desc": {
+    "message": "Merit represents your cultivation progress, accumulated by knocking the wooden fish:",
+    "description": "Merit system description"
+  },
+  "help_merit_base": {
+    "message": "Base Merit: +1 per knock",
+    "description": "Base merit"
+  },
+  "help_merit_first": {
+    "message": "First Knock Bonus: +5 for the first knock each day",
+    "description": "First knock bonus"
+  },
+  "help_merit_combo": {
+    "message": "Combo Bonus: Consecutive knocks earn extra merit",
+    "description": "Combo bonus"
+  },
+  "help_merit_milestone": {
+    "message": "Milestone Bonus: Reach specific counts for large merit rewards",
+    "description": "Milestone bonus"
+  },
+  "help_hp_title": {
+    "message": "HP System",
+    "description": "HP system title"
+  },
+  "help_hp_desc": {
+    "message": "HP represents your activity status and must be maintained daily:",
+    "description": "HP system description"
+  },
+  "help_hp_initial": {
+    "message": "Initial HP: 100",
+    "description": "Initial HP"
+  },
+  "help_hp_reward": {
+    "message": "Daily Reward: +10 HP for the first knock each day",
+    "description": "Daily HP reward"
+  },
+  "help_hp_penalty": {
+    "message": "Inactivity Penalty: -10 HP for each day without knocking",
+    "description": "Inactivity penalty"
+  },
+  "help_hp_death": {
+    "message": "HP Depleted: Triggers death detection",
+    "description": "HP depleted"
+  },
+  "help_streak_title": {
+    "message": "Consecutive Days",
+    "description": "Streak title"
+  },
+  "help_streak_desc": {
+    "message": "Knocking the wooden fish for consecutive days builds your streak. Longer streaks earn more rewards. Streaks reset if interrupted.",
+    "description": "Streak description"
+  },
+  "help_tips_title": {
+    "message": "Tips",
+    "description": "Tips title"
+  },
+  "help_tip1": {
+    "message": "Knock the wooden fish at least once daily to keep your HP from depleting",
+    "description": "Tip 1"
+  },
+  "help_tip2": {
+    "message": "Maintain your streak for more rewards - try not to break it",
+    "description": "Tip 2"
+  },
+  "help_tip3": {
+    "message": "Sign in to sync your data to the cloud and across multiple devices",
+    "description": "Tip 3"
+  },
+  "deathDetectionSettings": {
+    "message": "Death Detection Settings",
+    "description": "Death detection settings title"
+  },
+  "deathDetectionDescription": {
+    "message": "Configure death detection rules. The server will automatically check your activity status based on your settings and notify your emergency contacts when conditions are met.",
+    "description": "Death detection description"
+  },
+  "enableDeathDetection": {
+    "message": "Enable Death Detection",
+    "description": "Enable death detection"
+  },
+  "enableDeathDetectionDesc": {
+    "message": "The server will periodically check your activity status when enabled",
+    "description": "Enable description"
+  },
+  "inactivityThreshold": {
+    "message": "Inactivity Threshold",
+    "description": "Inactivity threshold"
+  },
+  "inactivityThresholdDesc": {
+    "message": "Trigger death detection after this many days without knocking",
+    "description": "Inactivity threshold description"
+  },
+  "hpThreshold": {
+    "message": "HP Threshold",
+    "description": "HP threshold"
+  },
+  "hpThresholdDesc": {
+    "message": "Trigger death detection when HP falls below this value",
+    "description": "HP threshold description"
+  },
+  "checkInterval": {
+    "message": "Check Interval",
+    "description": "Check interval"
+  },
+  "checkIntervalDesc": {
+    "message": "How often to check status",
+    "description": "Check interval description"
+  },
+  "currentStatus": {
+    "message": "Current Status",
+    "description": "Current status"
+  },
+  "statusNormal": {
+    "message": "Status Normal",
+    "description": "Status normal"
+  },
+  "deathDetected": {
+    "message": "Death Detected",
+    "description": "Death detected"
+  },
+  "reason": {
+    "message": "Reason",
+    "description": "Reason label"
+  },
+  "inactiveDays": {
+    "message": "Inactive Days",
+    "description": "Inactive days label"
+  },
+  "lastActive": {
+    "message": "Last Active",
+    "description": "Last active label"
+  },
+  "detectionTime": {
+    "message": "Detection Time",
+    "description": "Detection time label"
+  },
+  "notificationStatus": {
+    "message": "Notification Status",
+    "description": "Notification status label"
+  },
+  "sent": {
+    "message": "Sent",
+    "description": "Sent status"
+  },
+  "pending": {
+    "message": "Pending",
+    "description": "Pending status"
+  },
+  "noDetectionRecord": {
+    "message": "No detection record",
+    "description": "No detection record"
+  },
+  "checkNow": {
+    "message": "Check Now",
+    "description": "Check now button"
+  },
+  "checking": {
+    "message": "Checking...",
+    "description": "Checking text"
+  },
+  "instructions": {
+    "message": "Instructions",
+    "description": "Instructions title"
+  },
+  "instruction1": {
+    "message": "Death detection judges status based on your activity and HP",
+    "description": "Instruction 1"
+  },
+  "instruction2": {
+    "message": "Your emergency contacts will be notified when death detection is triggered",
+    "description": "Instruction 2"
+  },
+  "instruction3": {
+    "message": "You can manage your contact list in the Emergency Contacts tab",
+    "description": "Instruction 3"
+  },
+  "instruction4": {
+    "message": "Set reasonable thresholds to avoid false alarms",
+    "description": "Instruction 4"
+  },
+  "daysCount": {
+    "message": "$COUNT$ days",
+    "description": "Days count",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "7"
+      }
+    }
+  },
+  "interval30min": {
+    "message": "30 minutes",
+    "description": "30 minutes"
+  },
+  "interval1hour": {
+    "message": "1 hour",
+    "description": "1 hour"
+  },
+  "interval2hours": {
+    "message": "2 hours",
+    "description": "2 hours"
+  },
+  "interval6hours": {
+    "message": "6 hours",
+    "description": "6 hours"
+  },
+  "interval12hours": {
+    "message": "12 hours",
+    "description": "12 hours"
+  },
+  "interval24hours": {
+    "message": "24 hours",
+    "description": "24 hours"
+  },
+  "emergencyContacts": {
+    "message": "Emergency Contacts",
+    "description": "Emergency contacts title"
+  },
+  "contactsDescription": {
+    "message": "These contacts will be notified when you've been inactive for an extended period",
+    "description": "Contacts description"
+  },
+  "addContact": {
+    "message": "Add Contact",
+    "description": "Add contact button"
+  },
+  "noContactsYet": {
+    "message": "No emergency contacts added yet",
+    "description": "No contacts message"
+  },
+  "addFirstContact": {
+    "message": "Click the button above to add your first contact",
+    "description": "Add first contact hint"
+  },
+  "editContact": {
+    "message": "Edit Contact",
+    "description": "Edit contact title"
+  },
+  "name": {
+    "message": "Name",
+    "description": "Name field"
+  },
+  "namePlaceholder": {
+    "message": "Enter name",
+    "description": "Name placeholder"
+  },
+  "email": {
+    "message": "Email",
+    "description": "Email field"
+  },
+  "emailPlaceholder": {
+    "message": "example@email.com",
+    "description": "Email placeholder"
+  },
+  "relationship": {
+    "message": "Relationship",
+    "description": "Relationship field"
+  },
+  "relationshipPlaceholder": {
+    "message": "e.g., Father, Friend, Colleague",
+    "description": "Relationship placeholder"
+  },
+  "relationshipHint": {
+    "message": "Contacts will be grouped by relationship",
+    "description": "Relationship hint"
+  },
+  "relationshipOther": {
+    "message": "Other",
+    "description": "Other relationship"
+  },
+  "priority": {
+    "message": "Priority",
+    "description": "Priority field"
+  },
+  "priorityHighest": {
+    "message": "Highest",
+    "description": "Highest priority"
+  },
+  "priorityMedium": {
+    "message": "Medium",
+    "description": "Medium priority"
+  },
+  "priorityLowest": {
+    "message": "Lowest",
+    "description": "Lowest priority"
+  },
+  "nameRequired": {
+    "message": "Please enter a name",
+    "description": "Name required error"
+  },
+  "emailRequired": {
+    "message": "Please enter an email",
+    "description": "Email required error"
+  },
+  "emailInvalid": {
+    "message": "Invalid email format",
+    "description": "Email invalid error"
+  },
+  "relationshipRequired": {
+    "message": "Please enter or select a relationship",
+    "description": "Relationship required error"
+  },
+  "operationFailed": {
+    "message": "Operation failed",
+    "description": "Operation failed error"
+  },
+  "confirmDelete": {
+    "message": "Confirm Delete",
+    "description": "Confirm delete title"
+  },
+  "confirmDeleteContact": {
+    "message": "Are you sure you want to delete contact $NAME$?",
+    "description": "Confirm delete message",
+    "placeholders": {
+      "name": {
+        "content": "$1",
+        "example": "张三"
+      }
+    }
+  },
+  "cancel": {
+    "message": "Cancel",
+    "description": "Cancel button"
+  },
+  "delete": {
+    "message": "Delete",
+    "description": "Delete button"
+  },
+  "edit": {
+    "message": "Edit",
+    "description": "Edit button"
+  },
+  "add": {
+    "message": "Add",
+    "description": "Add button"
+  },
+  "save": {
+    "message": "Save",
+    "description": "Save button"
+  },
+  "saving": {
+    "message": "Saving...",
+    "description": "Saving status"
+  },
+  "emailPreview": {
+    "message": "Email Preview",
+    "description": "Email preview title"
+  },
+  "htmlView": {
+    "message": "HTML View",
+    "description": "HTML view"
+  },
+  "textView": {
+    "message": "Text View",
+    "description": "Text view"
+  },
+  "sendTestEmail": {
+    "message": "Send Test Email",
+    "description": "Send test email"
+  },
+  "subject": {
+    "message": "Subject",
+    "description": "Subject label"
+  },
+  "previewNote": {
+    "message": "💡 This is an email preview. Actual data will be used when sending.",
+    "description": "Preview note"
+  },
+  "noContactsWarning": {
+    "message": "⚠️ No emergency contacts added yet. Please add contacts in the Emergency Contacts tab before sending emails.",
+    "description": "No contacts warning"
+  },
+  "contactsInfo": {
+    "message": "✅ $COUNT$ emergency contact(s) added. Emails will be sent to highest priority contacts.",
+    "description": "Contacts info",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "3"
+      }
+    }
+  },
+  "addContactsFirst": {
+    "message": "Please add emergency contacts first",
+    "description": "Add contacts first"
+  },
+  "testEmailSuccess": {
+    "message": "✅ Test email prepared\\n\\nPlease confirm sending in your email client.\\n\\n💡 Tip: If the email client didn't open, check if your browser blocked pop-ups.",
+    "description": "Test email success"
+  },
+  "sendFailedError": {
+    "message": "❌ Send failed: $ERROR$",
+    "description": "Send failed error",
+    "placeholders": {
+      "error": {
+        "content": "$1",
+        "example": "未知错误"
+      }
+    }
+  },
+  "noContactsError": {
+    "message": "❌ Send failed: No emergency contacts added\\n\\nPlease add at least one contact in the Emergency Contacts tab.",
+    "description": "No contacts error"
+  },
+  "unknownError": {
+    "message": "Unknown error",
+    "description": "Unknown error"
+  },
+  "user": {
+    "message": "User",
+    "description": "User label"
+  },
+  "emailSubject": {
+    "message": "⚠️ Important Notice: Activity Status of $USER$",
+    "description": "Email subject",
+    "placeholders": {
+      "user": {
+        "content": "$1",
+        "example": "张三"
+      }
+    }
+  },
+  "notificationDeathWarningTitle": {
+    "message": "⚠️ HP Depleted",
+    "description": "Death warning title"
+  },
+  "deathWarning1Day": {
+    "message": "You haven't knocked the wooden fish for 1 day, HP depleted",
+    "description": "Death warning 1 day"
+  },
+  "deathWarningDays": {
+    "message": "You haven't knocked the wooden fish for $DAYS$ days, HP depleted",
+    "description": "Death warning multiple days",
+    "placeholders": {
+      "days": {
+        "content": "$1",
+        "example": "7"
+      }
+    }
+  },
+  "notificationHpWarningTitle": {
+    "message": "⚠️ HP Warning",
+    "description": "HP warning title"
+  },
+  "hpWarningCritical": {
+    "message": "HP is only $HP$ remaining, knock the wooden fish soon!",
+    "description": "HP critical",
+    "placeholders": {
+      "hp": {
+        "content": "$1",
+        "example": "10"
+      }
+    }
+  },
+  "hpWarningLow": {
+    "message": "HP dropped to $HP$, remember to knock the wooden fish daily",
+    "description": "HP low",
+    "placeholders": {
+      "hp": {
+        "content": "$1",
+        "example": "30"
+      }
+    }
+  },
+  "notificationFirstKnockTitle": {
+    "message": "Merit +1",
+    "description": "First knock title"
+  },
+  "hpIncreased": {
+    "message": "HP +10, Current HP: $HP$",
+    "description": "HP increased",
+    "placeholders": {
+      "hp": {
+        "content": "$1",
+        "example": "80"
+      }
+    }
+  },
+  "consecutiveDays": {
+    "message": "$DAYS$ day streak!",
+    "description": "Consecutive days",
+    "placeholders": {
+      "days": {
+        "content": "$1",
+        "example": "7"
+      }
+    }
+  },
+  "popup_today": {
+    "message": "Today",
+    "description": "Today label"
+  },
+  "popup_merit": {
+    "message": "Merit",
+    "description": "Merit label"
+  },
+  "popup_total": {
+    "message": "Total",
+    "description": "Total label"
+  },
+  "popup_appName": {
+    "message": "Are You Still Alive",
+    "description": "App name in footer"
+  },
+  "popup_settings": {
+    "message": "Settings",
+    "description": "Settings button"
+  },
+  "popup_woodenFish": {
+    "message": "Wooden Fish",
+    "description": "Wooden fish alt text"
+  },
+  "popup_dataLoadError": {
+    "message": "Failed to load data",
+    "description": "Data load error"
+  },
+  "options_stats": {
+    "message": "Stats",
+    "description": "Stats tab"
+  },
+  "options_contacts": {
+    "message": "Emergency Contacts",
+    "description": "Contacts tab"
+  },
+  "options_settings": {
+    "message": "Settings",
+    "description": "Settings tab"
+  },
+  "contacts_title": {
+    "message": "Emergency Contacts",
+    "description": "Contacts page title"
+  },
+  "contacts_description": {
+    "message": "Add emergency contacts who will be notified when you're inactive for too long",
+    "description": "Contacts page description"
+  },
+  "contacts_addButton": {
+    "message": "Add Contact",
+    "description": "Add contact button"
+  },
+  "contacts_empty": {
+    "message": "No emergency contacts added yet",
+    "description": "Empty state message"
+  },
+  "contacts_emptyHint": {
+    "message": "Click the button above to add your first contact",
+    "description": "Empty state hint"
+  },
+  "contactForm_title": {
+    "message": "Add Contact",
+    "description": "Add contact form title"
+  },
+  "contactForm_titleEdit": {
+    "message": "Edit Contact",
+    "description": "Edit contact form title"
+  },
+  "contactForm_name": {
+    "message": "Name",
+    "description": "Name field label"
+  },
+  "contactForm_namePlaceholder": {
+    "message": "Enter name",
+    "description": "Name field placeholder"
+  },
+  "contactForm_email": {
+    "message": "Email",
+    "description": "Email field label"
+  },
+  "contactForm_emailPlaceholder": {
+    "message": "example@email.com",
+    "description": "Email field placeholder"
+  },
+  "contactForm_relationship": {
+    "message": "Relationship",
+    "description": "Relationship field label"
+  },
+  "contactForm_relationshipPlaceholder": {
+    "message": "e.g., Father, Friend, Colleague",
+    "description": "Relationship field placeholder"
+  },
+  "contactForm_relationshipHint": {
+    "message": "Contacts will be grouped by relationship",
+    "description": "Relationship field hint"
+  },
+  "contactForm_priority": {
+    "message": "Priority",
+    "description": "Priority field label"
+  },
+  "contactForm_priorityHighest": {
+    "message": "Highest",
+    "description": "Highest priority"
+  },
+  "contactForm_priorityMedium": {
+    "message": "Medium",
+    "description": "Medium priority"
+  },
+  "contactForm_priorityLowest": {
+    "message": "Lowest",
+    "description": "Lowest priority"
+  },
+  "contactForm_nameRequired": {
+    "message": "Please enter a name",
+    "description": "Name required error"
+  },
+  "contactForm_emailRequired": {
+    "message": "Please enter an email",
+    "description": "Email required error"
+  },
+  "contactForm_emailInvalid": {
+    "message": "Invalid email format",
+    "description": "Email invalid error"
+  },
+  "contactForm_relationshipRequired": {
+    "message": "Please enter or select a relationship",
+    "description": "Relationship required error"
+  },
+  "contactForm_operationFailed": {
+    "message": "Operation failed",
+    "description": "Operation failed error"
+  },
+  "contactCard_confirmDelete": {
+    "message": "Confirm Delete",
+    "description": "Confirm delete title"
+  },
+  "contactCard_confirmDeleteMessage": {
+    "message": "Are you sure you want to delete contact $NAME$?",
+    "description": "Confirm delete message",
+    "placeholders": {
+      "name": {
+        "content": "$1",
+        "example": "张三"
+      }
+    }
+  },
+  "relationship_family": {
+    "message": "Family",
+    "description": "Family relationship"
+  },
+  "relationship_friend": {
+    "message": "Friend",
+    "description": "Friend relationship"
+  },
+  "relationship_colleague": {
+    "message": "Colleague",
+    "description": "Colleague relationship"
+  },
+  "relationship_other": {
+    "message": "Other",
+    "description": "Other relationship"
+  },
+  "settings_title": {
+    "message": "Death Detection Settings",
+    "description": "Settings page title"
+  },
+  "settings_description": {
+    "message": "Configure death detection rules. Your emergency contacts will be notified when conditions are met",
+    "description": "Settings page description"
+  },
+  "settings_enable": {
+    "message": "Enable Death Detection",
+    "description": "Enable death detection"
+  },
+  "settings_enableDesc": {
+    "message": "Periodically check your activity status when enabled",
+    "description": "Enable description"
+  },
+  "settings_inactivityThreshold": {
+    "message": "Inactivity Threshold",
+    "description": "Inactivity threshold"
+  },
+  "settings_inactivityThresholdDesc": {
+    "message": "Trigger death detection after this many days without knocking",
+    "description": "Inactivity threshold description"
+  },
+  "settings_hpThreshold": {
+    "message": "HP Threshold",
+    "description": "HP threshold"
+  },
+  "settings_hpThresholdDesc": {
+    "message": "Trigger death detection when HP falls below this value",
+    "description": "HP threshold description"
+  },
+  "settings_checkInterval": {
+    "message": "Check Interval",
+    "description": "Check interval"
+  },
+  "settings_checkIntervalDesc": {
+    "message": "How often to check status",
+    "description": "Check interval description"
+  },
+  "settings_currentStatus": {
+    "message": "Current Status",
+    "description": "Current status"
+  },
+  "settings_statusNormal": {
+    "message": "Status Normal",
+    "description": "Status normal"
+  },
+  "settings_statusDead": {
+    "message": "Death Detection Triggered",
+    "description": "Status dead"
+  },
+  "settings_reason": {
+    "message": "Reason",
+    "description": "Reason label"
+  },
+  "settings_inactiveDays": {
+    "message": "Inactive Days",
+    "description": "Inactive days label"
+  },
+  "settings_lastActive": {
+    "message": "Last Active",
+    "description": "Last active label"
+  },
+  "settings_detectionTime": {
+    "message": "Detection Time",
+    "description": "Detection time label"
+  },
+  "settings_notificationStatus": {
+    "message": "Notification Status",
+    "description": "Notification status label"
+  },
+  "settings_sent": {
+    "message": "Sent",
+    "description": "Sent status"
+  },
+  "settings_pending": {
+    "message": "Pending",
+    "description": "Pending status"
+  },
+  "settings_noRecord": {
+    "message": "No detection record",
+    "description": "No detection record"
+  },
+  "settings_checkNow": {
+    "message": "Check Now",
+    "description": "Check now button"
+  },
+  "settings_checking": {
+    "message": "Checking...",
+    "description": "Checking text"
+  },
+  "settings_instructions": {
+    "message": "Instructions",
+    "description": "Instructions title"
+  },
+  "settings_instruction1": {
+    "message": "Death detection judges status based on your activity and HP",
+    "description": "Instruction 1"
+  },
+  "settings_instruction2": {
+    "message": "Your emergency contacts will be notified when death detection is triggered",
+    "description": "Instruction 2"
+  },
+  "settings_instruction3": {
+    "message": "You can manage your contact list in the Emergency Contacts tab",
+    "description": "Instruction 3"
+  },
+  "settings_instruction4": {
+    "message": "Set reasonable thresholds to avoid false alarms",
+    "description": "Instruction 4"
+  },
+  "settings_daysCount": {
+    "message": "$COUNT$ days",
+    "description": "Days count",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "7"
+      }
+    }
+  },
+  "settings_interval30min": {
+    "message": "30 minutes",
+    "description": "30 minutes"
+  },
+  "settings_interval1hour": {
+    "message": "1 hour",
+    "description": "1 hour"
+  },
+  "settings_interval2hours": {
+    "message": "2 hours",
+    "description": "2 hours"
+  },
+  "settings_interval6hours": {
+    "message": "6 hours",
+    "description": "6 hours"
+  },
+  "settings_interval12hours": {
+    "message": "12 hours",
+    "description": "12 hours"
+  },
+  "settings_interval24hours": {
+    "message": "24 hours",
+    "description": "24 hours"
+  },
+  "email_subject": {
+    "message": "Subject",
+    "description": "Email subject",
+    "placeholders": {
+      "user": {
+        "content": "$1",
+        "example": "张三"
+      }
+    }
+  },
+  "email_preview": {
+    "message": "Email Preview",
+    "description": "Email preview title"
+  },
+  "email_htmlView": {
+    "message": "HTML View",
+    "description": "HTML view button"
+  },
+  "email_textView": {
+    "message": "Text View",
+    "description": "Text view button"
+  },
+  "email_sendTest": {
+    "message": "Send Test Email",
+    "description": "Send test email button"
+  },
+  "email_subject_label": {
+    "message": "Subject",
+    "description": "Subject label"
+  },
+  "email_previewNote": {
+    "message": "This is a preview. Actual emails will use current real data",
+    "description": "Preview note"
+  },
+  "email_noContactsWarning": {
+    "message": "⚠️ No emergency contacts added yet. Please add contacts in the Emergency Contacts tab before sending emails.",
+    "description": "No contacts warning"
+  },
+  "email_contactsInfo": {
+    "message": "✅ $COUNT$ emergency contact(s) added. Emails will be sent to highest priority contacts.",
+    "description": "Contacts info",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "3"
+      }
+    }
+  },
+  "email_addContactsFirst": {
+    "message": "Please add emergency contacts first",
+    "description": "Add contacts first tooltip"
+  },
+  "email_testSuccess": {
+    "message": "✅ Test email prepared\\n\\nPlease confirm sending in your email client.\\n\\n💡 Tip: If the email client didn't open, check if your browser blocked pop-ups.",
+    "description": "Test email success message"
+  },
+  "email_sendFailed": {
+    "message": "❌ Send failed: $ERROR$",
+    "description": "Send failed message",
+    "placeholders": {
+      "error": {
+        "content": "$1",
+        "example": "未知错误"
+      }
+    }
+  },
+  "email_noContactsError": {
+    "message": "❌ Send failed: No emergency contacts\\n\\nPlease add at least one contact in the Emergency Contacts tab.",
+    "description": "No contacts error"
+  },
+  "email_unknownError": {
+    "message": "Unknown error",
+    "description": "Unknown error"
+  },
+  "notification_deathWarningTitle": {
+    "message": "⚠️ HP Depleted",
+    "description": "Death warning notification title"
+  },
+  "notification_deathWarning1Day": {
+    "message": "You haven't knocked the wooden fish for 1 day, HP depleted",
+    "description": "Death warning 1 day"
+  },
+  "notification_deathWarningDays": {
+    "message": "You haven't knocked the wooden fish for $DAYS$ days, HP depleted",
+    "description": "Death warning multiple days",
+    "placeholders": {
+      "days": {
+        "content": "$1",
+        "example": "7"
+      }
+    }
+  },
+  "notification_hpWarningTitle": {
+    "message": "⚠️ HP Warning",
+    "description": "HP warning notification title"
+  },
+  "notification_hpCritical": {
+    "message": "HP is only $HP$ remaining, knock the wooden fish soon!",
+    "description": "HP critical message",
+    "placeholders": {
+      "hp": {
+        "content": "$1",
+        "example": "10"
+      }
+    }
+  },
+  "notification_hpLow": {
+    "message": "HP dropped to $HP$, remember to knock the wooden fish daily",
+    "description": "HP low message",
+    "placeholders": {
+      "hp": {
+        "content": "$1",
+        "example": "30"
+      }
+    }
+  },
+  "notification_firstKnockTitle": {
+    "message": "Merit +1",
+    "description": "First knock notification title"
+  },
+  "notification_hpIncreased": {
+    "message": "HP +10, Current HP: $HP$",
+    "description": "HP increased message",
+    "placeholders": {
+      "hp": {
+        "content": "$1",
+        "example": "80"
+      }
+    }
+  },
+  "notification_consecutiveDays": {
+    "message": "$DAYS$ day streak!",
+    "description": "Consecutive days message",
+    "placeholders": {
+      "days": {
+        "content": "$1",
+        "example": "7"
+      }
+    }
+  },
+  "stats_totalMerit": {
+    "message": "Total Merit",
+    "description": "Total merit label"
+  },
+  "stats_consecutiveDays": {
+    "message": "Streak",
+    "description": "Consecutive days label"
+  },
+  "stats_aliveDays": {
+    "message": "Days Alive",
+    "description": "Alive days label"
+  },
+  "stats_totalKnocks": {
+    "message": "Total Knocks",
+    "description": "Total knocks label"
+  },
+  "stats_avgPerDay": {
+    "message": "Avg/Day",
+    "description": "Average per day label"
+  },
+  "stats_maxStreak": {
+    "message": "Max Streak",
+    "description": "Max consecutive days label"
+  },
+  "stats_dataOverview": {
+    "message": "Data Overview",
+    "description": "Data overview title"
+  },
+  "stats_knockCount": {
+    "message": "Knocks",
+    "description": "Knock count legend"
+  },
+  "stats_noKnocks": {
+    "message": "No knocks",
+    "description": "No knocks legend"
+  },
+  "stats_year": {
+    "message": "Year",
+    "description": "Year label"
+  },
+  "stats_month": {
+    "message": "Month",
+    "description": "Month label"
+  },
+  "stats_prevMonth": {
+    "message": "Previous month",
+    "description": "Previous month button"
+  },
+  "stats_nextMonth": {
+    "message": "Next month",
+    "description": "Next month button"
+  },
+  "stats_sunday": {
+    "message": "Sun",
+    "description": "Sunday abbreviation"
+  },
+  "stats_monday": {
+    "message": "Mon",
+    "description": "Monday abbreviation"
+  },
+  "stats_tuesday": {
+    "message": "Tue",
+    "description": "Tuesday abbreviation"
+  },
+  "stats_wednesday": {
+    "message": "Wed",
+    "description": "Wednesday abbreviation"
+  },
+  "stats_thursday": {
+    "message": "Thu",
+    "description": "Thursday abbreviation"
+  },
+  "stats_friday": {
+    "message": "Fri",
+    "description": "Friday abbreviation"
+  },
+  "stats_saturday": {
+    "message": "Sat",
+    "description": "Saturday abbreviation"
+  },
+  "stats_days": {
+    "message": "$COUNT$ days",
+    "description": "Days count",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "7"
+      }
+    }
+  },
+  "stats_times": {
+    "message": "$COUNT$ times",
+    "description": "Times count",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "100"
+      }
+    }
+  },
+  "hp_alive": {
+    "message": "Alive",
+    "description": "Alive status"
+  },
+  "hp_dead": {
+    "message": "Deceased",
+    "description": "Dead status"
+  },
+  "hp_label": {
+    "message": "HP",
+    "description": "HP label"
+  },
+  "hp_streak": {
+    "message": "$DAYS$ days",
+    "description": "Streak days",
+    "placeholders": {
+      "days": {
+        "content": "$1",
+        "example": "7"
+      }
+    }
+  },
+  "dataLoadError": {
+    "message": "Failed to load data",
+    "description": "Data load error message"
+  },
+  "loadFailed": {
+    "message": "Load failed",
+    "description": "Load failed error"
+  },
+  "language": {
+    "message": "Language",
+    "description": "Language setting label"
+  },
+  "language_en": {
+    "message": "English",
+    "description": "English language option"
+  },
+  "language_zh_CN": {
+    "message": "简体中文",
+    "description": "Simplified Chinese language option"
+  },
+  "reason_detectionDisabled": {
+    "message": "Detection disabled",
+    "description": "Detection disabled reason"
+  },
+  "reason_hpBelowThreshold": {
+    "message": "HP dropped to $HP$, below threshold $THRESHOLD$",
+    "description": "HP below threshold reason",
+    "placeholders": {
+      "hp": {
+        "content": "$1",
+        "example": "5"
+      },
+      "threshold": {
+        "content": "$2",
+        "example": "10"
+      }
+    }
+  },
+  "reason_inactivityExceeded": {
+    "message": "Inactive for $DAYS$ days, exceeding threshold of $THRESHOLD$ days",
+    "description": "Inactivity exceeded reason",
+    "placeholders": {
+      "days": {
+        "content": "$1",
+        "example": "7"
+      },
+      "threshold": {
+        "content": "$2",
+        "example": "5"
+      }
+    }
+  },
+  "loginWithGoogle": {
+    "message": "Sign in with Google",
+    "description": "Login with Google button"
+  },
+  "loggingIn": {
+    "message": "Signing in...",
+    "description": "Logging in text"
+  },
+  "loginFailed": {
+    "message": "Sign in failed",
+    "description": "Login failed error"
+  },
+  "signOut": {
+    "message": "Sign out",
+    "description": "Sign out button"
+  },
+  "confirmSignOut": {
+    "message": "Are you sure you want to sign out?",
+    "description": "Confirm sign out message"
+  },
+  "accountSettings": {
+    "message": "Account Settings",
+    "description": "Account settings"
+  },
+  "menu": {
+    "message": "Menu",
+    "description": "Menu button"
+  },
+  "notSynced": {
+    "message": "Not synced",
+    "description": "Not synced status"
+  },
+  "sync_title": {
+    "message": "Data Sync",
+    "description": "Data sync title"
+  },
+  "sync_status": {
+    "message": "Status",
+    "description": "Sync status label"
+  },
+  "sync_lastSync": {
+    "message": "Last Sync",
+    "description": "Last sync label"
+  },
+  "sync_syncNow": {
+    "message": "Sync Now",
+    "description": "Sync now button"
+  },
+  "sync_syncing": {
+    "message": "Syncing...",
+    "description": "Syncing text"
+  },
+  "sync_idle": {
+    "message": "Idle",
+    "description": "Idle status"
+  },
+  "sync_success": {
+    "message": "Sync Successful",
+    "description": "Success status"
+  },
+  "sync_error": {
+    "message": "Sync Failed",
+    "description": "Error status"
+  },
+  "sync_offline": {
+    "message": "Offline",
+    "description": "Offline status"
+  },
+  "sync_never": {
+    "message": "Never synced",
+    "description": "Never synced"
+  },
+  "sync_justNow": {
+    "message": "Just now",
+    "description": "Just now"
+  },
+  "sync_minutesAgo": {
+    "message": "$COUNT$ minutes ago",
+    "description": "Minutes ago",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "5"
+      }
+    }
+  },
+  "sync_hoursAgo": {
+    "message": "$COUNT$ hours ago",
+    "description": "Hours ago",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "2"
+      }
+    }
+  },
+  "sync_daysAgo": {
+    "message": "$COUNT$ days ago",
+    "description": "Days ago",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "3"
+      }
+    }
+  },
+  "sync_loginRequired": {
+    "message": "Please sign in to enable data sync",
+    "description": "Login required message"
+  },
+  "sync_info1": {
+    "message": "💡 Data syncs automatically every 30 minutes",
+    "description": "Sync info 1"
+  },
+  "sync_info2": {
+    "message": "💡 Data syncs automatically after knocking and updating contacts",
+    "description": "Sync info 2"
+  },
+  "sync_info3": {
+    "message": "💡 Data syncs automatically when network is restored",
+    "description": "Sync info 3"
+  },
+  "account_userInfo": {
+    "message": "User Information",
+    "description": "User info title"
+  },
+  "account_displayName": {
+    "message": "Display Name",
+    "description": "Display name label"
+  },
+  "account_email": {
+    "message": "Email",
+    "description": "Email label"
+  },
+  "account_userId": {
+    "message": "User ID",
+    "description": "User ID label"
+  },
+  "account_notSet": {
+    "message": "Not set",
+    "description": "Not set"
+  },
+  "account_editName": {
+    "message": "Edit name",
+    "description": "Edit name button tooltip"
+  },
+  "account_enterName": {
+    "message": "Enter display name",
+    "description": "Enter name placeholder"
+  },
+  "account_nameUpdated": {
+    "message": "Display name updated",
+    "description": "Name updated message"
+  },
+  "account_nameUpdateFailed": {
+    "message": "Failed to update display name",
+    "description": "Name update failed message"
+  },
+  "account_dataSync": {
+    "message": "Data Sync",
+    "description": "Data sync title"
+  },
+  "account_actions": {
+    "message": "Account Actions",
+    "description": "Account actions title"
+  },
+  "account_deleteAccount": {
+    "message": "Delete Account",
+    "description": "Delete account button"
+  },
+  "account_deleteWarning": {
+    "message": "⚠️ Deleting your account will permanently delete all your data. This action cannot be undone",
+    "description": "Delete account warning"
+  },
+  "account_confirmDelete": {
+    "message": "Are you sure you want to delete your account?",
+    "description": "Confirm delete account"
+  },
+  "account_confirmDeleteWarning": {
+    "message": "⚠️ Final confirmation: All your data will be permanently deleted and cannot be recovered. Continue?",
+    "description": "Confirm delete account warning"
+  },
+  "account_deleteNotImplemented": {
+    "message": "Account deletion is not yet implemented. Please contact support to delete your account.",
+    "description": "Delete not implemented message"
+  },
+  "account_syncSuccess": {
+    "message": "✅ Sync successful!",
+    "description": "Sync success message"
+  },
+  "account_syncFailed": {
+    "message": "❌ Sync failed: $ERROR$",
+    "description": "Sync failed message",
+    "placeholders": {
+      "error": {
+        "content": "$1",
+        "example": "网络错误"
+      }
+    }
+  },
+  "account_signOutFailed": {
+    "message": "Sign out failed",
+    "description": "Sign out failed message"
+  },
+  "account_notSignedIn": {
+    "message": "You are not signed in",
+    "description": "Not signed in message"
+  },
+  "account_signInHint": {
+    "message": "Sign in to backup your data to the cloud and sync across devices",
+    "description": "Sign in hint"
+  },
+  "loginPrompt_title": {
+    "message": "Sign in required to send email notifications",
+    "description": "Login prompt title"
+  },
+  "loginPrompt_message": {
+    "message": "After adding emergency contacts, the system will notify them via email when you've been inactive for an extended period.",
+    "description": "Login prompt message"
+  },
+  "loginPrompt_benefit1": {
+    "message": "Send death notification emails to emergency contacts",
+    "description": "Login benefit 1"
+  },
+  "loginPrompt_benefit2": {
+    "message": "Automatically backup data to the cloud",
+    "description": "Login benefit 2"
+  },
+  "loginPrompt_benefit3": {
+    "message": "Sync data across multiple devices",
+    "description": "Login benefit 3"
+  },
+  "loginPrompt_skip": {
+    "message": "Skip for now",
+    "description": "Skip login button"
+  },
+  "loginPrompt_note": {
+    "message": "Click 'Skip for now' to continue adding contacts, but email notifications will not be available",
+    "description": "Login prompt note"
+  },
+  "gameplay_title": {
+    "message": "How to Play",
+    "description": "Gameplay guide title"
+  },
+  "gameplay_intro": {
+    "message": "Welcome to 'Are You Still Alive'! Stay active by knocking the wooden fish daily, accumulate merit, and maintain your HP.",
+    "description": "Gameplay introduction"
+  },
+  "gameplay_knock_title": {
+    "message": "How to Play",
+    "description": "How to play title"
+  },
+  "gameplay_knock_desc": {
+    "message": "Click the wooden fish icon in the popup to knock. Each knock increases your merit. The first knock of each day earns bonus rewards.",
+    "description": "How to play description"
+  },
+  "gameplay_merit_title": {
+    "message": "Merit System",
+    "description": "Merit system title"
+  },
+  "gameplay_merit_desc": {
+    "message": "Merit represents your cultivation progress, accumulated by knocking the wooden fish:",
+    "description": "Merit system description"
+  },
+  "gameplay_merit_base": {
+    "message": "Base Merit: +1 per knock",
+    "description": "Base merit"
+  },
+  "gameplay_merit_first": {
+    "message": "First Knock Bonus: +5 for the first knock each day",
+    "description": "First knock bonus"
+  },
+  "gameplay_merit_combo": {
+    "message": "Combo Bonus: Consecutive knocks earn extra merit",
+    "description": "Combo bonus"
+  },
+  "gameplay_merit_milestone": {
+    "message": "Milestone Bonus: Reach specific counts for large merit rewards",
+    "description": "Milestone bonus"
+  },
+  "gameplay_hp_title": {
+    "message": "HP System",
+    "description": "HP system title"
+  },
+  "gameplay_hp_desc": {
+    "message": "HP represents your activity status and must be maintained daily:",
+    "description": "HP system description"
+  },
+  "gameplay_hp_initial": {
+    "message": "Initial HP: 100",
+    "description": "Initial HP"
+  },
+  "gameplay_hp_reward": {
+    "message": "Daily Reward: +10 HP for the first knock each day",
+    "description": "Daily HP reward"
+  },
+  "gameplay_hp_penalty": {
+    "message": "Inactivity Penalty: -10 HP for each day without knocking",
+    "description": "Inactivity penalty"
+  },
+  "gameplay_hp_death": {
+    "message": "HP Depleted: Triggers death detection",
+    "description": "HP depleted"
+  },
+  "gameplay_streak_title": {
+    "message": "Consecutive Days",
+    "description": "Streak title"
+  },
+  "gameplay_streak_desc": {
+    "message": "Knocking the wooden fish for consecutive days builds your streak. Longer streaks earn more rewards. Streaks reset if interrupted.",
+    "description": "Streak description"
+  },
+  "gameplay_tips_title": {
+    "message": "💡 Tips",
+    "description": "Tips title"
+  },
+  "gameplay_tip1": {
+    "message": "Knock the wooden fish at least once daily to keep your HP from depleting",
+    "description": "Tip 1"
+  },
+  "gameplay_tip2": {
+    "message": "Maintain your streak for more rewards - try not to break it",
+    "description": "Tip 2"
+  },
+  "gameplay_tip3": {
+    "message": "Sign in to sync your data to the cloud and across multiple devices",
+    "description": "Tip 3"
+  }
+}

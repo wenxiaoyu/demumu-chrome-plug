@@ -1,174 +1,98 @@
-# 实施总结
+# Implementation Summary
 
-## ✅ 已完成的工作
+## Task 1.6: Status Detection and Notifications - COMPLETED ✅
 
-### 1. 项目初始化 ✓
+### What Was Built
 
-- ✅ 使用 pnpm 初始化项目
-- ✅ 配置 package.json（ESM 模式）
-- ✅ 安装所有核心依赖
-- ✅ 配置 TypeScript（严格模式 + 路径别名）
-- ✅ 配置 Vite（React + Web Extension 插件）
+#### Background Services
+1. **StatusChecker Service** (`src/background/services/status-checker.ts`)
+   - Checks for new day and resets todayKnocks
+   - Calculates current HP with time penalty
+   - Detects status changes (alive/dead)
+   - Triggers notifications for death/warning
+   - Updates browser badge with HP value and color
 
-### 2. Chrome 插件核心功能 ✓
+2. **NotificationService** (`src/background/services/notification-service.ts`)
+   - `showDeathWarning(daysSinceKnock)` - Shows death notification
+   - `showHPWarning(hp)` - Shows HP warning notification
+   - `showFirstKnockToday(consecutiveDays, hp)` - Shows first knock notification
+   - `clearAll()` - Clears all notifications
 
-- ✅ Manifest V3 配置
-- ✅ Popup 页面（React + TypeScript）
-- ✅ Options 页面（设置管理）
-- ✅ Background Service Worker
-- ✅ Content Script（页面注入）
-- ✅ 消息传递机制
-- ✅ Chrome Storage API 集成
+3. **Alarm Handler** (`src/background/handlers/alarm-handler.ts`)
+   - Creates periodic check alarm (every 60 minutes)
+   - Handles alarm events
+   - Triggers status checks
 
-### 3. 代码质量工具 ✓
+4. **Background Index** (`src/background/index.ts`)
+   - Initializes status checker on install
+   - Checks status on browser startup
+   - Sets up alarm listeners
+   - Handles messages from popup (KNOCK_COMPLETED, CHECK_STATUS)
 
-- ✅ ESLint 9（Flat Config）
-- ✅ Prettier（代码格式化）
-- ✅ Husky + lint-staged（Git Hooks）
-- ✅ TypeScript 严格类型检查
+#### Integration
+- **useKnock Hook**: Sends message to background after each knock
+- **Manifest**: Already configured with required permissions (storage, notifications, alarms)
+- **Build**: Successfully compiles and transforms TypeScript to JavaScript
 
-### 4. CI/CD 流水线 ✓
+### How It Works
 
-- ✅ GitHub Actions CI 工作流
-- ✅ GitHub Actions Release 工作流
-- ✅ Chrome Web Store 自动发布脚本
-- ✅ 构建产物自动打包
+1. **Periodic Checks**: Every 60 minutes, the alarm triggers a status check
+2. **Browser Startup**: When browser starts, status is checked immediately
+3. **After Knock**: When user knocks, popup sends message to background to update badge
+4. **Cross-Day Detection**: Background detects new day and resets todayKnocks
+5. **HP Calculation**: Background calculates actual HP considering time penalty
+6. **Notifications**: 
+   - Death: When HP reaches 0
+   - Warning: When HP ≤ 30
+   - First Knock: When user knocks for first time today (optional)
+7. **Badge**: Shows current HP with color coding (green/yellow/orange/red)
 
-### 5. 文档 ✓
+### Testing Checklist
 
-- ✅ README.md（完整项目文档）
-- ✅ QUICK_START.md（快速开始指南）
-- ✅ CHROME_WEB_STORE_SETUP.md（发布配置指南）
-- ✅ LICENSE（MIT）
-- ✅ .env.example（环境变量示例）
+- [x] Build succeeds without errors
+- [x] TypeScript type checking passes
+- [ ] Alarm creation works (verify in chrome://extensions)
+- [ ] Badge updates correctly after knock
+- [ ] Badge shows correct HP value and color
+- [ ] Cross-day detection resets todayKnocks
+- [ ] Death notification appears when HP = 0
+- [ ] Warning notification appears when HP ≤ 30
+- [ ] First knock notification appears (if implemented)
+- [ ] Status check runs every 60 minutes
 
-### 6. 项目配置 ✓
+### Next Steps
 
-- ✅ .gitignore
-- ✅ .prettierrc & .prettierignore
-- ✅ eslint.config.js
-- ✅ tsconfig.json
-- ✅ vite.config.ts
+1. **Manual Testing**: Load extension and verify all features work
+2. **Edge Cases**: Test cross-day scenarios, HP warnings, death state
+3. **Performance**: Monitor background service resource usage
+4. **Polish**: Adjust notification timing/frequency if needed
 
-## 📊 项目统计
+### Files Modified/Created
 
-- **总文件数**: 47 个
-- **代码行数**: 11,867 行
-- **依赖包数**: 547 个
-- **开发依赖**: 16 个核心包
-- **生产依赖**: 2 个（React + React-DOM）
+**Created:**
+- `src/background/index.ts`
+- `src/background/services/status-checker.ts`
+- `src/background/services/notification-service.ts`
+- `src/background/handlers/alarm-handler.ts`
 
-## 🎯 技术栈
+**Modified:**
+- `src/popup/hooks/useKnock.ts` (added background message)
+- `src/shared/constants.ts` (added NOTIFICATION_CONFIG)
 
-### 前端
-
-- React 19.2.3
-- TypeScript 5.9.3
-- Vite 7.3.1
-
-### 工具链
-
-- pnpm 10.28.0
-- ESLint 9.39.2
-- Prettier 3.8.0
-- Husky 9.1.7
-
-### Chrome Extension
-
-- Manifest V3
-- vite-plugin-web-extension 4.5.0
-- @types/chrome 0.1.33
-
-## ✨ 核心特性
-
-### 开发体验
-
-- ⚡ Vite 快速热重载
-- 🔍 完整的 TypeScript 类型提示
-- 🎨 自动代码格式化
-- 🔒 提交前代码检查
-
-### 插件功能
-
-- 🎯 Popup 弹出窗口（渐变 UI）
-- ⚙️ Options 设置页面
-- 🔄 Background Service Worker
-- 📝 Content Script 页面注入
-- 💾 Chrome Storage 数据持久化
-- 📡 完整的消息传递系统
-
-### CI/CD
-
-- 🤖 自动化测试（lint + type-check）
-- 📦 自动构建和打包
-- 🚀 自动发布到 Chrome Web Store
-- 📋 自动创建 GitHub Release
-
-## 🚀 如何使用
-
-### 开发
-
-```bash
-pnpm install
-pnpm dev
-```
-
-### 构建
-
-```bash
-pnpm build
-```
-
-### 发布
-
-```bash
-git tag v1.0.0
-git push origin v1.0.0
-```
-
-## 📝 下一步建议
-
-### 必做
-
-1. ✅ 替换占位图标为实际图标（PNG 格式）
-2. ✅ 配置 Chrome Web Store 发布凭证
-3. ✅ 在 Chrome Web Store 首次手动上传获取 Extension ID
-
-### 可选
-
-1. 添加单元测试（Vitest + Testing Library）
-2. 添加 E2E 测试（Playwright）
-3. 实现国际化（chrome.i18n）
-4. 添加更多插件功能
-5. 优化构建体积
-
-## 🎉 成果
-
-一个完整的、生产就绪的 Chrome 插件开发脚手架，包含：
-
-- ✅ 现代化的技术栈
-- ✅ 完善的开发工具链
-- ✅ 自动化的 CI/CD 流程
-- ✅ 详细的文档
-- ✅ 最佳实践的项目结构
-
-## 📚 相关文档
-
-- [README.md](../README.md) - 完整项目文档
-- [QUICK_START.md](./QUICK_START.md) - 快速开始
-- [CHROME_WEB_STORE_SETUP.md](./CHROME_WEB_STORE_SETUP.md) - 发布配置
-
-## 🙏 致谢
-
-感谢以下开源项目：
-
-- [Vite](https://vitejs.dev/)
-- [React](https://react.dev/)
-- [vite-plugin-web-extension](https://github.com/aklinker1/vite-plugin-web-extension)
-- [chrome-webstore-upload](https://github.com/fregante/chrome-webstore-upload)
+**Already Configured:**
+- `src/manifest.json` (permissions: storage, notifications, alarms)
 
 ---
 
-**项目状态**: ✅ 完成
-**最后更新**: 2026-01-15
-**版本**: 0.1.0
+## Phase 1 MVP Status
+
+### Completed Iterations ✅
+- ✅ 1.1: Minimum Viable Wooden Fish
+- ✅ 1.2: Today's Knock Statistics
+- ✅ 1.3: Merit System
+- ✅ 1.4: HP System
+- ✅ 1.5: Consecutive Days
+- ✅ 1.6: Status Detection and Notifications
+
+### Ready for Testing
+All core functionality is implemented and built successfully. The extension is ready for manual testing and user feedback.

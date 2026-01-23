@@ -1,122 +1,103 @@
-import { useState, useEffect } from 'react'
-import './options.css'
+import { useState, useEffect } from 'react';
+import { StatsPage } from './components/StatsPage';
+import { ContactsPage } from './components/ContactsPage';
+import { SettingsPage } from './components/SettingsPage';
+import { AccountSettings } from './components/AccountSettings';
+import { HelpPage } from './components/HelpPage';
+import { useContacts } from './hooks/useContacts';
+import { t, initLanguage } from '../shared/utils/i18n';
+import woodenFishIcon from '../icons/wooden-fish.svg';
+import './Options.css';
 
-interface Settings {
-  enableNotifications: boolean
-  autoStart: boolean
-  theme: 'light' | 'dark'
-}
+type Tab = 'stats' | 'contacts' | 'settings' | 'account' | 'help';
 
-function Options() {
-  const [settings, setSettings] = useState<Settings>({
-    enableNotifications: true,
-    autoStart: false,
-    theme: 'light',
-  })
-  const [saved, setSaved] = useState(false)
+/**
+ * Options 页面主组件
+ */
+export function Options() {
+  const [activeTab, setActiveTab] = useState<Tab>('stats');
+  const [langReady, setLangReady] = useState(false);
+  const { contacts, loading, addContact, updateContact, deleteContact } = useContacts();
 
+  // 初始化语言
   useEffect(() => {
-    // Load settings from storage
-    chrome.storage.local.get(['settings'], (result) => {
-      if (result.settings) {
-        setSettings(result.settings as Settings)
-      }
-    })
-  }, [])
+    initLanguage().then(() => setLangReady(true));
+  }, []);
 
-  const handleSave = () => {
-    chrome.storage.local.set({ settings }, () => {
-      setSaved(true)
-      setTimeout(() => setSaved(false), 2000)
-    })
-  }
-
-  const handleReset = () => {
-    const defaultSettings: Settings = {
-      enableNotifications: true,
-      autoStart: false,
-      theme: 'light',
+  // 支持从 URL 参数指定默认标签
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const tab = params.get('tab') as Tab;
+    if (tab && ['stats', 'contacts', 'settings', 'account', 'help'].includes(tab)) {
+      setActiveTab(tab);
     }
-    setSettings(defaultSettings)
-    chrome.storage.local.set({ settings: defaultSettings })
+  }, []);
+
+  if (!langReady) {
+    return (
+      <div className="options-container">
+        <div className="options-loading">Loading...</div>
+      </div>
+    );
   }
 
   return (
     <div className="options-container">
-      <header>
-        <h1>Extension Settings</h1>
-        <p>Configure your extension preferences</p>
+      <header className="options-header">
+        <h1 className="options-title">
+          <img src={woodenFishIcon} alt={t('woodenFish')} className="title-icon-svg" />
+          {t('appName')}
+        </h1>
+        
+        <nav className="options-tabs">
+          <button
+            className={`tab-button ${activeTab === 'stats' ? 'active' : ''}`}
+            onClick={() => setActiveTab('stats')}
+          >
+            {t('tabStats')}
+          </button>
+          <button
+            className={`tab-button ${activeTab === 'contacts' ? 'active' : ''}`}
+            onClick={() => setActiveTab('contacts')}
+          >
+            {t('tabContacts')}
+          </button>
+          <button
+            className={`tab-button ${activeTab === 'account' ? 'active' : ''}`}
+            onClick={() => setActiveTab('account')}
+          >
+            {t('tabAccount')}
+          </button>
+          <button
+            className={`tab-button ${activeTab === 'settings' ? 'active' : ''}`}
+            onClick={() => setActiveTab('settings')}
+          >
+            {t('tabSettings')}
+          </button>
+          <button
+            className={`tab-button ${activeTab === 'help' ? 'active' : ''}`}
+            onClick={() => setActiveTab('help')}
+          >
+            {t('tabHelp')}
+          </button>
+        </nav>
       </header>
 
-      <main>
-        <section className="settings-section">
-          <h2>General</h2>
-
-          <div className="setting-item">
-            <label>
-              <input
-                type="checkbox"
-                checked={settings.enableNotifications}
-                onChange={(e) =>
-                  setSettings({ ...settings, enableNotifications: e.target.checked })
-                }
-              />
-              <span>Enable Notifications</span>
-            </label>
-            <p className="setting-description">
-              Show notifications when content script receives messages
-            </p>
-          </div>
-
-          <div className="setting-item">
-            <label>
-              <input
-                type="checkbox"
-                checked={settings.autoStart}
-                onChange={(e) => setSettings({ ...settings, autoStart: e.target.checked })}
-              />
-              <span>Auto Start</span>
-            </label>
-            <p className="setting-description">
-              Automatically start extension features on page load
-            </p>
-          </div>
-        </section>
-
-        <section className="settings-section">
-          <h2>Appearance</h2>
-
-          <div className="setting-item">
-            <label htmlFor="theme">Theme</label>
-            <select
-              id="theme"
-              value={settings.theme}
-              onChange={(e) =>
-                setSettings({ ...settings, theme: e.target.value as 'light' | 'dark' })
-              }
-            >
-              <option value="light">Light</option>
-              <option value="dark">Dark</option>
-            </select>
-            <p className="setting-description">Choose your preferred color theme</p>
-          </div>
-        </section>
-
-        <div className="actions">
-          <button className="btn-primary" onClick={handleSave}>
-            {saved ? '✓ Saved!' : 'Save Settings'}
-          </button>
-          <button className="btn-secondary" onClick={handleReset}>
-            Reset to Defaults
-          </button>
-        </div>
+      <main className="options-main">
+        {activeTab === 'stats' && <StatsPage />}
+        {activeTab === 'contacts' && (
+          <ContactsPage
+            contacts={contacts}
+            onAdd={addContact}
+            onUpdate={updateContact}
+            onDelete={deleteContact}
+            loading={loading}
+          />
+        )}
+        {activeTab === 'account' && <AccountSettings />}
+        {activeTab === 'settings' && <SettingsPage />}
+        {activeTab === 'help' && <HelpPage />}
       </main>
-
-      <footer>
-        <p>Demumu Chrome Extension v{chrome.runtime.getManifest().version}</p>
-      </footer>
     </div>
-  )
+  );
 }
-
-export default Options

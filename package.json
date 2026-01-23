@@ -1,7 +1,7 @@
 {
-  "name": "demumu-chrome-extension",
-  "version": "0.1.1",
-  "description": "A modern Chrome extension built with TypeScript and React",
+  "name": "alive-checker",
+  "version": "0.1.0",
+  "description": "还活着吗 - 用游戏化的方式追踪你的存活状态",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -14,10 +14,11 @@
   },
   "keywords": [
     "chrome-extension",
-    "browser-extension",
+    "check-in",
+    "gamification",
+    "productivity",
     "typescript",
-    "react",
-    "vite"
+    "react"
   ],
   "author": "wenxy",
   "license": "MIT",
@@ -42,6 +43,7 @@
     "vite-plugin-web-extension": "^4.5.0"
   },
   "dependencies": {
+    "firebase": "^12.8.0",
     "react": "^19.2.3",
     "react-dom": "^19.2.3"
   },

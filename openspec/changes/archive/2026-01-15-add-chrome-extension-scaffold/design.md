@@ -1,11 +1,9 @@
 # Design: Chrome 插件脚手架与 CI/CD 流水线
 
 ## Context
-
 这是一个全新的 Chrome 插件项目，需要建立完整的开发、构建和发布基础设施。目标是为个人开发者提供一个现代化、自动化的开发环境，支持快速迭代和无缝发布到 Chrome Web Store。
 
 关键约束：
-
 - 必须使用 Manifest V3（Manifest V2 将于 2024 年停止支持）
 - 需要支持 TypeScript 和 React 以提供良好的开发体验
 - CI/CD 流程需要完全自动化，减少手动操作
@@ -14,7 +12,6 @@
 ## Goals / Non-Goals
 
 ### Goals
-
 - 提供开箱即用的 Chrome 插件开发环境
 - 实现快速的开发反馈循环（热重载、类型检查）
 - 自动化发布流程，一键发布到 Chrome Web Store
@@ -22,7 +19,6 @@
 - 清晰的项目结构，易于扩展
 
 ### Non-Goals
-
 - 不包含具体的业务功能实现（这是脚手架）
 - 不支持 Firefox 或其他浏览器（专注 Chrome）
 - 不包含复杂的测试框架（可后续添加）
@@ -31,92 +27,64 @@
 ## Decisions
 
 ### 1. 构建工具：Vite
-
 **决策**: 使用 Vite 作为构建工具
 
 **理由**:
-
 - 极快的开发服务器启动和热更新
 - 原生支持 TypeScript 和 React
 - 有成熟的 Chrome 插件插件（vite-plugin-web-extension）
 - 比 Webpack 配置更简单，更适合个人开发者
 
 **替代方案**:
-
 - Webpack: 更成熟但配置复杂，构建速度较慢
 - Plasmo: 专门的 Chrome 插件框架，但抽象层次过高，灵活性较低
 - Rollup: 适合库开发，但对应用开发支持不如 Vite
 
 ### 2. UI 框架：React
-
 **决策**: 使用 React 作为 UI 框架
 
 **理由**:
-
 - 生态系统成熟，组件库丰富
 - TypeScript 支持完善
 - 开发者熟悉度高
 - 适合构建复杂的 popup 和 options 页面
 
 **替代方案**:
-
 - Vue: 同样优秀，但 React 生态更大
 - Svelte: 体积更小，但生态较小
 - Vanilla JS: 简单场景可用，但复杂 UI 开发效率低
 
-### 3. 包管理器：pnpm
-
-**决策**: 使用 pnpm 作为包管理器
+### 3. 包管理器：npm
+**决策**: 使用 npm 作为包管理器
 
 **理由**:
-
 - 磁盘空间效率高（硬链接）
 - 安装速度快
 - 严格的依赖管理，避免幽灵依赖
 - 与 npm 兼容
 
-**替代方案**:
-
-- npm: 默认选择，但速度和空间效率较低
-- yarn: 速度快，但 pnpm 更现代
-
 ### 4. CI/CD 平台：GitHub Actions
-
 **决策**: 使用 GitHub Actions 实现 CI/CD
 
 **理由**:
-
 - 与 GitHub 深度集成
 - 免费额度充足（个人开发者）
 - 配置简单，YAML 格式
 - 社区有大量现成的 actions
 
-**替代方案**:
-
-- GitLab CI: 需要 GitLab 账号
-- CircleCI: 免费额度有限
-- Jenkins: 需要自己维护服务器
-
 ### 5. Chrome Web Store 发布：chrome-webstore-upload
-
 **决策**: 使用 chrome-webstore-upload npm 包
 
 **理由**:
-
 - 官方推荐的发布工具
 - 支持完整的 Chrome Web Store API
 - 可以在 CI 环境中使用
 - 活跃维护
 
-**替代方案**:
-
-- 手动上传: 繁琐，容易出错
-- 自己实现 API 调用: 重复造轮子
 
 ## Architecture
 
 ### 项目结构
-
 ```
 demumu-chrome-plug/
 ├── .github/
@@ -149,7 +117,6 @@ demumu-chrome-plug/
 ```
 
 ### 组件交互
-
 ```
 ┌─────────────┐
 │   Popup    │ ←→ Chrome Storage API
@@ -171,7 +138,6 @@ demumu-chrome-plug/
 ```
 
 ### CI/CD 流程
-
 ```
 Code Push → GitHub
      ↓
@@ -180,7 +146,7 @@ Code Push → GitHub
      ├─ Lint & Type Check
      ├─ Build
      └─ Tests (optional)
-
+     
 Tag Push (v*) → GitHub
      ↓
   Release Workflow
@@ -193,51 +159,42 @@ Tag Push (v*) → GitHub
 ## Risks / Trade-offs
 
 ### Risk 1: Chrome Web Store API 凭证泄露
-
 **风险**: 如果 API 凭证泄露，恶意用户可能上传恶意版本
 
 **缓解措施**:
-
 - 使用 GitHub Secrets 存储凭证
 - 定期轮换 refresh token
 - 监控发布活动
 
 ### Risk 2: Manifest V3 限制
-
 **风险**: Manifest V3 对某些功能有限制（如 service worker 生命周期）
 
 **缓解措施**:
-
 - 遵循最佳实践，使用消息传递而非长连接
 - 使用 chrome.alarms API 处理定时任务
 - 充分测试 service worker 的唤醒和休眠
 
 ### Risk 3: 构建产物体积
-
 **风险**: React 可能导致插件体积较大
 
 **缓解措施**:
-
 - Vite 自动进行 tree-shaking 和代码分割
 - 使用 Preact 替代 React（如果需要）
 - 监控构建产物大小
 
 ### Trade-off: 开发体验 vs 体积
-
 选择 React + TypeScript 提供了良好的开发体验，但会增加一些体积。对于大多数插件来说，这个权衡是值得的。如果插件非常简单，可以考虑使用 Vanilla JS。
 
 ## Migration Plan
 
 ### 初始设置步骤
-
-1. 克隆仓库并安装依赖：`pnpm install`
+1. 克隆仓库并安装依赖：`npm install`
 2. 配置 Chrome Web Store 开发者账号
 3. 获取 API 凭证（CLIENT_ID, CLIENT_SECRET, REFRESH_TOKEN）
 4. 在 GitHub 仓库设置中添加 Secrets
-5. 运行 `pnpm dev` 开始开发
+5. 运行 `npm dev` 开始开发
 
 ### Chrome Web Store API 凭证获取
-
 1. 访问 [Google Cloud Console](https://console.cloud.google.com/)
 2. 创建新项目或选择现有项目
 3. 启用 Chrome Web Store API
@@ -264,7 +221,6 @@ Tag Push (v*) → GitHub
 ## Implementation Notes
 
 ### Vite 配置关键点
-
 ```typescript
 // vite.config.ts
 import { defineConfig } from 'vite'
@@ -287,7 +243,6 @@ export default defineConfig({
 ```
 
 ### Manifest V3 关键配置
-
 ```json
 {
   "manifest_version": 3,
@@ -296,12 +251,10 @@ export default defineConfig({
   "background": {
     "service_worker": "background/index.js"
   },
-  "content_scripts": [
-    {
-      "matches": ["<all_urls>"],
-      "js": ["content/index.js"]
-    }
-  ],
+  "content_scripts": [{
+    "matches": ["<all_urls>"],
+    "js": ["content/index.js"]
+  }],
   "action": {
     "default_popup": "popup/index.html"
   }
@@ -309,7 +262,6 @@ export default defineConfig({
 ```
 
 ### GitHub Actions 发布关键步骤
-
 ```yaml
 - name: Upload to Chrome Web Store
   env:

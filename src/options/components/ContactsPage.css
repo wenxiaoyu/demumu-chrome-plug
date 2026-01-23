@@ -1,0 +1,123 @@
+.contacts-page {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.contacts-header {
+  margin-bottom: 24px;
+}
+
+.contacts-header h2 {
+  margin: 0 0 8px 0;
+  font-size: 24px;
+  color: #4a4035;
+}
+
+.contacts-description {
+  margin: 0;
+  font-size: 14px;
+  color: #8b7355;
+  line-height: 1.5;
+}
+
+.add-contact-btn {
+  width: 100%;
+  padding: 16px;
+  background: #239a3b;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: background 0.2s;
+  margin-bottom: 24px;
+}
+
+.add-contact-btn:hover {
+  background: #1e8532;
+}
+
+.add-icon {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.loading {
+  text-align: center;
+  padding: 48px;
+  color: #8b7355;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 48px 24px;
+  background: #f8f5ed;
+  border-radius: 12px;
+  margin-top: 24px;
+}
+
+.empty-icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+}
+
+.empty-message {
+  margin: 0 0 8px 0;
+  font-size: 16px;
+  color: #4a4035;
+  font-weight: 500;
+}
+
+.empty-hint {
+  margin: 0;
+  font-size: 14px;
+  color: #8b7355;
+}
+
+.contacts-groups {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.contact-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.group-title {
+  margin: 0;
+  font-size: 18px;
+  color: #4a4035;
+  font-weight: 600;
+  padding-bottom: 8px;
+  border-bottom: 2px solid rgba(139, 115, 85, 0.1);
+}
+
+.group-contacts {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* 响应式 */
+@media (max-width: 768px) {
+  .contacts-page {
+    padding: 16px;
+  }
+
+  .contacts-header h2 {
+    font-size: 20px;
+  }
+
+  .add-contact-btn {
+    padding: 14px;
+    font-size: 15px;
+  }
+}

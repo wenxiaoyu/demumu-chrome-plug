@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>数字格式化测试</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 40px;
+      background: #f5f5f5;
+    }
+    .test-container {
+      background: white;
+      padding: 30px;
+      border-radius: 8px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    h1 {
+      color: #333;
+      margin-bottom: 30px;
+    }
+    .test-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 15px;
+      border-bottom: 1px solid #eee;
+      font-size: 18px;
+    }
+    .test-item:last-child {
+      border-bottom: none;
+    }
+    .original {
+      color: #666;
+      font-family: monospace;
+    }
+    .formatted {
+      color: #239a3b;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="test-container">
+    <h1>数字格式化测试</h1>
+    <div id="results"></div>
+  </div>
+
+  <script>
+    function formatNumber(value) {
+      if (typeof value === 'string') return value;
+      
+      if (value < 1000) {
+        return value.toString();
+      }
+      
+      if (value < 10000) {
+        return value.toLocaleString('zh-CN');
+      }
+      
+      const wan = value / 10000;
+      if (wan < 10) {
+        return wan.toFixed(1) + '万';
+      } else if (wan < 100) {
+        return wan.toFixed(1) + '万';
+      } else if (wan < 1000) {
+        return Math.floor(wan) + '万';
+      } else {
+        return Math.floor(wan) + '万';
+      }
+    }
+
+    const testNumbers = [
+      0,
+      99,
+      999,
+      1000,
+      1234,
+      9999,
+      10000,
+      12345,
+      99999,
+      100000,
+      123456,
+      999999,
+      1000000,
+      1234567,
+      9999999,
+      12345678,
+      99999999
+    ];
+
+    const resultsDiv = document.getElementById('results');
+    
+    testNumbers.forEach(num => {
+      const formatted = formatNumber(num);
+      const div = document.createElement('div');
+      div.className = 'test-item';
+      div.innerHTML = `
+        <span class="original">${num.toLocaleString('zh-CN')}</span>
+        <span class="formatted">${formatted}</span>
+      `;
+      resultsDiv.appendChild(div);
+    });
+  </script>
+</body>
+</html>

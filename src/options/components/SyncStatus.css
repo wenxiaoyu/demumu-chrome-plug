@@ -1,0 +1,87 @@
+.sync-status {
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.sync-status-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.sync-status-header h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.sync-now-button {
+  padding: 8px 16px;
+  background: #8b7355;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.sync-now-button:hover:not(:disabled) {
+  background: #6d5a44;
+  transform: translateY(-1px);
+}
+
+.sync-now-button:disabled {
+  background: #d1d5db;
+  cursor: not-allowed;
+}
+
+.sync-status-content {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sync-status-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sync-status-label {
+  font-weight: 500;
+  color: #6b7280;
+  min-width: 80px;
+}
+
+.sync-status-value {
+  color: #1f2937;
+  font-weight: 500;
+}
+
+.sync-status-message {
+  color: #6b7280;
+  text-align: center;
+  padding: 20px;
+  margin: 0;
+}
+
+.sync-status-info {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.sync-status-info p {
+  margin: 6px 0;
+  font-size: 13px;
+  color: #6b7280;
+  line-height: 1.5;
+}

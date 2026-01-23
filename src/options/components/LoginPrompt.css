@@ -1,0 +1,178 @@
+.login-prompt-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1001;
+  animation: fadeIn 0.2s ease-out;
+}
+
+.login-prompt-modal {
+  background: white;
+  border-radius: 12px;
+  padding: 32px;
+  max-width: 480px;
+  width: 90%;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  animation: slideUp 0.3s ease-out;
+}
+
+.prompt-icon {
+  font-size: 48px;
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.prompt-title {
+  margin: 0 0 12px 0;
+  font-size: 20px;
+  font-weight: 600;
+  color: #1f2937;
+  text-align: center;
+}
+
+.prompt-message {
+  margin: 0 0 24px 0;
+  font-size: 14px;
+  color: #6b7280;
+  text-align: center;
+  line-height: 1.6;
+}
+
+.prompt-benefits {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 24px;
+  padding: 16px;
+  background: #f9fafb;
+  border-radius: 8px;
+}
+
+.benefit-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.benefit-icon {
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.benefit-text {
+  font-size: 14px;
+  color: #374151;
+  line-height: 1.5;
+}
+
+.prompt-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.btn-login,
+.btn-skip,
+.btn-cancel-prompt {
+  width: 100%;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.btn-login {
+  background: #8b7355;
+  color: white;
+}
+
+.btn-login:hover:not(:disabled) {
+  background: #6d5a44;
+  transform: translateY(-1px);
+}
+
+.btn-login:disabled {
+  background: #d1d5db;
+  cursor: not-allowed;
+}
+
+.btn-skip {
+  background: #f3f4f6;
+  color: #1f2937;
+}
+
+.btn-skip:hover:not(:disabled) {
+  background: #e5e7eb;
+}
+
+.btn-cancel-prompt {
+  background: transparent;
+  color: #6b7280;
+  padding: 8px;
+}
+
+.btn-cancel-prompt:hover:not(:disabled) {
+  color: #1f2937;
+}
+
+.btn-icon,
+.btn-spinner {
+  font-size: 16px;
+}
+
+.prompt-note {
+  margin: 0;
+  font-size: 12px;
+  color: #9ca3af;
+  text-align: center;
+  line-height: 1.5;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 640px) {
+  .login-prompt-modal {
+    padding: 24px;
+    max-width: 95%;
+  }
+
+  .prompt-icon {
+    font-size: 40px;
+  }
+
+  .prompt-title {
+    font-size: 18px;
+  }
+}

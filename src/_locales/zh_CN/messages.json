@@ -1,0 +1,1604 @@
+{
+  "extensionName": {
+    "message": "还活着吗",
+    "description": "Extension name"
+  },
+  "extensionDescription": {
+    "message": "通过敲木鱼保持活跃，累积功德值",
+    "description": "Extension description"
+  },
+  
+  "common_ok": {
+    "message": "确定",
+    "description": "OK button"
+  },
+  "common_cancel": {
+    "message": "取消",
+    "description": "Cancel button"
+  },
+  "common_save": {
+    "message": "保存",
+    "description": "Save button"
+  },
+  "common_delete": {
+    "message": "删除",
+    "description": "Delete button"
+  },
+  "common_edit": {
+    "message": "编辑",
+    "description": "Edit button"
+  },
+  "common_add": {
+    "message": "添加",
+    "description": "Add button"
+  },
+  "common_loading": {
+    "message": "加载中...",
+    "description": "Loading text"
+  },
+  "common_saving": {
+    "message": "保存中...",
+    "description": "Saving text"
+  },
+  "common_error": {
+    "message": "错误",
+    "description": "Error text"
+  },
+  "common_success": {
+    "message": "成功",
+    "description": "Success text"
+  },
+  
+  "loading": {
+    "message": "加载中...",
+    "description": "Loading state"
+  },
+  "today": {
+    "message": "今日",
+    "description": "Today label"
+  },
+  "merit": {
+    "message": "功德",
+    "description": "Merit label"
+  },
+  "total": {
+    "message": "总计",
+    "description": "Total label"
+  },
+  "appName": {
+    "message": "还活着吗",
+    "description": "App name"
+  },
+  "settings": {
+    "message": "设置",
+    "description": "Settings"
+  },
+  "woodenFish": {
+    "message": "木鱼",
+    "description": "Wooden fish"
+  },
+  "tabStats": {
+    "message": "统计",
+    "description": "Stats tab"
+  },
+  "tabContacts": {
+    "message": "紧急联系人",
+    "description": "Contacts tab"
+  },
+  "tabAccount": {
+    "message": "账号",
+    "description": "Account tab"
+  },
+  "tabSettings": {
+    "message": "设置",
+    "description": "Settings tab"
+  },
+  "tabHelp": {
+    "message": "帮助",
+    "description": "Help tab"
+  },
+  
+  "help": {
+    "message": "帮助",
+    "description": "Help button"
+  },
+  "help_title": {
+    "message": "玩法说明",
+    "description": "Help page title"
+  },
+  "help_intro": {
+    "message": "欢迎使用「还活着吗」！通过每天敲击木鱼来保持活跃，累积功德值，维持生命值。",
+    "description": "Help page introduction"
+  },
+  "help_knock_title": {
+    "message": "如何玩",
+    "description": "How to play title"
+  },
+  "help_knock_desc": {
+    "message": "点击弹窗中的木鱼图标即可敲击，每次敲击都会增加功德值。每天第一次敲击会获得额外奖励。",
+    "description": "How to play description"
+  },
+  "help_merit_title": {
+    "message": "功德值系统",
+    "description": "Merit system title"
+  },
+  "help_merit_desc": {
+    "message": "功德值是您修行的成果，通过敲击木鱼累积：",
+    "description": "Merit system description"
+  },
+  "help_merit_base": {
+    "message": "基础功德：每次敲击 +1",
+    "description": "Base merit"
+  },
+  "help_merit_first": {
+    "message": "首次奖励：每天第一次敲击 +5",
+    "description": "First knock bonus"
+  },
+  "help_merit_combo": {
+    "message": "连击奖励：连续敲击可获得额外功德",
+    "description": "Combo bonus"
+  },
+  "help_merit_milestone": {
+    "message": "里程碑奖励：达到特定次数可获得大量功德",
+    "description": "Milestone bonus"
+  },
+  "help_hp_title": {
+    "message": "生命值系统",
+    "description": "HP system title"
+  },
+  "help_hp_desc": {
+    "message": "生命值代表您的活跃状态，需要每天维持：",
+    "description": "HP system description"
+  },
+  "help_hp_initial": {
+    "message": "初始生命值：100",
+    "description": "Initial HP"
+  },
+  "help_hp_reward": {
+    "message": "每日奖励：每天第一次敲击 +10 HP",
+    "description": "Daily HP reward"
+  },
+  "help_hp_penalty": {
+    "message": "未活跃惩罚：每天未敲击 -10 HP",
+    "description": "Inactivity penalty"
+  },
+  "help_hp_death": {
+    "message": "生命值归零：将触发死亡检测",
+    "description": "HP depleted"
+  },
+  "help_streak_title": {
+    "message": "连续打卡",
+    "description": "Streak title"
+  },
+  "help_streak_desc": {
+    "message": "连续多天敲击木鱼可以累积连续天数，连续天数越长，获得的奖励越多。中断后需要重新开始累积。",
+    "description": "Streak description"
+  },
+  "help_tips_title": {
+    "message": "小贴士",
+    "description": "Tips title"
+  },
+  "help_tip1": {
+    "message": "每天至少敲击一次木鱼，保持生命值不归零",
+    "description": "Tip 1"
+  },
+  "help_tip2": {
+    "message": "连续打卡可以获得更多奖励，尽量不要中断",
+    "description": "Tip 2"
+  },
+  "help_tip3": {
+    "message": "登录账号可以将数据同步到云端，在多设备间同步",
+    "description": "Tip 3"
+  },
+  
+  "deathDetectionSettings": {
+    "message": "死亡检测设置",
+    "description": "Death detection settings title"
+  },
+  "deathDetectionDescription": {
+    "message": "配置死亡检测规则，服务端会根据您的配置自动检测活跃状态，当满足条件时将通知您的紧急联系人",
+    "description": "Death detection description"
+  },
+  "enableDeathDetection": {
+    "message": "启用死亡检测",
+    "description": "Enable death detection"
+  },
+  "enableDeathDetectionDesc": {
+    "message": "开启后服务端将定期检测您的活跃状态",
+    "description": "Enable description"
+  },
+  "inactivityThreshold": {
+    "message": "未活跃天数阈值",
+    "description": "Inactivity threshold"
+  },
+  "inactivityThresholdDesc": {
+    "message": "超过此天数未敲击木鱼将触发死亡检测",
+    "description": "Inactivity threshold description"
+  },
+  "hpThreshold": {
+    "message": "HP 阈值",
+    "description": "HP threshold"
+  },
+  "hpThresholdDesc": {
+    "message": "HP 低于此值将触发死亡检测",
+    "description": "HP threshold description"
+  },
+  "checkInterval": {
+    "message": "检查间隔",
+    "description": "Check interval"
+  },
+  "checkIntervalDesc": {
+    "message": "每隔多久检查一次状态",
+    "description": "Check interval description"
+  },
+  "currentStatus": {
+    "message": "当前状态",
+    "description": "Current status"
+  },
+  "statusNormal": {
+    "message": "状态正常",
+    "description": "Status normal"
+  },
+  "deathDetected": {
+    "message": "已触发死亡检测",
+    "description": "Death detected"
+  },
+  "reason": {
+    "message": "原因",
+    "description": "Reason label"
+  },
+  "inactiveDays": {
+    "message": "未活跃天数",
+    "description": "Inactive days label"
+  },
+  "lastActive": {
+    "message": "最后活跃",
+    "description": "Last active label"
+  },
+  "detectionTime": {
+    "message": "检测时间",
+    "description": "Detection time label"
+  },
+  "notificationStatus": {
+    "message": "通知状态",
+    "description": "Notification status label"
+  },
+  "sent": {
+    "message": "已发送",
+    "description": "Sent status"
+  },
+  "pending": {
+    "message": "待发送",
+    "description": "Pending status"
+  },
+  "noDetectionRecord": {
+    "message": "暂无检测记录",
+    "description": "No detection record"
+  },
+  "checkNow": {
+    "message": "立即检测",
+    "description": "Check now button"
+  },
+  "checking": {
+    "message": "检测中...",
+    "description": "Checking text"
+  },
+  "instructions": {
+    "message": "说明",
+    "description": "Instructions title"
+  },
+  "instruction1": {
+    "message": "死亡检测会根据您的活跃度和 HP 值判断状态",
+    "description": "Instruction 1"
+  },
+  "instruction2": {
+    "message": "当触发死亡检测时，系统会通知您的紧急联系人",
+    "description": "Instruction 2"
+  },
+  "instruction3": {
+    "message": "您可以在紧急联系人标签中管理联系人列表",
+    "description": "Instruction 3"
+  },
+  "instruction4": {
+    "message": "建议设置合理的阈值，避免误报",
+    "description": "Instruction 4"
+  },
+  "daysCount": {
+    "message": "$COUNT$ 天",
+    "description": "Days count",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "7"
+      }
+    }
+  },
+  "interval30min": {
+    "message": "30 分钟",
+    "description": "30 minutes"
+  },
+  "interval1hour": {
+    "message": "1 小时",
+    "description": "1 hour"
+  },
+  "interval2hours": {
+    "message": "2 小时",
+    "description": "2 hours"
+  },
+  "interval6hours": {
+    "message": "6 小时",
+    "description": "6 hours"
+  },
+  "interval12hours": {
+    "message": "12 小时",
+    "description": "12 hours"
+  },
+  "interval24hours": {
+    "message": "24 小时",
+    "description": "24 hours"
+  },
+  
+  "emergencyContacts": {
+    "message": "紧急联系人",
+    "description": "Emergency contacts title"
+  },
+  "contactsDescription": {
+    "message": "当检测到您长时间未活跃时，系统将通知这些联系人",
+    "description": "Contacts description"
+  },
+  "addContact": {
+    "message": "添加联系人",
+    "description": "Add contact button"
+  },
+  "noContactsYet": {
+    "message": "还没有添加紧急联系人",
+    "description": "No contacts message"
+  },
+  "addFirstContact": {
+    "message": "点击上方按钮添加您的第一个联系人",
+    "description": "Add first contact hint"
+  },
+  "editContact": {
+    "message": "编辑联系人",
+    "description": "Edit contact title"
+  },
+  "name": {
+    "message": "姓名",
+    "description": "Name field"
+  },
+  "namePlaceholder": {
+    "message": "请输入姓名",
+    "description": "Name placeholder"
+  },
+  "email": {
+    "message": "邮箱",
+    "description": "Email field"
+  },
+  "emailPlaceholder": {
+    "message": "example@email.com",
+    "description": "Email placeholder"
+  },
+  "relationship": {
+    "message": "关系",
+    "description": "Relationship field"
+  },
+  "relationshipPlaceholder": {
+    "message": "例如：父亲、好友、同事",
+    "description": "Relationship placeholder"
+  },
+  "relationshipHint": {
+    "message": "输入关系后会自动分组显示",
+    "description": "Relationship hint"
+  },
+  "relationshipOther": {
+    "message": "其他",
+    "description": "Other relationship"
+  },
+  "priority": {
+    "message": "优先级",
+    "description": "Priority field"
+  },
+  "priorityHighest": {
+    "message": "最高",
+    "description": "Highest priority"
+  },
+  "priorityMedium": {
+    "message": "中等",
+    "description": "Medium priority"
+  },
+  "priorityLowest": {
+    "message": "最低",
+    "description": "Lowest priority"
+  },
+  "nameRequired": {
+    "message": "请输入姓名",
+    "description": "Name required error"
+  },
+  "emailRequired": {
+    "message": "请输入邮箱",
+    "description": "Email required error"
+  },
+  "emailInvalid": {
+    "message": "邮箱格式不正确",
+    "description": "Email invalid error"
+  },
+  "relationshipRequired": {
+    "message": "请输入或选择关系",
+    "description": "Relationship required error"
+  },
+  "operationFailed": {
+    "message": "操作失败",
+    "description": "Operation failed error"
+  },
+  "confirmDelete": {
+    "message": "确认删除",
+    "description": "Confirm delete title"
+  },
+  "confirmDeleteContact": {
+    "message": "确定要删除联系人 $NAME$ 吗？",
+    "description": "Confirm delete message",
+    "placeholders": {
+      "name": {
+        "content": "$1",
+        "example": "张三"
+      }
+    }
+  },
+  "cancel": {
+    "message": "取消",
+    "description": "Cancel button"
+  },
+  "delete": {
+    "message": "删除",
+    "description": "Delete button"
+  },
+  "edit": {
+    "message": "编辑",
+    "description": "Edit button"
+  },
+  "add": {
+    "message": "添加",
+    "description": "Add button"
+  },
+  "save": {
+    "message": "保存",
+    "description": "Save button"
+  },
+  "saving": {
+    "message": "保存中...",
+    "description": "Saving text"
+  },
+  
+  "emailPreview": {
+    "message": "邮件预览",
+    "description": "Email preview title"
+  },
+  "htmlView": {
+    "message": "HTML 视图",
+    "description": "HTML view"
+  },
+  "textView": {
+    "message": "纯文本视图",
+    "description": "Text view"
+  },
+  "sendTestEmail": {
+    "message": "发送测试邮件",
+    "description": "Send test email"
+  },
+  "subject": {
+    "message": "主题",
+    "description": "Subject label"
+  },
+  "previewNote": {
+    "message": "💡 这是邮件预览，实际发送时会使用当前的真实数据",
+    "description": "Preview note"
+  },
+  "noContactsWarning": {
+    "message": "⚠️ 还没有添加紧急联系人，请先到紧急联系人标签页添加联系人后再发送邮件。",
+    "description": "No contacts warning"
+  },
+  "contactsInfo": {
+    "message": "✅ 已添加 $COUNT$ 个紧急联系人，邮件将发送给优先级最高的联系人。",
+    "description": "Contacts info",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "3"
+      }
+    }
+  },
+  "addContactsFirst": {
+    "message": "请先添加紧急联系人",
+    "description": "Add contacts first"
+  },
+  "testEmailSuccess": {
+    "message": "✅ 测试邮件已准备\n\n请在打开的邮件客户端中确认发送。\n\n💡 提示：如果没有打开邮件客户端，请检查浏览器是否阻止了弹出窗口。",
+    "description": "Test email success"
+  },
+  "sendFailedError": {
+    "message": "❌ 发送失败：$ERROR$",
+    "description": "Send failed error",
+    "placeholders": {
+      "error": {
+        "content": "$1",
+        "example": "未知错误"
+      }
+    }
+  },
+  "noContactsError": {
+    "message": "❌ 发送失败：还没有添加紧急联系人\n\n请先到紧急联系人标签页添加至少一个联系人。",
+    "description": "No contacts error"
+  },
+  "unknownError": {
+    "message": "未知错误",
+    "description": "Unknown error"
+  },
+  "user": {
+    "message": "用户",
+    "description": "User label"
+  },
+  
+  "emailSubject": {
+    "message": "⚠️ 重要通知：关于 $USER$ 的活跃状态",
+    "description": "Email subject",
+    "placeholders": {
+      "user": {
+        "content": "$1",
+        "example": "张三"
+      }
+    }
+  },
+  
+  "notificationDeathWarningTitle": {
+    "message": "⚠️ 生命值归零",
+    "description": "Death warning title"
+  },
+  "deathWarning1Day": {
+    "message": "你已经1天没有敲木鱼了，生命值归零",
+    "description": "Death warning 1 day"
+  },
+  "deathWarningDays": {
+    "message": "你已经$DAYS$天没有敲木鱼了，生命值归零",
+    "description": "Death warning multiple days",
+    "placeholders": {
+      "days": {
+        "content": "$1",
+        "example": "7"
+      }
+    }
+  },
+  "notificationHpWarningTitle": {
+    "message": "⚠️ 生命值警告",
+    "description": "HP warning title"
+  },
+  "hpWarningCritical": {
+    "message": "生命值仅剩 $HP$，请尽快敲木鱼！",
+    "description": "HP critical",
+    "placeholders": {
+      "hp": {
+        "content": "$1",
+        "example": "10"
+      }
+    }
+  },
+  "hpWarningLow": {
+    "message": "生命值降至 $HP$，记得每天敲木鱼哦",
+    "description": "HP low",
+    "placeholders": {
+      "hp": {
+        "content": "$1",
+        "example": "30"
+      }
+    }
+  },
+  "notificationFirstKnockTitle": {
+    "message": "功德 +1",
+    "description": "First knock title"
+  },
+  "hpIncreased": {
+    "message": "生命值 +10，当前 HP: $HP$",
+    "description": "HP increased",
+    "placeholders": {
+      "hp": {
+        "content": "$1",
+        "example": "80"
+      }
+    }
+  },
+  "consecutiveDays": {
+    "message": "连续打卡 $DAYS$ 天！",
+    "description": "Consecutive days",
+    "placeholders": {
+      "days": {
+        "content": "$1",
+        "example": "7"
+      }
+    }
+  },
+  
+  "popup_today": {
+    "message": "今日",
+    "description": "Today label"
+  },
+  "popup_merit": {
+    "message": "功德",
+    "description": "Merit label"
+  },
+  "popup_total": {
+    "message": "总计",
+    "description": "Total label"
+  },
+  "popup_appName": {
+    "message": "还活着吗",
+    "description": "App name in footer"
+  },
+  "popup_settings": {
+    "message": "设置",
+    "description": "Settings button"
+  },
+  "popup_woodenFish": {
+    "message": "木鱼",
+    "description": "Wooden fish alt text"
+  },
+  "popup_dataLoadError": {
+    "message": "数据加载失败",
+    "description": "Data load error"
+  },
+  
+  "options_stats": {
+    "message": "统计",
+    "description": "Stats tab"
+  },
+  "options_contacts": {
+    "message": "紧急联系人",
+    "description": "Contacts tab"
+  },
+  "options_settings": {
+    "message": "设置",
+    "description": "Settings tab"
+  },
+  
+  "contacts_title": {
+    "message": "紧急联系人",
+    "description": "Contacts page title"
+  },
+  "contacts_description": {
+    "message": "当检测到您长时间未活跃时，系统将通知这些联系人",
+    "description": "Contacts page description"
+  },
+  "contacts_addButton": {
+    "message": "添加联系人",
+    "description": "Add contact button"
+  },
+  "contacts_empty": {
+    "message": "还没有添加紧急联系人",
+    "description": "Empty state message"
+  },
+  "contacts_emptyHint": {
+    "message": "点击上方按钮添加您的第一个联系人",
+    "description": "Empty state hint"
+  },
+  
+  "contactForm_title": {
+    "message": "添加联系人",
+    "description": "Add contact form title"
+  },
+  "contactForm_titleEdit": {
+    "message": "编辑联系人",
+    "description": "Edit contact form title"
+  },
+  "contactForm_name": {
+    "message": "姓名",
+    "description": "Name field label"
+  },
+  "contactForm_namePlaceholder": {
+    "message": "请输入姓名",
+    "description": "Name field placeholder"
+  },
+  "contactForm_email": {
+    "message": "邮箱",
+    "description": "Email field label"
+  },
+  "contactForm_emailPlaceholder": {
+    "message": "example@email.com",
+    "description": "Email field placeholder"
+  },
+  "contactForm_relationship": {
+    "message": "关系",
+    "description": "Relationship field label"
+  },
+  "contactForm_relationshipPlaceholder": {
+    "message": "例如：父亲、好友、同事",
+    "description": "Relationship field placeholder"
+  },
+  "contactForm_relationshipHint": {
+    "message": "输入关系后会自动分组显示",
+    "description": "Relationship field hint"
+  },
+  "contactForm_priority": {
+    "message": "优先级",
+    "description": "Priority field label"
+  },
+  "contactForm_priorityHighest": {
+    "message": "最高",
+    "description": "Highest priority"
+  },
+  "contactForm_priorityMedium": {
+    "message": "中等",
+    "description": "Medium priority"
+  },
+  "contactForm_priorityLowest": {
+    "message": "最低",
+    "description": "Lowest priority"
+  },
+  "contactForm_nameRequired": {
+    "message": "请输入姓名",
+    "description": "Name required error"
+  },
+  "contactForm_emailRequired": {
+    "message": "请输入邮箱",
+    "description": "Email required error"
+  },
+  "contactForm_emailInvalid": {
+    "message": "邮箱格式不正确",
+    "description": "Email invalid error"
+  },
+  "contactForm_relationshipRequired": {
+    "message": "请输入或选择关系",
+    "description": "Relationship required error"
+  },
+  "contactForm_operationFailed": {
+    "message": "操作失败",
+    "description": "Operation failed error"
+  },
+  
+  "contactCard_confirmDelete": {
+    "message": "确认删除",
+    "description": "Confirm delete title"
+  },
+  "contactCard_confirmDeleteMessage": {
+    "message": "确定要删除联系人 $NAME$ 吗？",
+    "description": "Confirm delete message",
+    "placeholders": {
+      "name": {
+        "content": "$1",
+        "example": "张三"
+      }
+    }
+  },
+  
+  "relationship_family": {
+    "message": "家人",
+    "description": "Family relationship"
+  },
+  "relationship_friend": {
+    "message": "朋友",
+    "description": "Friend relationship"
+  },
+  "relationship_colleague": {
+    "message": "同事",
+    "description": "Colleague relationship"
+  },
+  "relationship_other": {
+    "message": "其他",
+    "description": "Other relationship"
+  }
+,
+  "settings_title": {
+    "message": "死亡检测设置",
+    "description": "Settings page title"
+  },
+  "settings_description": {
+    "message": "配置死亡检测规则，当满足条件时将通知您的紧急联系人",
+    "description": "Settings page description"
+  },
+  "settings_enable": {
+    "message": "启用死亡检测",
+    "description": "Enable death detection"
+  },
+  "settings_enableDesc": {
+    "message": "开启后将定期检测您的活跃状态",
+    "description": "Enable description"
+  },
+  "settings_inactivityThreshold": {
+    "message": "未活跃天数阈值",
+    "description": "Inactivity threshold"
+  },
+  "settings_inactivityThresholdDesc": {
+    "message": "超过此天数未敲击木鱼将触发死亡检测",
+    "description": "Inactivity threshold description"
+  },
+  "settings_hpThreshold": {
+    "message": "HP 阈值",
+    "description": "HP threshold"
+  },
+  "settings_hpThresholdDesc": {
+    "message": "HP 低于此值将触发死亡检测",
+    "description": "HP threshold description"
+  },
+  "settings_checkInterval": {
+    "message": "检查间隔",
+    "description": "Check interval"
+  },
+  "settings_checkIntervalDesc": {
+    "message": "每隔多久检查一次状态",
+    "description": "Check interval description"
+  },
+  "settings_currentStatus": {
+    "message": "当前状态",
+    "description": "Current status"
+  },
+  "settings_statusNormal": {
+    "message": "状态正常",
+    "description": "Status normal"
+  },
+  "settings_statusDead": {
+    "message": "已触发死亡检测",
+    "description": "Status dead"
+  },
+  "settings_reason": {
+    "message": "原因",
+    "description": "Reason label"
+  },
+  "settings_inactiveDays": {
+    "message": "未活跃天数",
+    "description": "Inactive days label"
+  },
+  "settings_lastActive": {
+    "message": "最后活跃",
+    "description": "Last active label"
+  },
+  "settings_detectionTime": {
+    "message": "检测时间",
+    "description": "Detection time label"
+  },
+  "settings_notificationStatus": {
+    "message": "通知状态",
+    "description": "Notification status label"
+  },
+  "settings_sent": {
+    "message": "已发送",
+    "description": "Sent status"
+  },
+  "settings_pending": {
+    "message": "待发送",
+    "description": "Pending status"
+  },
+  "settings_noRecord": {
+    "message": "暂无检测记录",
+    "description": "No detection record"
+  },
+  "settings_checkNow": {
+    "message": "立即检测",
+    "description": "Check now button"
+  },
+  "settings_checking": {
+    "message": "检测中...",
+    "description": "Checking text"
+  },
+  "settings_instructions": {
+    "message": "说明",
+    "description": "Instructions title"
+  },
+  "settings_instruction1": {
+    "message": "死亡检测会根据您的活跃度和 HP 值判断状态",
+    "description": "Instruction 1"
+  },
+  "settings_instruction2": {
+    "message": "当触发死亡检测时，系统会通知您的紧急联系人",
+    "description": "Instruction 2"
+  },
+  "settings_instruction3": {
+    "message": "您可以在紧急联系人标签中管理联系人列表",
+    "description": "Instruction 3"
+  },
+  "settings_instruction4": {
+    "message": "建议设置合理的阈值，避免误报",
+    "description": "Instruction 4"
+  },
+  "settings_daysCount": {
+    "message": "$COUNT$ 天",
+    "description": "Days count",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "7"
+      }
+    }
+  },
+  "settings_interval30min": {
+    "message": "30 分钟",
+    "description": "30 minutes"
+  },
+  "settings_interval1hour": {
+    "message": "1 小时",
+    "description": "1 hour"
+  },
+  "settings_interval2hours": {
+    "message": "2 小时",
+    "description": "2 hours"
+  },
+  "settings_interval6hours": {
+    "message": "6 小时",
+    "description": "6 hours"
+  },
+  "settings_interval12hours": {
+    "message": "12 小时",
+    "description": "12 hours"
+  },
+  "settings_interval24hours": {
+    "message": "24 小时",
+    "description": "24 hours"
+  }
+,
+  "email_subject": {
+    "message": "⚠️ 重要通知：关于 $USER$ 的活跃状态",
+    "description": "Email subject",
+    "placeholders": {
+      "user": {
+        "content": "$1",
+        "example": "张三"
+      }
+    }
+  },
+  "email_preview": {
+    "message": "邮件预览",
+    "description": "Email preview title"
+  },
+  "email_htmlView": {
+    "message": "HTML 视图",
+    "description": "HTML view button"
+  },
+  "email_textView": {
+    "message": "纯文本视图",
+    "description": "Text view button"
+  },
+  "email_sendTest": {
+    "message": "发送测试邮件",
+    "description": "Send test email button"
+  },
+  "email_subject_label": {
+    "message": "主题",
+    "description": "Subject label"
+  },
+  "email_previewNote": {
+    "message": "💡 这是邮件预览，实际发送时会使用当前的真实数据",
+    "description": "Preview note"
+  },
+  "email_noContactsWarning": {
+    "message": "⚠️ 还没有添加紧急联系人，请先到紧急联系人标签页添加联系人后再发送邮件。",
+    "description": "No contacts warning"
+  },
+  "email_contactsInfo": {
+    "message": "✅ 已添加 $COUNT$ 个紧急联系人，邮件将发送给优先级最高的联系人。",
+    "description": "Contacts info",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "3"
+      }
+    }
+  },
+  "email_addContactsFirst": {
+    "message": "请先添加紧急联系人",
+    "description": "Add contacts first tooltip"
+  },
+  "email_testSuccess": {
+    "message": "✅ 测试邮件已准备\n\n请在打开的邮件客户端中确认发送。\n\n💡 提示：如果没有打开邮件客户端，请检查浏览器是否阻止了弹出窗口。",
+    "description": "Test email success message"
+  },
+  "email_sendFailed": {
+    "message": "❌ 发送失败：$ERROR$",
+    "description": "Send failed message",
+    "placeholders": {
+      "error": {
+        "content": "$1",
+        "example": "未知错误"
+      }
+    }
+  },
+  "email_noContactsError": {
+    "message": "❌ 发送失败：还没有添加紧急联系人\n\n请先到紧急联系人标签页添加至少一个联系人。",
+    "description": "No contacts error"
+  },
+  "email_unknownError": {
+    "message": "未知错误",
+    "description": "Unknown error"
+  },
+  
+  "notification_deathWarningTitle": {
+    "message": "⚠️ 生命值归零",
+    "description": "Death warning notification title"
+  },
+  "notification_deathWarning1Day": {
+    "message": "你已经1天没有敲木鱼了，生命值归零",
+    "description": "Death warning 1 day"
+  },
+  "notification_deathWarningDays": {
+    "message": "你已经$DAYS$天没有敲木鱼了，生命值归零",
+    "description": "Death warning multiple days",
+    "placeholders": {
+      "days": {
+        "content": "$1",
+        "example": "7"
+      }
+    }
+  },
+  "notification_hpWarningTitle": {
+    "message": "⚠️ 生命值警告",
+    "description": "HP warning notification title"
+  },
+  "notification_hpCritical": {
+    "message": "生命值仅剩 $HP$，请尽快敲木鱼！",
+    "description": "HP critical message",
+    "placeholders": {
+      "hp": {
+        "content": "$1",
+        "example": "10"
+      }
+    }
+  },
+  "notification_hpLow": {
+    "message": "生命值降至 $HP$，记得每天敲木鱼哦",
+    "description": "HP low message",
+    "placeholders": {
+      "hp": {
+        "content": "$1",
+        "example": "30"
+      }
+    }
+  },
+  "notification_firstKnockTitle": {
+    "message": "功德 +1",
+    "description": "First knock notification title"
+  },
+  "notification_hpIncreased": {
+    "message": "生命值 +10，当前 HP: $HP$",
+    "description": "HP increased message",
+    "placeholders": {
+      "hp": {
+        "content": "$1",
+        "example": "80"
+      }
+    }
+  },
+  "notification_consecutiveDays": {
+    "message": "连续打卡 $DAYS$ 天！",
+    "description": "Consecutive days message",
+    "placeholders": {
+      "days": {
+        "content": "$1",
+        "example": "7"
+      }
+    }
+  },
+  
+  "user": {
+    "message": "用户",
+    "description": "User label"
+  },
+  
+  "stats_totalMerit": {
+    "message": "总功德值",
+    "description": "Total merit label"
+  },
+  "stats_consecutiveDays": {
+    "message": "连续活跃",
+    "description": "Consecutive days label"
+  },
+  "stats_aliveDays": {
+    "message": "存活天数",
+    "description": "Alive days label"
+  },
+  "stats_totalKnocks": {
+    "message": "总敲击次数",
+    "description": "Total knocks label"
+  },
+  "stats_avgPerDay": {
+    "message": "平均每日",
+    "description": "Average per day label"
+  },
+  "stats_maxStreak": {
+    "message": "最长连续",
+    "description": "Max consecutive days label"
+  },
+  "stats_dataOverview": {
+    "message": "数据总览",
+    "description": "Data overview title"
+  },
+  "stats_knockCount": {
+    "message": "敲击次数",
+    "description": "Knock count legend"
+  },
+  "stats_noKnocks": {
+    "message": "未敲击",
+    "description": "No knocks legend"
+  },
+  "stats_year": {
+    "message": "年",
+    "description": "Year label"
+  },
+  "stats_month": {
+    "message": "月",
+    "description": "Month label"
+  },
+  "stats_prevMonth": {
+    "message": "上一月",
+    "description": "Previous month button"
+  },
+  "stats_nextMonth": {
+    "message": "下一月",
+    "description": "Next month button"
+  },
+  "stats_sunday": {
+    "message": "日",
+    "description": "Sunday abbreviation"
+  },
+  "stats_monday": {
+    "message": "一",
+    "description": "Monday abbreviation"
+  },
+  "stats_tuesday": {
+    "message": "二",
+    "description": "Tuesday abbreviation"
+  },
+  "stats_wednesday": {
+    "message": "三",
+    "description": "Wednesday abbreviation"
+  },
+  "stats_thursday": {
+    "message": "四",
+    "description": "Thursday abbreviation"
+  },
+  "stats_friday": {
+    "message": "五",
+    "description": "Friday abbreviation"
+  },
+  "stats_saturday": {
+    "message": "六",
+    "description": "Saturday abbreviation"
+  },
+  "stats_days": {
+    "message": "$COUNT$ 天",
+    "description": "Days count",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "7"
+      }
+    }
+  },
+  "stats_times": {
+    "message": "$COUNT$ 次",
+    "description": "Times count",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "100"
+      }
+    }
+  },
+  
+  "hp_alive": {
+    "message": "存活中",
+    "description": "Alive status"
+  },
+  "hp_dead": {
+    "message": "已往生",
+    "description": "Dead status"
+  },
+  "hp_label": {
+    "message": "生命值",
+    "description": "HP label"
+  },
+  "hp_streak": {
+    "message": "$DAYS$天",
+    "description": "Streak days",
+    "placeholders": {
+      "days": {
+        "content": "$1",
+        "example": "7"
+      }
+    }
+  },
+  
+  "dataLoadError": {
+    "message": "数据加载失败",
+    "description": "Data load error message"
+  },
+  "loadFailed": {
+    "message": "加载失败",
+    "description": "Load failed error"
+  },
+  
+  "language": {
+    "message": "语言",
+    "description": "Language setting label"
+  },
+  "language_en": {
+    "message": "English",
+    "description": "English language option"
+  },
+  "language_zh_CN": {
+    "message": "简体中文",
+    "description": "Simplified Chinese language option"
+  },
+  
+  "reason_detectionDisabled": {
+    "message": "检测未启用",
+    "description": "Detection disabled reason"
+  },
+  "reason_hpBelowThreshold": {
+    "message": "HP 已降至 $HP$，低于阈值 $THRESHOLD$",
+    "description": "HP below threshold reason",
+    "placeholders": {
+      "hp": {
+        "content": "$1",
+        "example": "5"
+      },
+      "threshold": {
+        "content": "$2",
+        "example": "10"
+      }
+    }
+  },
+  "reason_inactivityExceeded": {
+    "message": "已 $DAYS$ 天未活跃，超过阈值 $THRESHOLD$ 天",
+    "description": "Inactivity exceeded reason",
+    "placeholders": {
+      "days": {
+        "content": "$1",
+        "example": "7"
+      },
+      "threshold": {
+        "content": "$2",
+        "example": "5"
+      }
+    }
+  },
+  
+  "loginWithGoogle": {
+    "message": "使用 Google 登录",
+    "description": "Login with Google button"
+  },
+  "loggingIn": {
+    "message": "登录中...",
+    "description": "Logging in text"
+  },
+  "loginFailed": {
+    "message": "登录失败",
+    "description": "Login failed error"
+  },
+  "signOut": {
+    "message": "退出登录",
+    "description": "Sign out button"
+  },
+  "confirmSignOut": {
+    "message": "确定要退出登录吗？",
+    "description": "Confirm sign out message"
+  },
+  "accountSettings": {
+    "message": "账号设置",
+    "description": "Account settings"
+  },
+  "menu": {
+    "message": "菜单",
+    "description": "Menu button"
+  },
+  "notSynced": {
+    "message": "未同步",
+    "description": "Not synced status"
+  },
+  
+  "sync_title": {
+    "message": "数据同步",
+    "description": "Data sync title"
+  },
+  "sync_status": {
+    "message": "状态",
+    "description": "Sync status label"
+  },
+  "sync_lastSync": {
+    "message": "最后同步",
+    "description": "Last sync label"
+  },
+  "sync_syncNow": {
+    "message": "立即同步",
+    "description": "Sync now button"
+  },
+  "sync_syncing": {
+    "message": "同步中...",
+    "description": "Syncing text"
+  },
+  "sync_idle": {
+    "message": "空闲",
+    "description": "Idle status"
+  },
+  "sync_success": {
+    "message": "同步成功",
+    "description": "Success status"
+  },
+  "sync_error": {
+    "message": "同步失败",
+    "description": "Error status"
+  },
+  "sync_offline": {
+    "message": "离线",
+    "description": "Offline status"
+  },
+  "sync_never": {
+    "message": "从未同步",
+    "description": "Never synced"
+  },
+  "sync_justNow": {
+    "message": "刚刚",
+    "description": "Just now"
+  },
+  "sync_minutesAgo": {
+    "message": "$COUNT$ 分钟前",
+    "description": "Minutes ago",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "5"
+      }
+    }
+  },
+  "sync_hoursAgo": {
+    "message": "$COUNT$ 小时前",
+    "description": "Hours ago",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "2"
+      }
+    }
+  },
+  "sync_daysAgo": {
+    "message": "$COUNT$ 天前",
+    "description": "Days ago",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "3"
+      }
+    }
+  },
+  "sync_loginRequired": {
+    "message": "请先登录以启用数据同步",
+    "description": "Login required message"
+  },
+  "sync_info1": {
+    "message": "💡 数据每 30 分钟自动同步一次",
+    "description": "Sync info 1"
+  },
+  "sync_info2": {
+    "message": "💡 敲击木鱼和修改联系人后会自动同步",
+    "description": "Sync info 2"
+  },
+  "sync_info3": {
+    "message": "💡 网络恢复时会自动同步",
+    "description": "Sync info 3"
+  },
+  
+  "account_userInfo": {
+    "message": "用户信息",
+    "description": "User info title"
+  },
+  "account_displayName": {
+    "message": "显示名称",
+    "description": "Display name label"
+  },
+  "account_email": {
+    "message": "邮箱",
+    "description": "Email label"
+  },
+  "account_userId": {
+    "message": "用户 ID",
+    "description": "User ID label"
+  },
+  "account_notSet": {
+    "message": "未设置",
+    "description": "Not set"
+  },
+  "account_editName": {
+    "message": "编辑名称",
+    "description": "Edit name button tooltip"
+  },
+  "account_enterName": {
+    "message": "请输入显示名称",
+    "description": "Enter name placeholder"
+  },
+  "account_nameUpdated": {
+    "message": "显示名称已更新",
+    "description": "Name updated message"
+  },
+  "account_nameUpdateFailed": {
+    "message": "更新显示名称失败",
+    "description": "Name update failed message"
+  },
+  "save": {
+    "message": "保存",
+    "description": "Save button"
+  },
+  "saving": {
+    "message": "保存中...",
+    "description": "Saving status"
+  },
+  "cancel": {
+    "message": "取消",
+    "description": "Cancel button"
+  },
+  "account_dataSync": {
+    "message": "数据同步",
+    "description": "Data sync title"
+  },
+  "account_actions": {
+    "message": "账号操作",
+    "description": "Account actions title"
+  },
+  "account_deleteAccount": {
+    "message": "删除账号",
+    "description": "Delete account button"
+  },
+  "account_deleteWarning": {
+    "message": "⚠️ 删除账号将永久删除您的所有数据，此操作不可恢复",
+    "description": "Delete account warning"
+  },
+  "account_confirmDelete": {
+    "message": "确定要删除账号吗？",
+    "description": "Confirm delete account"
+  },
+  "account_confirmDeleteWarning": {
+    "message": "⚠️ 最后确认：删除账号后，您的所有数据将被永久删除且无法恢复。确定继续吗？",
+    "description": "Confirm delete account warning"
+  },
+  "account_deleteNotImplemented": {
+    "message": "账号删除功能尚未实现。如需删除账号，请联系支持团队。",
+    "description": "Delete not implemented message"
+  },
+  "account_syncSuccess": {
+    "message": "✅ 同步成功！",
+    "description": "Sync success message"
+  },
+  "account_syncFailed": {
+    "message": "❌ 同步失败：$ERROR$",
+    "description": "Sync failed message",
+    "placeholders": {
+      "error": {
+        "content": "$1",
+        "example": "网络错误"
+      }
+    }
+  },
+  "account_signOutFailed": {
+    "message": "退出登录失败",
+    "description": "Sign out failed message"
+  },
+  "account_notSignedIn": {
+    "message": "您还未登录",
+    "description": "Not signed in message"
+  },
+  "account_signInHint": {
+    "message": "登录后可以备份数据到云端，并在多设备间同步",
+    "description": "Sign in hint"
+  },
+  
+  "loginPrompt_title": {
+    "message": "需要登录才能发送邮件通知",
+    "description": "Login prompt title"
+  },
+  "loginPrompt_message": {
+    "message": "添加紧急联系人后，当您长时间未活跃时，系统将通过邮件通知他们。",
+    "description": "Login prompt message"
+  },
+  "loginPrompt_benefit1": {
+    "message": "发送死亡通知邮件给紧急联系人",
+    "description": "Login benefit 1"
+  },
+  "loginPrompt_benefit2": {
+    "message": "数据自动备份到云端",
+    "description": "Login benefit 2"
+  },
+  "loginPrompt_benefit3": {
+    "message": "多设备同步数据",
+    "description": "Login benefit 3"
+  },
+  "loginPrompt_skip": {
+    "message": "稍后再说",
+    "description": "Skip login button"
+  },
+  "loginPrompt_note": {
+    "message": "点击「稍后再说」可以继续添加联系人，但无法发送邮件通知",
+    "description": "Login prompt note"
+  },
+  
+  "gameplay_title": {
+    "message": "玩法说明",
+    "description": "Gameplay guide title"
+  },
+  "gameplay_intro": {
+    "message": "欢迎使用「还活着吗」！通过每天敲击木鱼来保持活跃，累积功德值，维持生命值。",
+    "description": "Gameplay introduction"
+  },
+  "gameplay_knock_title": {
+    "message": "如何玩",
+    "description": "How to play title"
+  },
+  "gameplay_knock_desc": {
+    "message": "点击弹窗中的木鱼图标即可敲击，每次敲击都会增加功德值。每天第一次敲击会获得额外奖励。",
+    "description": "How to play description"
+  },
+  "gameplay_merit_title": {
+    "message": "功德值系统",
+    "description": "Merit system title"
+  },
+  "gameplay_merit_desc": {
+    "message": "功德值是您修行的成果，通过敲击木鱼累积：",
+    "description": "Merit system description"
+  },
+  "gameplay_merit_base": {
+    "message": "基础功德：每次敲击 +1",
+    "description": "Base merit"
+  },
+  "gameplay_merit_first": {
+    "message": "首次奖励：每天第一次敲击 +5",
+    "description": "First knock bonus"
+  },
+  "gameplay_merit_combo": {
+    "message": "连击奖励：连续敲击可获得额外功德",
+    "description": "Combo bonus"
+  },
+  "gameplay_merit_milestone": {
+    "message": "里程碑奖励：达到特定次数可获得大量功德",
+    "description": "Milestone bonus"
+  },
+  "gameplay_hp_title": {
+    "message": "生命值系统",
+    "description": "HP system title"
+  },
+  "gameplay_hp_desc": {
+    "message": "生命值代表您的活跃状态，需要每天维持：",
+    "description": "HP system description"
+  },
+  "gameplay_hp_initial": {
+    "message": "初始生命值：100",
+    "description": "Initial HP"
+  },
+  "gameplay_hp_reward": {
+    "message": "每日奖励：每天第一次敲击 +10 HP",
+    "description": "Daily HP reward"
+  },
+  "gameplay_hp_penalty": {
+    "message": "未活跃惩罚：每天未敲击 -10 HP",
+    "description": "Inactivity penalty"
+  },
+  "gameplay_hp_death": {
+    "message": "生命值归零：将触发死亡检测",
+    "description": "HP depleted"
+  },
+  "gameplay_streak_title": {
+    "message": "连续打卡",
+    "description": "Streak title"
+  },
+  "gameplay_streak_desc": {
+    "message": "连续多天敲击木鱼可以累积连续天数，连续天数越长，获得的奖励越多。中断后需要重新开始累积。",
+    "description": "Streak description"
+  },
+  "gameplay_tips_title": {
+    "message": "💡 小贴士",
+    "description": "Tips title"
+  },
+  "gameplay_tip1": {
+    "message": "每天至少敲击一次木鱼，保持生命值不归零",
+    "description": "Tip 1"
+  },
+  "gameplay_tip2": {
+    "message": "连续打卡可以获得更多奖励，尽量不要中断",
+    "description": "Tip 2"
+  },
+  "gameplay_tip3": {
+    "message": "登录账号可以将数据同步到云端，在多设备间同步",
+    "description": "Tip 3"
+  }
+}

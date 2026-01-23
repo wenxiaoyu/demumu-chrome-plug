@@ -1,0 +1,122 @@
+/* 总览容器 */
+.overview-container {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 16px;
+  padding: 32px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+.overview-title {
+  margin: 0 0 32px 0;
+  font-size: 20px;
+  font-weight: 600;
+  color: #4a4035;
+}
+
+/* 加载和错误状态 */
+.overview-loading,
+.overview-error {
+  text-align: center;
+  padding: 60px 20px;
+  color: #8b7355;
+  font-size: 16px;
+}
+
+.overview-error {
+  color: #d9534f;
+}
+
+/* 指标网格 */
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+/* 指标卡片 */
+.metric-card {
+  background: linear-gradient(135deg, #f8f5ed 0%, #f0ebe0 100%);
+  border-radius: 12px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(139, 115, 85, 0.1);
+}
+
+.metric-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  border-color: rgba(139, 115, 85, 0.2);
+}
+
+.metric-icon {
+  font-size: 36px;
+  margin-bottom: 12px;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+.metric-value {
+  font-size: 28px;
+  font-weight: 700;
+  color: #4a4035;
+  margin-bottom: 8px;
+  letter-spacing: -0.5px;
+}
+
+.metric-label {
+  font-size: 14px;
+  color: #8b7355;
+  font-weight: 500;
+}
+
+/* 响应式 */
+@media (max-width: 768px) {
+  .overview-container {
+    padding: 20px;
+  }
+
+  .overview-title {
+    font-size: 18px;
+    margin-bottom: 24px;
+  }
+
+  .metrics-grid {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 16px;
+  }
+
+  .metric-card {
+    padding: 20px;
+  }
+
+  .metric-icon {
+    font-size: 32px;
+  }
+
+  .metric-value {
+    font-size: 24px;
+  }
+
+  .metric-label {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  .metrics-grid {
+    grid-template-columns: 1fr;
+  }
+}

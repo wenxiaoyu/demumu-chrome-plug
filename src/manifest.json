@@ -1,19 +1,20 @@
 {
   "manifest_version": 3,
-  "name": "Demumu Chrome Extension",
-  "version": "0.1.1",
-  "description": "A modern Chrome extension built with TypeScript and React",
+  "name": "__MSG_extensionName__",
+  "version": "0.1.0",
+  "description": "__MSG_extensionDescription__",
+  "default_locale": "en",
   "icons": {
-    "16": "icons/icon-16.svg",
-    "48": "icons/icon-48.svg",
-    "128": "icons/icon-128.svg"
+    "16": "icons/icon-16.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
   },
   "action": {
     "default_popup": "src/popup/index.html",
     "default_icon": {
-      "16": "icons/icon-16.svg",
-      "48": "icons/icon-48.svg",
-      "128": "icons/icon-128.svg"
+      "16": "icons/icon-16.png",
+      "48": "icons/icon-48.png",
+      "128": "icons/icon-128.png"
     }
   },
   "background": {
@@ -27,6 +28,11 @@
     }
   ],
   "options_page": "src/options/index.html",
-  "permissions": ["storage", "tabs"],
-  "host_permissions": ["<all_urls>"]
+  "permissions": ["storage", "notifications", "alarms", "identity"],
+  "host_permissions": [
+    "https://*.firebaseapp.com/*",
+    "https://*.googleapis.com/*",
+    "https://securetoken.googleapis.com/*",
+    "https://identitytoolkit.googleapis.com/*"
+  ]
 }

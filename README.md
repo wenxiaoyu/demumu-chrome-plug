@@ -1,172 +1,326 @@
-# Demumu Chrome Extension
+# 还活着吗 (Alive Checker)
 
-A modern Chrome extension built with TypeScript, React, and Vite.
+一个借鉴"死了么"APP 理念的 Chrome 浏览器插件，通过禅意的敲木鱼方式和功德值系统，让你保持活跃。
 
-## Features
+## ✨ 核心特性
 
-- 🚀 **Fast Development**: Powered by Vite for instant HMR
-- 📦 **TypeScript**: Full type safety with TypeScript
-- ⚛️ **React**: Modern React 18 with hooks
-- 🎨 **Beautiful UI**: Gradient design with smooth animations
-- 🔧 **Manifest V3**: Uses the latest Chrome Extension API
-- 🤖 **CI/CD**: Automated testing and deployment with GitHub Actions
+### 🪵 敲木鱼系统
+- **禅意交互**：点击木鱼，感受宁静的敲击体验
+- **无限敲击**：每天可以无限次敲击，没有次数限制
+- **视觉反馈**：优雅的动画效果和声波扩散
+- **俯视视角**：从上往下看的木鱼设计，更具禅意
 
-## Project Structure
+### 🙏 功德值系统
+功德值是一个多维度的累积系统，不是简单的每次+1：
 
-```
-src/
-├── background/     # Background service worker
-├── content/        # Content scripts injected into web pages
-├── popup/          # Extension popup UI (React)
-├── options/        # Options/settings page (React)
-├── icons/          # Extension icons
-└── manifest.json   # Extension manifest (V3)
-```
+- **基础功德**：每次敲击 +1
+- **每日首次加成**：每天第一次敲击 +5
+- **连击加成**：3秒内连续敲击，每次额外 +1（最多+5）
+- **连续天数加成**：每连续一天 +0.5（最多+10）
+- **里程碑奖励**：
+  - 10次：+10功德
+  - 50次：+50功德
+  - 100次：+100功德
+  - 500次：+500功德
+  - 1000次：+1000功德
+  - 5000次：+5000功德
 
-## Development
+**功德等级**：
+- 新手：< 10
+- 初学者：10-99
+- 初窥门径：100-499
+- 虔诚信徒：500-999
+- 修行有成：1000-4999
+- 大德高僧：5000-9999
+- 功德圆满：≥ 10000
 
-### Prerequisites
+### 💯 生命值（HP）系统
+- **初始值**：100 HP
+- **每日首次敲击**：+10 HP
+- **每天不敲击**：-10 HP
+- **状态显示**：
+  - 😊 存活中（HP > 0）
+  - 💀 已往生（HP = 0）
+- **连续天数**：显示连续打卡天数，配有🔥火焰图标
+
+### 📊 数据统计
+- **今日敲击**：今天敲击的次数
+- **功德值**：累积的总功德
+- **总计敲击**：历史总敲击次数
+
+## 🎨 设计理念
+
+### 禅意美学
+- **色彩**：温暖的米色/茶色系，营造宁静氛围
+- **字体**：衬线字体，增加书卷气
+- **动画**：缓慢平和的动画节奏（4-6秒）
+- **装饰**：禅圆、微妙纹理等禅意元素
+- **透明度**：毛玻璃效果，层次分明
+
+### 交互设计
+- **简洁**：一键敲击，无复杂操作
+- **反馈**：即时的视觉和数据反馈
+- **专注**：去除干扰，专注当下
+- **平和**：柔和的色彩和动画
+
+## 🚀 快速开始
+
+### 前置要求
 
 - Node.js 18+
-- pnpm (recommended) or npm
+- pnpm（推荐）或 npm
 
-### Setup
+### 安装
 
-1. Clone the repository:
+1. 克隆仓库：
 
 ```bash
-git clone <your-repo-url>
-cd demumu-chrome-plug
+git clone https://github.com/wenxiaoyu/alive-checker.git
+cd alive-checker
 ```
 
-2. Install dependencies:
+2. 安装依赖：
 
 ```bash
 pnpm install
 ```
 
-3. Start development server:
+3. 启动开发服务器：
 
 ```bash
 pnpm dev
 ```
 
-4. Load the extension in Chrome:
-   - Open Chrome and navigate to `chrome://extensions/`
-   - Enable "Developer mode"
-   - Click "Load unpacked"
-   - Select the `dist` folder
+4. 在 Chrome 中加载插件：
+   - 打开 Chrome 浏览器，访问 `chrome://extensions/`
+   - 开启"开发者模式"
+   - 点击"加载已解压的扩展程序"
+   - 选择 `dist` 文件夹
 
-### Available Scripts
+### 可用命令
 
-- `pnpm dev` - Start development server with hot reload
-- `pnpm build` - Build for production
-- `pnpm lint` - Run ESLint
-- `pnpm format` - Format code with Prettier
-- `pnpm type-check` - Run TypeScript type checking
+- `pnpm dev` - 启动开发服务器（支持热更新）
+- `pnpm build` - 构建生产版本
+- `pnpm lint` - 运行 ESLint 检查
+- `pnpm format` - 使用 Prettier 格式化代码
+- `pnpm type-check` - 运行 TypeScript 类型检查
 
-## Building for Production
+## 📖 使用指南
 
-```bash
-pnpm build
-```
+### 基础使用
 
-This will create an optimized build in the `dist` folder. You can then:
+1. **打开插件**：点击浏览器工具栏中的插件图标
+2. **敲木鱼**：点击中间的木鱼，感受禅意的敲击
+3. **查看数据**：底部显示今日敲击、功德值、总计敲击
+4. **保持活跃**：每天至少敲击一次，维持生命值
 
-1. Zip the `dist` folder
-2. Upload to Chrome Web Store
+### 进阶技巧
 
-## CI/CD
+1. **连击加成**：快速连续敲击（3秒内），可获得额外功德
+2. **每日首次**：每天第一次敲击有+5功德加成
+3. **连续打卡**：连续多天打卡，每天额外+0.5功德
+4. **里程碑**：达到特定敲击次数时，获得大额功德奖励
 
-This project uses GitHub Actions for automated CI/CD:
+### 数据说明
 
-- **CI Pipeline**: Runs on every push and PR
-  - Installs dependencies
-  - Runs linting and type checking
-  - Builds the extension
+- **今日敲击**：当天的敲击次数，每天0点重置
+- **功德值**：永久累积，永不减少
+- **总计敲击**：历史总敲击次数
+- **生命值**：0-100，每天不敲-10，每日首次敲击+10
+- **连续天数**：连续打卡的天数
 
-- **Release Pipeline**: Triggered by version tags (e.g., `v1.0.0`)
-  - Builds production version
-  - Creates zip package
-  - Uploads to Chrome Web Store (requires setup)
-  - Creates GitHub Release
-
-### Setting up Chrome Web Store Auto-Publish
-
-To enable automatic publishing to Chrome Web Store, you need to:
-
-1. **Get Chrome Web Store API Credentials**:
-   - Go to [Google Cloud Console](https://console.cloud.google.com/)
-   - Create a new project or select existing one
-   - Enable Chrome Web Store API
-   - Create OAuth 2.0 credentials
-   - Get your `CLIENT_ID` and `CLIENT_SECRET`
-
-2. **Get Refresh Token**:
-   - Use [OAuth 2.0 Playground](https://developers.google.com/oauthplayground/)
-   - Configure with your credentials
-   - Authorize Chrome Web Store API
-   - Exchange authorization code for refresh token
-
-3. **Get Extension ID**:
-   - Upload your extension to Chrome Web Store (first time manually)
-   - Find your extension ID in the Developer Dashboard
-
-4. **Add GitHub Secrets**:
-   Go to your repository Settings → Secrets and add:
-   - `CHROME_CLIENT_ID`
-   - `CHROME_CLIENT_SECRET`
-   - `CHROME_REFRESH_TOKEN`
-   - `CHROME_EXTENSION_ID`
-
-5. **Create a Release**:
-   ```bash
-   git tag v1.0.0
-   git push origin v1.0.0
-   ```
-
-## Tech Stack
-
-- **Frontend**: React 18, TypeScript
-- **Build Tool**: Vite 5
-- **Package Manager**: pnpm
-- **Code Quality**: ESLint, Prettier, Husky
-- **CI/CD**: GitHub Actions
-- **Chrome API**: Manifest V3
-
-## Architecture
-
-### Message Passing
-
-The extension uses Chrome's message passing API for communication:
+## 📁 项目结构
 
 ```
-Popup ←→ Background Worker ←→ Content Script
+alive-checker/
+├── openspec/              # OpenSpec 项目管理文档
+│   ├── project.md         # 项目总览
+│   ├── AGENTS.md          # AI 助手工作指引
+│   ├── changes/           # 变更提案（按阶段组织）
+│   ├── specs/             # 独立功能规格
+│   └── templates/         # 文档模板
+├── src/
+│   ├── background/        # Background Service Worker
+│   ├── content/           # Content Scripts
+│   ├── popup/             # Popup 页面（React）
+│   ├── options/           # Options 页面（React）
+│   ├── shared/            # 共享代码（类型、工具等）
+│   ├── icons/             # 插件图标
+│   └── manifest.json      # 插件清单（Manifest V3）
+├── docs/                  # 文档
+├── scripts/               # 构建脚本
+└── dist/                  # 构建输出
 ```
 
-- **Popup**: User interface, sends messages to background/content
-- **Background**: Service worker, handles extension logic
-- **Content Script**: Runs in web pages, can manipulate DOM
+## 🎯 开发路线图
 
-### Storage
+### ✅ 阶段 0：项目搭建（已完成）
+- 项目结构初始化
+- 开发环境配置
+- OpenSpec 文档结构
 
-Uses `chrome.storage.local` for persistent data storage across sessions.
+### 🚧 阶段 1：MVP 本地版（进行中）
+- 敲木鱼系统（无限次敲击）
+- 功德值累积系统
+- 生命值（HP）系统
+- 状态检测和通知
+- 数据可视化
 
-## Contributing
+### 📋 阶段 2：游戏化升级（计划中）
+- 木鱼音效和动画
+- 成就系统
+- 浏览器活动检测
+- 挑战任务系统
+- 主题系统
 
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+### 📋 阶段 3：社交功能（计划中）
+- 后端服务（Google Cloud）
+- 用户账号系统
+- 好友系统
+- 戳一戳功能
+- 排行榜
+- 邮件通知
 
-## License
+### 📋 阶段 4：高级功能（计划中）
+- 小队系统
+- 社交互动增强
+- 年度报告
+- 数据分析
 
-MIT License - see LICENSE file for details
+### 📋 阶段 5：商业化探索（计划中）
+- 免费增值模式
+- 虚拟商品
+- 企业版
 
-## Resources
+详细路线图请查看 [openspec/project.md](openspec/project.md)
 
-- [Chrome Extension Documentation](https://developer.chrome.com/docs/extensions/)
-- [Manifest V3 Migration Guide](https://developer.chrome.com/docs/extensions/mv3/intro/)
-- [Vite Documentation](https://vitejs.dev/)
-- [React Documentation](https://react.dev/)
+## 🛠️ 技术栈
+
+- **前端**：React 19 + TypeScript
+- **构建工具**：Vite 7
+- **插件框架**：Chrome Extension Manifest V3
+- **状态管理**：Chrome Storage API
+- **样式**：CSS Modules + 禅意设计系统
+- **代码规范**：ESLint + Prettier + Husky
+- **CI/CD**：GitHub Actions
+- **后端**（阶段 3+）：Google Cloud Functions + Firestore
+
+## 🎯 功能亮点
+
+### 已实现功能 ✅
+
+1. **敲木鱼系统**
+   - 俯视视角的3D木鱼设计
+   - 点击动画和声波效果
+   - 冲击波扩散效果
+   - 鼠标悬停呼吸动画
+
+2. **功德值算法**
+   - 多维度计算系统
+   - 连击检测（3秒窗口）
+   - 连续天数加成
+   - 里程碑奖励机制
+
+3. **生命值系统**
+   - 每日首次敲击奖励
+   - 时间惩罚机制
+   - 状态显示（存活/往生）
+   - 连续天数统计
+
+4. **禅意UI设计**
+   - 温暖的米色/茶色系
+   - 毛玻璃效果
+   - 禅圆装饰元素
+   - 缓慢平和的动画
+
+5. **数据持久化**
+   - Chrome Storage API
+   - 本地数据存储
+   - 实时数据同步
+
+### 计划中功能 📋
+
+- 音效系统（木鱼敲击声）
+- 成就系统
+- 数据可视化（图表、日历）
+- 主题系统
+- 云端同步
+- 社交功能
+
+## 📖 文档
+
+- [项目总览](openspec/project.md) - 完整的项目规划和路线图
+- [开发指南](openspec/AGENTS.md) - AI 助手和开发者指引
+- [快速开始](docs/QUICK_START.md) - 快速上手指南
+- [功德算法说明](src/shared/utils/merit-calculator.ts) - 功德值计算逻辑
+- [HP计算说明](src/shared/utils/hp-calculator.ts) - 生命值计算逻辑
+
+## ❓ 常见问题
+
+### Q: 功德值会减少吗？
+A: 不会。功德值只增不减，是永久累积的。
+
+### Q: 生命值降到0会怎样？
+A: 状态会变为"已往生"（💀），但可以继续敲木鱼，每日首次敲击仍可恢复+10 HP。
+
+### Q: 连击加成如何触发？
+A: 在3秒内连续敲击，每次可获得额外+1功德（最多+5）。
+
+### Q: 里程碑奖励是什么？
+A: 当总敲击次数达到特定数值（10、50、100、500、1000、5000）时，会获得大额功德奖励。
+
+### Q: 数据存储在哪里？
+A: 目前所有数据都存储在本地（Chrome Storage），不会上传到云端。
+
+### Q: 如何备份数据？
+A: 当前版本暂不支持数据导出，后续版本会添加此功能。
+
+## 🤝 贡献
+
+欢迎贡献！请查看 [贡献指南](docs/CONTRIBUTING.md) 了解详情。
+
+1. Fork 本仓库
+2. 创建特性分支 (`git checkout -b feature/amazing-feature`)
+3. 提交更改 (`git commit -m 'feat: add amazing feature'`)
+4. 推送到分支 (`git push origin feature/amazing-feature`)
+5. 创建 Pull Request
+
+## 📝 开发原则
+
+- **渐进式迭代**：每个阶段独立可用，可以单独发布
+- **本地优先**：核心功能必须在本地可用，云端作为增强
+- **用户体验**：简洁、有趣、不打扰
+- **代码质量**：TypeScript 严格模式，完善的类型定义
+
+## 📄 许可证
+
+MIT License - 详见 [LICENSE](LICENSE) 文件
+
+## 🔗 相关链接
+
+- [Chrome Extension 官方文档](https://developer.chrome.com/docs/extensions/)
+- [Manifest V3 迁移指南](https://developer.chrome.com/docs/extensions/mv3/intro/)
+- [React 文档](https://react.dev/)
+- [Vite 文档](https://vitejs.dev/)
+
+## 💬 联系方式
+
+- **GitHub**：https://github.com/wenxiaoyu/alive-checker
+- **问题反馈**：[GitHub Issues](https://github.com/wenxiaoyu/alive-checker/issues)
+- **讨论**：[GitHub Discussions](https://github.com/wenxiaoyu/alive-checker/discussions)
+
+---
+
+**灵感来源**：["死了么"APP](https://apps.apple.com/cn/app/%E6%AD%BB%E4%BA%86%E4%B9%88/id1585876236)
+
+**开发者**：wenxy + AI 助手
+
+**当前版本**：v0.1.0（阶段 1 MVP 进行中）
+
+**更新日志**：
+- v0.1.0 (2025-01)
+  - ✅ 敲木鱼系统（俯视视角、动画效果）
+  - ✅ 功德值多维度算法（连击、连续天数、里程碑）
+  - ✅ 生命值系统（每日奖励、时间惩罚）
+  - ✅ 禅意UI设计（米色系、毛玻璃、禅圆装饰）
+  - ✅ 数据持久化（Chrome Storage）

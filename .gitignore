@@ -12,6 +12,9 @@ build
 .env.local
 .env.*.local
 
+# Firebase configuration (contains sensitive API keys)
+src/shared/config/firebase.ts
+
 # IDE
 .vscode/*
 !.vscode/extensions.json

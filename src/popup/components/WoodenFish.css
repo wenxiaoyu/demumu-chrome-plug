@@ -1,0 +1,246 @@
+/* 木鱼容器 */
+.wooden-fish-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30px 20px 20px;
+}
+
+.wooden-fish-scene {
+  position: relative;
+  width: 220px;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 背景光晕 - 更柔和 */
+.fish-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(
+    circle,
+    rgba(139, 115, 85, 0.06) 0%,
+    rgba(139, 115, 85, 0.03) 40%,
+    transparent 70%
+  );
+  border-radius: 50%;
+  transition: all 0.4s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.fish-glow.active {
+  width: 260px;
+  height: 260px;
+  background: radial-gradient(
+    circle,
+    rgba(139, 115, 85, 0.15) 0%,
+    rgba(139, 115, 85, 0.08) 30%,
+    rgba(139, 115, 85, 0.04) 60%,
+    transparent 80%
+  );
+  animation: glow-pulse 0.8s ease-out;
+}
+
+@keyframes glow-pulse {
+  0% {
+    transform: translate(-50%, -50%) scale(0.85);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+}
+
+/* 涟漪效果 - 更自然 */
+.ripple-effect {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 30px;
+  height: 30px;
+  border: 2px solid rgba(139, 115, 85, 0.5);
+  border-radius: 50%;
+  pointer-events: none;
+  animation: ripple-expand 1.2s ease-out forwards;
+  z-index: 5;
+}
+
+@keyframes ripple-expand {
+  0% {
+    width: 30px;
+    height: 30px;
+    border-color: rgba(139, 115, 85, 0.5);
+    opacity: 1;
+  }
+  50% {
+    border-color: rgba(139, 115, 85, 0.3);
+    opacity: 0.8;
+  }
+  100% {
+    width: 240px;
+    height: 240px;
+    border-color: rgba(139, 115, 85, 0);
+    opacity: 0;
+  }
+}
+
+/* 木鱼棍 */
+.wooden-stick {
+  position: absolute;
+  top: -10px;
+  right: 15px;
+  width: 70px;
+  height: 70px;
+  z-index: 15;
+  pointer-events: none;
+  transform-origin: 75% 75%;
+  transform: rotate(-35deg);
+  transition: transform 0.2s ease;
+}
+
+.wooden-stick-icon {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 2px 6px rgba(74, 64, 53, 0.3));
+}
+
+/* 木鱼棍敲击动画 */
+.wooden-stick.knocking {
+  animation: stick-knock 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes stick-knock {
+  0% {
+    transform: rotate(-35deg);
+  }
+  35% {
+    transform: rotate(5deg) translateY(8px) translateX(-3px);
+  }
+  65% {
+    transform: rotate(-10deg) translateY(3px) translateX(-1px);
+  }
+  100% {
+    transform: rotate(-35deg);
+  }
+}
+
+/* 木鱼按钮 */
+.wooden-fish-button {
+  position: relative;
+  width: 85px;
+  height: 85px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: transform 0.2s ease;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wooden-fish-button:hover {
+  transform: scale(1.03);
+}
+
+.wooden-fish-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* 木鱼图标 */
+.wooden-fish-icon {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 3px 8px rgba(74, 64, 53, 0.25));
+  transition: filter 0.2s ease;
+}
+
+.wooden-fish-button:hover .wooden-fish-icon {
+  filter: drop-shadow(0 4px 12px rgba(74, 64, 53, 0.35));
+}
+
+/* 敲击动画 - 轻微抖动 */
+.wooden-fish-button.knocking {
+  animation: knock-shake 0.26s ease-out;
+  animation-delay: 0.14s;
+  animation-fill-mode: backwards;
+}
+
+@keyframes knock-shake {
+  0%, 100% {
+    transform: translateY(0) translateX(0);
+  }
+  25% {
+    transform: translateY(2px) translateX(-1px);
+  }
+  50% {
+    transform: translateY(-1px) translateX(1px);
+  }
+  75% {
+    transform: translateY(1px) translateX(-0.5px);
+  }
+}
+
+/* 提示文字 */
+.fish-hint {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: #a89680;
+  user-select: none;
+  opacity: 0.5;
+  transition: opacity 0.3s ease;
+  margin-top: 16px;
+}
+
+.wooden-fish-button:hover ~ .fish-hint {
+  opacity: 0.8;
+}
+
+.hint-icon {
+  font-size: 16px;
+  animation: hint-float 3s ease-in-out infinite;
+}
+
+@keyframes hint-float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+.hint-text {
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+/* 响应式 */
+@media (max-width: 400px) {
+  .wooden-fish-scene {
+    width: 200px;
+    height: 180px;
+  }
+
+  .wooden-fish-button {
+    width: 120px;
+    height: 120px;
+  }
+}

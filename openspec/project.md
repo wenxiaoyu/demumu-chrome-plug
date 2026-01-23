@@ -1,76 +1,158 @@
-# Project Context
+# 还活着吗 (Demumu) - Chrome 插件
 
-## Purpose
+## 项目概述
 
-Demumu Chrome 插件 - 一个现代化的 Chrome 浏览器扩展项目，使用 TypeScript + React 构建，具备完整的 CI/CD 自动化发布流程。
+借鉴"死了么"APP，通过 Chrome 插件实现轻量化的"存活监控"系统，采用敲木鱼的禅意交互方式。
 
-## Tech Stack
+**核心理念：** 用禅意的敲木鱼方式让用户保持活跃，通过功德值、生命值等机制增强用户粘性，并提供云端同步和自动邮件通知功能。
 
-- **前端框架**: React 18 + TypeScript
-- **构建工具**: Vite 5
-- **包管理器**: pnpm
-- **Chrome API**: Manifest V3
-- **代码质量**: ESLint + Prettier + Husky
-- **CI/CD**: GitHub Actions
-- **发布**: Chrome Web Store API
+## 产品定位
 
-## Project Conventions
+- **目标用户**：关注自己"存活状态"的年轻用户（18-35 岁），喜欢禅意文化
+- **核心价值**：禅意的敲木鱼交互 + 功德值累积 + 生命值系统 + 趣味性
+- **差异化优势**：
+  - 浏览器原生集成，无需独立 APP
+  - 禅意的敲木鱼交互，无限次敲击
+  - 功德值累积系统
+  - 自动检测浏览器活跃度
+  - 本地优先，隐私友好
 
-### Code Style
+## 技术栈
 
-- 使用 TypeScript 严格模式
-- 使用 Prettier 进行代码格式化（2 空格缩进）
-- 使用 ESLint 进行代码检查
-- 组件使用 PascalCase 命名
-- 文件名使用 kebab-case
-- 提交前自动运行 lint-staged
+### 前端
+- **语言**：TypeScript
+- **框架**：React 19
+- **构建工具**：Vite 7
+- **插件框架**：Chrome Extension Manifest V3
+- **状态管理**：Chrome Storage API
+- **样式**：CSS Modules
 
-### Architecture Patterns
+### 后端（阶段 3+）
+- **平台**：Google Cloud Platform
+- **计算**：Cloud Functions (Gen 2)
+- **数据库**：Firestore
+- **定时任务**：Cloud Scheduler
+- **邮件服务**：SendGrid
+- **认证**：Firebase Authentication（可选）
 
-- **组件化**: 使用 React 函数组件 + Hooks
-- **消息传递**: Background ↔ Content Script ↔ Popup 使用 Chrome Message API
-- **状态管理**: 使用 Chrome Storage API 持久化数据
-- **模块化**: 按功能划分目录（background, content, popup, options）
+### 开发工具
+- **版本控制**：Git + GitHub
+- **CI/CD**：GitHub Actions
+- **代码规范**：ESLint + Prettier
+- **类型检查**：TypeScript Strict Mode
+- **测试**：Vitest（计划）
 
-### Testing Strategy
+## 开发阶段
 
-- 初始版本专注于手动测试
-- 后续可添加 Vitest + Testing Library
-- 在真实 Chrome 环境中测试插件功能
+### 已完成
+- [x] **阶段 0**：项目搭建
+  - ✅ 基础脚手架
+  - ✅ OpenSpec 文档结构
+  - ✅ 项目配置
+  - ✅ 基础类型定义
+  - ✅ UI 框架搭建
+  - ✅ 图标设计
 
-### Git Workflow
+- [x] **阶段 1**：MVP 本地版（Phase 1）
+  - ✅ M1: 敲木鱼核心功能（无限次敲击）
+  - ✅ M2: 功德值多维度算法系统
+  - ✅ M3: 生命值（HP）系统
+  - ✅ M4: 数据可视化和统计
+  - ✅ M5: 死亡通知系统（本地）
+  - ✅ M6: 国际化（中英文双语）
+  - ✅ M7: 用户认证与云端同步（部分完成）
+    - ✅ Firebase 项目设置
+    - ✅ Google 账号登录
+    - ✅ 数据双向同步
+    - ✅ 邮件模板同步
+    - ⏳ 云端死亡检测（待完成）
+    - ⏳ 自动邮件通知（待完成）
 
-- **主分支**: main
-- **功能分支**: feature/xxx
-- **发布流程**:
-  - 推送代码触发 CI 检查
-  - 创建版本标签（v1.0.0）触发自动发布
-  - 自动上传到 Chrome Web Store
-  - 自动创建 GitHub Release
+### 计划中
+- [ ] **阶段 2**：游戏化升级（2-3 周）
+  - 木鱼音效和动画
+  - 成就系统
+  - 浏览器活动检测
+  - 挑战任务系统
+  - 主题系统
 
-## Domain Context
+- [ ] **阶段 3**：社交功能（3-4 周）
+  - 后台服务搭建（Google Cloud）
+  - 用户系统
+  - 好友系统
+  - 戳一戳功能
+  - 排行榜
+  - 邮件通知
 
-这是一个 Chrome 浏览器扩展项目，需要理解：
+- [ ] **阶段 4**：高级功能（4-6 周）
+  - 小队系统
+  - 社交互动增强
+  - 年度报告
+  - 数据分析
+  - 多渠道通知
 
-- Chrome Extension Manifest V3 规范
-- Service Worker 生命周期管理
-- Content Script 注入和隔离机制
-- Chrome Storage API 使用
-- Chrome Web Store 发布流程
+- [ ] **阶段 5**：商业化探索（持续）
+  - 免费增值模式
+  - 虚拟商品
+  - 企业版
+  - 运营策略
 
-## Important Constraints
+## 当前状态
 
-- **必须使用 Manifest V3**（Manifest V2 已弃用）
-- **Service Worker 限制**: 不能使用 DOM API，生命周期短暂
-- **Content Script 限制**: 在隔离环境中运行，需要通过消息与 background 通信
-- **Chrome Web Store 限制**:
-  - 包大小 < 100MB
-  - 需要开发者账号（$5 一次性费用）
-  - 审核时间通常 1-3 天
+**当前版本：** v1.0.0
+**当前阶段：** 阶段 1 - MVP 本地版（M7 进行中）
+**活跃变更：** phase-1-mvp-local/m7-auth-sync
+**下一个里程碑：** 完成云端死亡检测和自动邮件通知
 
-## External Dependencies
+### 最近更新
+- 2026-01-22：整理文档结构，归类到 docs 子文件夹
+- 2026-01-21：完成 M7 用户认证与云端同步（55%）
+- 2026-01-21：实现邮件模板同步功能
+- 2026-01-21：实现用户配置同步
+- 2026-01-20：完成 M6 国际化（中英文双语）
+- 2026-01-19：完成 M5 死亡通知系统
+- 2026-01-18：完成 M1-M4 核心功能
 
-- **Chrome Web Store API**: 用于自动发布插件
-- **GitHub Actions**: 免费 CI/CD 服务
-- **Google Cloud Console**: 获取 OAuth 凭证
-- **npm Registry**: 依赖包管理
+## 项目指标
+
+### 技术指标
+- TypeScript 严格模式：✅ 已启用
+- 构建时间：< 30 秒 ✅
+- 插件大小：< 2MB ✅
+- 代码规范：ESLint + Prettier ✅
+
+### 功能完成度
+- 阶段 0（项目搭建）：100% ✅
+- 阶段 1（MVP 本地版）：约 85% 🚧
+  - M1-M6：100% ✅
+  - M7：55% ⏳（认证和同步完成，云端检测待完成）
+
+### 产品指标（目标）
+- 阶段 1：50-100 种子用户
+- 阶段 2：用户留存率 > 50%
+- 阶段 3：月活用户 > 1000
+
+## 相关文档
+
+- [开发路线图](./roadmap.md)
+- [技术架构](./architecture.md)
+- [设计规范](./design-system.md)
+- [API 文档](./api-docs.md)（阶段 3+）
+- [贡献指南](../CONTRIBUTING.md)
+
+## 团队
+
+- **项目负责人**：wenxy
+- **开发**：wenxy + AI 助手
+- **设计**：待定
+- **测试**：社区用户
+
+## 许可证
+
+MIT License
+
+## 联系方式
+
+- **GitHub**：https://github.com/wenxiaoyu/alive-checker
+- **问题反馈**：GitHub Issues
+- **讨论**：GitHub Discussions

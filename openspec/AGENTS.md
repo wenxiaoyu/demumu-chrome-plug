@@ -1,522 +1,474 @@
-# OpenSpec Instructions
+# AI 助手工作指引
 
-Instructions for AI coding assistants using OpenSpec for spec-driven development.
+## 项目上下文
 
-## TL;DR Quick Checklist
+这是一个 Chrome 浏览器插件项目，名为"还活着吗"（Demumu），借鉴"死了么"APP 的理念，通过禅意的敲木鱼交互和游戏化的签到系统来增强用户粘性。
 
-- Search existing work: `openspec spec list --long`, `openspec list` (use `rg` only for full-text search)
-- Decide scope: new capability vs modify existing capability
-- Pick a unique `change-id`: kebab-case, verb-led (`add-`, `update-`, `remove-`, `refactor-`)
-- Scaffold: `proposal.md`, `tasks.md`, `design.md` (only if needed), and delta specs per affected capability
-- Write deltas: use `## ADDED|MODIFIED|REMOVED|RENAMED Requirements`; include at least one `#### Scenario:` per requirement
-- Validate: `openspec validate [change-id] --strict` and fix issues
-- Request approval: Do not start implementation until proposal is approved
+**项目特点：**
+- 渐进式开发：分多个里程碑逐步实现功能
+- 本地优先：核心功能本地实现，云端作为增强
+- 用户体验：简洁、有趣、禅意、不打扰
+- 技术栈：TypeScript + React 19 + Vite 7 + Chrome Extension Manifest V3 + Firebase
 
-## Three-Stage Workflow
+**当前状态：**
+- 版本：v1.0.0
+- 阶段：Phase 1 MVP（M7 进行中）
+- 完成度：约 85%
 
-### Stage 1: Creating Changes
+## 开发原则
 
-Create proposal when you need to:
+### 1. 渐进式迭代
+- 每个阶段独立可用，可以单独发布
+- 后续阶段在前一阶段基础上增强
+- 不破坏已有功能
 
-- Add features or functionality
-- Make breaking changes (API, schema)
-- Change architecture or patterns
-- Optimize performance (changes behavior)
-- Update security patterns
+### 2. 本地优先
+- 核心功能必须在本地可用
+- 云端服务作为可选增强
+- 离线时基础功能仍可使用
+- 数据同步采用"本地立即更新 + 异步云端同步"策略
 
-Triggers (examples):
+### 3. 用户体验
+- 界面简洁，操作直观
+- 趣味性强，黑色幽默风格
+- 不过度打扰用户
+- 性能优先，响应迅速
 
-- "Help me create a change proposal"
-- "Help me plan a change"
-- "Help me create a proposal"
-- "I want to create a spec proposal"
-- "I want to create a spec"
+### 4. 代码质量
+- TypeScript 严格模式
+- 完善的类型定义
+- 遵循 ESLint 规则
+- 代码注释清晰
+- 单元测试覆盖关键逻辑
 
-Loose matching guidance:
+## 当前工作流程
 
-- Contains one of: `proposal`, `change`, `spec`
-- With one of: `create`, `plan`, `make`, `start`, `help`
+### 查看项目状态
 
-Skip proposal for:
+1. **了解项目总体情况**
+   ```bash
+   # 阅读项目总览
+   cat openspec/project.md
+   
+   # 查看当前状态
+   cat openspec/STATUS.md
+   ```
 
-- Bug fixes (restore intended behavior)
-- Typos, formatting, comments
-- Dependency updates (non-breaking)
-- Configuration changes
-- Tests for existing behavior
+2. **查看当前里程碑**
+   ```bash
+   # 当前正在进行 M7：用户认证与云端同步
+   cat openspec/changes/phase-1-mvp-local/m7-auth-sync/spec.md
+   cat openspec/changes/phase-1-mvp-local/m7-auth-sync/tasks.md
+   
+   # 查看最新进展
+   cat docs/milestones/M7_CURRENT_STATUS.md
+   ```
 
-**Workflow**
+3. **查看文档结构**
+   ```bash
+   # 文档已按类型归类到 docs 子文件夹
+   cat docs/README.md
+   ```
 
-1. Review `openspec/project.md`, `openspec list`, and `openspec list --specs` to understand current context.
-2. Choose a unique verb-led `change-id` and scaffold `proposal.md`, `tasks.md`, optional `design.md`, and spec deltas under `openspec/changes/<id>/`.
-3. Draft spec deltas using `## ADDED|MODIFIED|REMOVED Requirements` with at least one `#### Scenario:` per requirement.
-4. Run `openspec validate <id> --strict` and resolve any issues before sharing the proposal.
+### 执行任务
 
-### Stage 2: Implementing Changes
+1. 按照 `tasks.md` 中的顺序执行任务
+2. 完成一个任务后，在 `tasks.md` 中标记为完成
+3. 提交代码时引用任务编号
+4. 遇到问题及时更新 `spec.md`
 
-Track these steps as TODOs and complete them one by one.
+### 完成阶段
 
-1. **Read proposal.md** - Understand what's being built
-2. **Read design.md** (if exists) - Review technical decisions
-3. **Read tasks.md** - Get implementation checklist
-4. **Implement tasks sequentially** - Complete in order
-5. **Confirm completion** - Ensure every item in `tasks.md` is finished before updating statuses
-6. **Update checklist** - After all work is done, set every task to `- [x]` so the list reflects reality
-7. **Approval gate** - Do not start implementation until the proposal is reviewed and approved
+1. 确保所有任务完成
+2. 运行测试和类型检查
+3. 更新 `openspec/project.md` 中的状态
+4. 创建 Git 标签
+5. 准备下一阶段的变更提案
 
-### Stage 3: Archiving Changes
+## 变更提案规范
 
-After deployment, create separate PR to:
+### 目录结构
+```
+openspec/changes/
+├── phase-0-setup/           # 阶段 0：项目搭建
+│   ├── spec.md             # 详细规格说明
+│   └── tasks.md            # 任务清单
+├── phase-1-mvp-local/      # 阶段 1：MVP 本地版
+│   ├── spec.md
+│   └── tasks.md
+└── ...
+```
 
-- Move `changes/[name]/` → `changes/archive/YYYY-MM-DD-[name]/`
-- Update `specs/` if capabilities changed
-- Use `openspec archive <change-id> --skip-specs --yes` for tooling-only changes (always pass the change ID explicitly)
-- Run `openspec validate --strict` to confirm the archived change passes checks
+### spec.md 格式
 
-## Before Any Task
+```markdown
+# 阶段 X：标题
 
-**Context Checklist:**
+## 目标
+简要说明本阶段要达成的目标
 
-- [ ] Read relevant specs in `specs/[capability]/spec.md`
-- [ ] Check pending changes in `changes/` for conflicts
-- [ ] Read `openspec/project.md` for conventions
-- [ ] Run `openspec list` to see active changes
-- [ ] Run `openspec list --specs` to see existing capabilities
+## 范围
+### 包含
+- 功能 1
+- 功能 2
 
-**Before Creating Specs:**
+### 不包含
+- 功能 3
+- 功能 4
 
-- Always check if capability already exists
-- Prefer modifying existing specs over creating duplicates
-- Use `openspec show [spec]` to review current state
-- If request is ambiguous, ask 1–2 clarifying questions before scaffolding
+## 详细设计
+### 1. 功能模块 A
+设计说明...
 
-### Search Guidance
+### 2. 功能模块 B
+设计说明...
 
-- Enumerate specs: `openspec spec list --long` (or `--json` for scripts)
-- Enumerate changes: `openspec list` (or `openspec change list --json` - deprecated but available)
-- Show details:
-  - Spec: `openspec show <spec-id> --type spec` (use `--json` for filters)
-  - Change: `openspec show <change-id> --json --deltas-only`
-- Full-text search (use ripgrep): `rg -n "Requirement:|Scenario:" openspec/specs`
+## 技术实现
+代码结构、关键算法等
 
-## Quick Start
+## 验收标准
+- [ ] 标准 1
+- [ ] 标准 2
 
-### CLI Commands
+## 依赖
+前置条件
 
+## 风险
+潜在风险和应对方案
+
+## 时间估算
+预计时间
+```
+
+### tasks.md 格式
+
+```markdown
+# 阶段 X：标题 - 任务清单
+
+## 任务列表
+
+- [ ] 1. 大任务 A
+  - [ ] 1.1 子任务 A1
+  - [ ] 1.2 子任务 A2
+
+- [ ] 2. 大任务 B
+  - [ ] 2.1 子任务 B1
+  - [ ] 2.2 子任务 B2
+
+## 完成标准
+所有任务完成，验收标准通过
+```
+
+## 代码规范
+
+### 项目目录结构
+```
+demumu-chrome-extension/
+├── openspec/                    # OpenSpec 项目管理
+│   ├── project.md              # 项目总览
+│   ├── AGENTS.md               # AI 助手指引（本文件）
+│   ├── STATUS.md               # 项目状态
+│   ├── changes/                # 变更提案（按阶段和里程碑组织）
+│   │   └── phase-1-mvp-local/
+│   │       ├── m1-core-function/
+│   │       ├── m2-data-stats/
+│   │       ├── m3-visualization/
+│   │       ├── m4-testing-release/
+│   │       ├── m5-death-notification/
+│   │       ├── m6-i18n/
+│   │       └── m7-auth-sync/   # 当前进行中
+│   └── templates/              # 文档模板
+├── docs/                       # 项目文档（按类型归类）
+│   ├── README.md               # 文档索引
+│   ├── setup/                  # 设置和配置指南
+│   ├── milestones/             # 里程碑和进度文档
+│   ├── features/               # 功能说明文档
+│   ├── fixes/                  # 修复记录文档
+│   └── development/            # 开发相关文档
+├── src/
+│   ├── background/             # Background Service Worker
+│   │   ├── index.ts
+│   │   ├── handlers/
+│   │   └── services/
+│   ├── popup/                  # Popup 页面（React）
+│   │   ├── Popup.tsx
+│   │   ├── components/
+│   │   └── hooks/
+│   ├── options/                # Options 页面（React）
+│   │   ├── Options.tsx
+│   │   ├── components/
+│   │   └── hooks/
+│   ├── content/                # Content Scripts
+│   ├── shared/                 # 共享代码
+│   │   ├── config/             # 配置（Firebase 等）
+│   │   ├── services/           # 服务（认证、同步、邮件等）
+│   │   ├── templates/          # 邮件模板
+│   │   ├── types/              # 类型定义
+│   │   ├── utils/              # 工具函数
+│   │   ├── types.ts
+│   │   ├── storage.ts
+│   │   └── constants.ts
+│   ├── _locales/               # 国际化翻译
+│   │   ├── zh_CN/
+│   │   └── en/
+│   ├── icons/                  # 插件图标
+│   └── manifest.json           # 插件清单
+├── scripts/                    # 构建和工具脚本
+├── dist/                       # 构建输出
+└── AGENTS.md                   # 开发规范（根目录）
+```
+
+### TypeScript 规范
+
+```typescript
+// 使用严格模式
+// tsconfig.json: "strict": true
+
+// 明确的类型定义
+interface UserData {
+  userId: string;
+  lastCheckIn: number;
+  consecutiveDays: number;
+  hp: number;
+  status: 'alive' | 'dead';
+}
+
+// 避免 any，使用 unknown
+function processData(data: unknown): void {
+  // 类型守卫
+  if (isUserData(data)) {
+    // ...
+  }
+}
+
+// 使用枚举
+enum CheckInType {
+  Normal = 'normal',
+  Mood = 'mood',
+  Quote = 'quote'
+}
+
+// 导出类型
+export type { UserData };
+export { CheckInType };
+```
+
+### React 规范
+
+```typescript
+// 使用函数组件 + Hooks
+import { useState, useEffect } from 'react';
+
+interface Props {
+  userId: string;
+  onCheckIn: () => void;
+}
+
+export function CheckInButton({ userId, onCheckIn }: Props) {
+  const [loading, setLoading] = useState(false);
+  
+  const handleClick = async () => {
+    setLoading(true);
+    try {
+      await onCheckIn();
+    } finally {
+      setLoading(false);
+    }
+  };
+  
+  return (
+    <button onClick={handleClick} disabled={loading}>
+      {loading ? '签到中...' : '签到'}
+    </button>
+  );
+}
+```
+
+### Chrome Storage 规范
+
+```typescript
+// 使用类型安全的存储封装
+class Storage {
+  async get<T>(key: string): Promise<T | null> {
+    const result = await chrome.storage.local.get(key);
+    return result[key] ?? null;
+  }
+  
+  async set<T>(key: string, value: T): Promise<void> {
+    await chrome.storage.local.set({ [key]: value });
+  }
+}
+
+// 使用常量定义存储键
+export const STORAGE_KEYS = {
+  USER_DATA: 'userData',
+  CHECK_IN_HISTORY: 'checkInHistory',
+  ACHIEVEMENTS: 'achievements'
+} as const;
+```
+
+## 常用命令
+
+### 开发
 ```bash
-# Essential commands
-openspec list                  # List active changes
-openspec list --specs          # List specifications
-openspec show [item]           # Display change or spec
-openspec validate [item]       # Validate changes or specs
-openspec archive <change-id> [--yes|-y]   # Archive after deployment (add --yes for non-interactive runs)
+# 启动开发服务器
+pnpm dev
 
-# Project management
-openspec init [path]           # Initialize OpenSpec
-openspec update [path]         # Update instruction files
+# 构建生产版本
+pnpm build
 
-# Interactive mode
-openspec show                  # Prompts for selection
-openspec validate              # Bulk validation mode
+# 类型检查
+pnpm type-check
 
-# Debugging
-openspec show [change] --json --deltas-only
-openspec validate [change] --strict
+# 代码检查
+pnpm lint
+
+# 格式化代码
+pnpm format
+
+# 运行测试（计划）
+pnpm test
 ```
 
-### Command Flags
-
-- `--json` - Machine-readable output
-- `--type change|spec` - Disambiguate items
-- `--strict` - Comprehensive validation
-- `--no-interactive` - Disable prompts
-- `--skip-specs` - Archive without spec updates
-- `--yes`/`-y` - Skip confirmation prompts (non-interactive archive)
-
-## Directory Structure
-
-```
-openspec/
-├── project.md              # Project conventions
-├── specs/                  # Current truth - what IS built
-│   └── [capability]/       # Single focused capability
-│       ├── spec.md         # Requirements and scenarios
-│       └── design.md       # Technical patterns
-├── changes/                # Proposals - what SHOULD change
-│   ├── [change-name]/
-│   │   ├── proposal.md     # Why, what, impact
-│   │   ├── tasks.md        # Implementation checklist
-│   │   ├── design.md       # Technical decisions (optional; see criteria)
-│   │   └── specs/          # Delta changes
-│   │       └── [capability]/
-│   │           └── spec.md # ADDED/MODIFIED/REMOVED
-│   └── archive/            # Completed changes
-```
-
-## Creating Change Proposals
-
-### Decision Tree
-
-```
-New request?
-├─ Bug fix restoring spec behavior? → Fix directly
-├─ Typo/format/comment? → Fix directly
-├─ New feature/capability? → Create proposal
-├─ Breaking change? → Create proposal
-├─ Architecture change? → Create proposal
-└─ Unclear? → Create proposal (safer)
-```
-
-### Proposal Structure
-
-1. **Create directory:** `changes/[change-id]/` (kebab-case, verb-led, unique)
-
-2. **Write proposal.md:**
-
-```markdown
-# Change: [Brief description of change]
-
-## Why
-
-[1-2 sentences on problem/opportunity]
-
-## What Changes
-
-- [Bullet list of changes]
-- [Mark breaking changes with **BREAKING**]
-
-## Impact
-
-- Affected specs: [list capabilities]
-- Affected code: [key files/systems]
-```
-
-3. **Create spec deltas:** `specs/[capability]/spec.md`
-
-```markdown
-## ADDED Requirements
-
-### Requirement: New Feature
-
-The system SHALL provide...
-
-#### Scenario: Success case
-
-- **WHEN** user performs action
-- **THEN** expected result
-
-## MODIFIED Requirements
-
-### Requirement: Existing Feature
-
-[Complete modified requirement]
-
-## REMOVED Requirements
-
-### Requirement: Old Feature
-
-**Reason**: [Why removing]
-**Migration**: [How to handle]
-```
-
-If multiple capabilities are affected, create multiple delta files under `changes/[change-id]/specs/<capability>/spec.md`—one per capability.
-
-4. **Create tasks.md:**
-
-```markdown
-## 1. Implementation
-
-- [ ] 1.1 Create database schema
-- [ ] 1.2 Implement API endpoint
-- [ ] 1.3 Add frontend component
-- [ ] 1.4 Write tests
-```
-
-5. **Create design.md when needed:**
-   Create `design.md` if any of the following apply; otherwise omit it:
-
-- Cross-cutting change (multiple services/modules) or a new architectural pattern
-- New external dependency or significant data model changes
-- Security, performance, or migration complexity
-- Ambiguity that benefits from technical decisions before coding
-
-Minimal `design.md` skeleton:
-
-```markdown
-## Context
-
-[Background, constraints, stakeholders]
-
-## Goals / Non-Goals
-
-- Goals: [...]
-- Non-Goals: [...]
-
-## Decisions
-
-- Decision: [What and why]
-- Alternatives considered: [Options + rationale]
-
-## Risks / Trade-offs
-
-- [Risk] → Mitigation
-
-## Migration Plan
-
-[Steps, rollback]
-
-## Open Questions
-
-- [...]
-```
-
-## Spec File Format
-
-### Critical: Scenario Formatting
-
-**CORRECT** (use #### headers):
-
-```markdown
-#### Scenario: User login success
-
-- **WHEN** valid credentials provided
-- **THEN** return JWT token
-```
-
-**WRONG** (don't use bullets or bold):
-
-```markdown
-- **Scenario: User login** ❌
-  **Scenario**: User login ❌
-
-### Scenario: User login ❌
-```
-
-Every requirement MUST have at least one scenario.
-
-### Requirement Wording
-
-- Use SHALL/MUST for normative requirements (avoid should/may unless intentionally non-normative)
-
-### Delta Operations
-
-- `## ADDED Requirements` - New capabilities
-- `## MODIFIED Requirements` - Changed behavior
-- `## REMOVED Requirements` - Deprecated features
-- `## RENAMED Requirements` - Name changes
-
-Headers matched with `trim(header)` - whitespace ignored.
-
-#### When to use ADDED vs MODIFIED
-
-- ADDED: Introduces a new capability or sub-capability that can stand alone as a requirement. Prefer ADDED when the change is orthogonal (e.g., adding "Slash Command Configuration") rather than altering the semantics of an existing requirement.
-- MODIFIED: Changes the behavior, scope, or acceptance criteria of an existing requirement. Always paste the full, updated requirement content (header + all scenarios). The archiver will replace the entire requirement with what you provide here; partial deltas will drop previous details.
-- RENAMED: Use when only the name changes. If you also change behavior, use RENAMED (name) plus MODIFIED (content) referencing the new name.
-
-Common pitfall: Using MODIFIED to add a new concern without including the previous text. This causes loss of detail at archive time. If you aren’t explicitly changing the existing requirement, add a new requirement under ADDED instead.
-
-Authoring a MODIFIED requirement correctly:
-
-1. Locate the existing requirement in `openspec/specs/<capability>/spec.md`.
-2. Copy the entire requirement block (from `### Requirement: ...` through its scenarios).
-3. Paste it under `## MODIFIED Requirements` and edit to reflect the new behavior.
-4. Ensure the header text matches exactly (whitespace-insensitive) and keep at least one `#### Scenario:`.
-
-Example for RENAMED:
-
-```markdown
-## RENAMED Requirements
-
-- FROM: `### Requirement: Login`
-- TO: `### Requirement: User Authentication`
-```
-
-## Troubleshooting
-
-### Common Errors
-
-**"Change must have at least one delta"**
-
-- Check `changes/[name]/specs/` exists with .md files
-- Verify files have operation prefixes (## ADDED Requirements)
-
-**"Requirement must have at least one scenario"**
-
-- Check scenarios use `#### Scenario:` format (4 hashtags)
-- Don't use bullet points or bold for scenario headers
-
-**Silent scenario parsing failures**
-
-- Exact format required: `#### Scenario: Name`
-- Debug with: `openspec show [change] --json --deltas-only`
-
-### Validation Tips
-
+### Git 工作流
 ```bash
-# Always use strict mode for comprehensive checks
-openspec validate [change] --strict
+# 创建功能分支
+git checkout -b feature/task-1-1
 
-# Debug delta parsing
-openspec show [change] --json | jq '.deltas'
+# 提交代码
+git add .
+git commit -m "feat(phase-1): implement check-in service (task 1.1)"
 
-# Check specific requirement
-openspec show [spec] --json -r 1
+# 推送到远程
+git push origin feature/task-1-1
+
+# 合并到主分支
+git checkout main
+git merge feature/task-1-1
+
+# 创建版本标签
+git tag v0.2.0
+git push origin v0.2.0
 ```
 
-## Happy Path Script
+## Chrome Extension 注意事项
 
-```bash
-# 1) Explore current state
-openspec spec list --long
-openspec list
-# Optional full-text search:
-# rg -n "Requirement:|Scenario:" openspec/specs
-# rg -n "^#|Requirement:" openspec/changes
+### Manifest V3 限制
 
-# 2) Choose change id and scaffold
-CHANGE=add-two-factor-auth
-mkdir -p openspec/changes/$CHANGE/{specs/auth}
-printf "## Why\n...\n\n## What Changes\n- ...\n\n## Impact\n- ...\n" > openspec/changes/$CHANGE/proposal.md
-printf "## 1. Implementation\n- [ ] 1.1 ...\n" > openspec/changes/$CHANGE/tasks.md
+1. **Service Worker 限制**
+   - 不能使用 `window` 对象
+   - 不能使用 DOM API
+   - 生命周期有限，会自动休眠
 
-# 3) Add deltas (example)
-cat > openspec/changes/$CHANGE/specs/auth/spec.md << 'EOF'
-## ADDED Requirements
-### Requirement: Two-Factor Authentication
-Users MUST provide a second factor during login.
+2. **Content Security Policy**
+   - 不能使用 `eval()`
+   - 不能使用内联脚本
+   - 外部资源需要在 manifest 中声明
 
-#### Scenario: OTP required
-- **WHEN** valid credentials are provided
-- **THEN** an OTP challenge is required
-EOF
+3. **权限声明**
+   ```json
+   {
+     "permissions": ["storage", "notifications", "alarms"],
+     "host_permissions": ["<all_urls>"]
+   }
+   ```
 
-# 4) Validate
-openspec validate $CHANGE --strict
+### 最佳实践
+
+1. **数据存储**
+   ```typescript
+   // 使用 chrome.storage.local（无限制）
+   // 避免使用 chrome.storage.sync（有配额限制）
+   await chrome.storage.local.set({ key: value });
+   ```
+
+2. **定时任务**
+   ```typescript
+   // 使用 chrome.alarms 而不是 setInterval
+   chrome.alarms.create('checkStatus', { periodInMinutes: 60 });
+   ```
+
+3. **通知**
+   ```typescript
+   // 使用 chrome.notifications
+   chrome.notifications.create({
+     type: 'basic',
+     iconUrl: 'icons/icon-128.png',
+     title: '标题',
+     message: '内容'
+   });
+   ```
+
+## 调试技巧
+
+### 开发者工具
+
+1. **Popup 调试**
+   - 右键点击插件图标 → 检查弹出内容
+
+2. **Background 调试**
+   - chrome://extensions → 详细信息 → 检查视图：Service Worker
+
+3. **Content Script 调试**
+   - 在目标页面打开开发者工具
+
+### 日志规范
+
+```typescript
+// 使用统一的日志前缀
+const LOG_PREFIX = '[AliveChecker]';
+
+console.log(`${LOG_PREFIX} Check-in successful`);
+console.error(`${LOG_PREFIX} Error:`, error);
+console.warn(`${LOG_PREFIX} Warning:`, message);
 ```
 
-## Multi-Capability Example
+## 测试策略
 
-```
-openspec/changes/add-2fa-notify/
-├── proposal.md
-├── tasks.md
-└── specs/
-    ├── auth/
-    │   └── spec.md   # ADDED: Two-Factor Authentication
-    └── notifications/
-        └── spec.md   # ADDED: OTP email notification
-```
+### 单元测试（计划）
+- 测试核心业务逻辑
+- 测试工具函数
+- 使用 Vitest
 
-auth/spec.md
+### 集成测试（计划）
+- 测试 Chrome API 交互
+- 测试数据流
+- 使用 Playwright
 
-```markdown
-## ADDED Requirements
+### 手动测试
+- 每个功能完成后手动测试
+- 在不同场景下测试
+- 记录测试结果
 
-### Requirement: Two-Factor Authentication
+## 常见问题
 
-...
-```
+### Q: 如何处理异步操作？
+A: 使用 async/await，确保错误处理
 
-notifications/spec.md
+### Q: 如何在不同页面间共享状态？
+A: 使用 Chrome Storage API 或 Message Passing
 
-```markdown
-## ADDED Requirements
+### Q: 如何优化性能？
+A: 
+- 减少不必要的存储读写
+- 使用防抖和节流
+- 延迟加载非关键功能
 
-### Requirement: OTP Email Notification
+### Q: 如何处理数据迁移？
+A: 
+- 在存储中保存版本号
+- 检测版本变化时执行迁移
+- 保留旧数据作为备份
 
-...
-```
+## 资源链接
 
-## Best Practices
+- [Chrome Extension 官方文档](https://developer.chrome.com/docs/extensions/)
+- [Manifest V3 迁移指南](https://developer.chrome.com/docs/extensions/mv3/intro/)
+- [Chrome Storage API](https://developer.chrome.com/docs/extensions/reference/storage/)
+- [TypeScript 手册](https://www.typescriptlang.org/docs/)
+- [React 文档](https://react.dev/)
 
-### Simplicity First
+## 更新日志
 
-- Default to <100 lines of new code
-- Single-file implementations until proven insufficient
-- Avoid frameworks without clear justification
-- Choose boring, proven patterns
-
-### Complexity Triggers
-
-Only add complexity with:
-
-- Performance data showing current solution too slow
-- Concrete scale requirements (>1000 users, >100MB data)
-- Multiple proven use cases requiring abstraction
-
-### Clear References
-
-- Use `file.ts:42` format for code locations
-- Reference specs as `specs/auth/spec.md`
-- Link related changes and PRs
-
-### Capability Naming
-
-- Use verb-noun: `user-auth`, `payment-capture`
-- Single purpose per capability
-- 10-minute understandability rule
-- Split if description needs "AND"
-
-### Change ID Naming
-
-- Use kebab-case, short and descriptive: `add-two-factor-auth`
-- Prefer verb-led prefixes: `add-`, `update-`, `remove-`, `refactor-`
-- Ensure uniqueness; if taken, append `-2`, `-3`, etc.
-
-## Tool Selection Guide
-
-| Task                  | Tool | Why                      |
-| --------------------- | ---- | ------------------------ |
-| Find files by pattern | Glob | Fast pattern matching    |
-| Search code content   | Grep | Optimized regex search   |
-| Read specific files   | Read | Direct file access       |
-| Explore unknown scope | Task | Multi-step investigation |
-
-## Error Recovery
-
-### Change Conflicts
-
-1. Run `openspec list` to see active changes
-2. Check for overlapping specs
-3. Coordinate with change owners
-4. Consider combining proposals
-
-### Validation Failures
-
-1. Run with `--strict` flag
-2. Check JSON output for details
-3. Verify spec file format
-4. Ensure scenarios properly formatted
-
-### Missing Context
-
-1. Read project.md first
-2. Check related specs
-3. Review recent archives
-4. Ask for clarification
-
-## Quick Reference
-
-### Stage Indicators
-
-- `changes/` - Proposed, not yet built
-- `specs/` - Built and deployed
-- `archive/` - Completed changes
-
-### File Purposes
-
-- `proposal.md` - Why and what
-- `tasks.md` - Implementation steps
-- `design.md` - Technical decisions
-- `spec.md` - Requirements and behavior
-
-### CLI Essentials
-
-```bash
-openspec list              # What's in progress?
-openspec show [item]       # View details
-openspec validate --strict # Is it correct?
-openspec archive <change-id> [--yes|-y]  # Mark complete (add --yes for automation)
-```
-
-Remember: Specs are truth. Changes are proposals. Keep them in sync.
+- 2026-01-15：创建 AGENTS.md
+- 2026-01-15：添加开发规范和最佳实践
