@@ -7,7 +7,7 @@
     "message": "通过敲木鱼保持活跃，累积功德值",
     "description": "Extension description"
   },
-  
+
   "common_ok": {
     "message": "确定",
     "description": "OK button"
@@ -48,7 +48,7 @@
     "message": "成功",
     "description": "Success text"
   },
-  
+
   "loading": {
     "message": "加载中...",
     "description": "Loading state"
@@ -97,7 +97,7 @@
     "message": "帮助",
     "description": "Help tab"
   },
-  
+
   "help": {
     "message": "帮助",
     "description": "Help button"
@@ -190,7 +190,7 @@
     "message": "登录账号可以将数据同步到云端，在多设备间同步",
     "description": "Tip 3"
   },
-  
+
   "deathDetectionSettings": {
     "message": "死亡检测设置",
     "description": "Death detection settings title"
@@ -337,7 +337,7 @@
     "message": "24 小时",
     "description": "24 hours"
   },
-  
+
   "emergencyContacts": {
     "message": "紧急联系人",
     "description": "Emergency contacts title"
@@ -468,7 +468,7 @@
     "message": "保存中...",
     "description": "Saving text"
   },
-  
+
   "emailPreview": {
     "message": "邮件预览",
     "description": "Email preview title"
@@ -537,7 +537,7 @@
     "message": "用户",
     "description": "User label"
   },
-  
+
   "emailSubject": {
     "message": "⚠️ 重要通知：关于 $USER$ 的活跃状态",
     "description": "Email subject",
@@ -548,7 +548,7 @@
       }
     }
   },
-  
+
   "notificationDeathWarningTitle": {
     "message": "⚠️ 生命值归零",
     "description": "Death warning title"
@@ -615,7 +615,7 @@
       }
     }
   },
-  
+
   "popup_today": {
     "message": "今日",
     "description": "Today label"
@@ -644,7 +644,7 @@
     "message": "数据加载失败",
     "description": "Data load error"
   },
-  
+
   "options_stats": {
     "message": "统计",
     "description": "Stats tab"
@@ -657,7 +657,7 @@
     "message": "设置",
     "description": "Settings tab"
   },
-  
+
   "contacts_title": {
     "message": "紧急联系人",
     "description": "Contacts page title"
@@ -678,7 +678,7 @@
     "message": "点击上方按钮添加您的第一个联系人",
     "description": "Empty state hint"
   },
-  
+
   "contactForm_title": {
     "message": "添加联系人",
     "description": "Add contact form title"
@@ -751,7 +751,7 @@
     "message": "操作失败",
     "description": "Operation failed error"
   },
-  
+
   "contactCard_confirmDelete": {
     "message": "确认删除",
     "description": "Confirm delete title"
@@ -766,7 +766,7 @@
       }
     }
   },
-  
+
   "relationship_family": {
     "message": "家人",
     "description": "Family relationship"
@@ -782,8 +782,7 @@
   "relationship_other": {
     "message": "其他",
     "description": "Other relationship"
-  }
-,
+  },
   "settings_title": {
     "message": "死亡检测设置",
     "description": "Settings page title"
@@ -929,8 +928,7 @@
   "settings_interval24hours": {
     "message": "24 小时",
     "description": "24 hours"
-  }
-,
+  },
   "email_subject": {
     "message": "⚠️ 重要通知：关于 $USER$ 的活跃状态",
     "description": "Email subject",
@@ -1005,7 +1003,7 @@
     "message": "未知错误",
     "description": "Unknown error"
   },
-  
+
   "notification_deathWarningTitle": {
     "message": "⚠️ 生命值归零",
     "description": "Death warning notification title"
@@ -1072,12 +1070,12 @@
       }
     }
   },
-  
+
   "user": {
     "message": "用户",
     "description": "User label"
   },
-  
+
   "stats_totalMerit": {
     "message": "总功德值",
     "description": "Total merit label"
@@ -1178,7 +1176,7 @@
       }
     }
   },
-  
+
   "hp_alive": {
     "message": "存活中",
     "description": "Alive status"
@@ -1201,7 +1199,7 @@
       }
     }
   },
-  
+
   "dataLoadError": {
     "message": "数据加载失败",
     "description": "Data load error message"
@@ -1210,7 +1208,7 @@
     "message": "加载失败",
     "description": "Load failed error"
   },
-  
+
   "language": {
     "message": "语言",
     "description": "Language setting label"
@@ -1223,7 +1221,7 @@
     "message": "简体中文",
     "description": "Simplified Chinese language option"
   },
-  
+
   "reason_detectionDisabled": {
     "message": "检测未启用",
     "description": "Detection disabled reason"
@@ -1256,7 +1254,7 @@
       }
     }
   },
-  
+
   "loginWithGoogle": {
     "message": "使用 Google 登录",
     "description": "Login with Google button"
@@ -1289,7 +1287,7 @@
     "message": "未同步",
     "description": "Not synced status"
   },
-  
+
   "sync_title": {
     "message": "数据同步",
     "description": "Data sync title"
@@ -1380,7 +1378,7 @@
     "message": "💡 网络恢复时会自动同步",
     "description": "Sync info 3"
   },
-  
+
   "account_userInfo": {
     "message": "用户信息",
     "description": "User info title"
@@ -1483,7 +1481,32 @@
     "message": "登录后可以备份数据到云端，并在多设备间同步",
     "description": "Sign in hint"
   },
-  
+
+  "account_title": {
+    "message": "账号设置",
+    "description": "Account settings title"
+  },
+  "account_comingSoon": {
+    "message": "云端同步功能即将推出",
+    "description": "Coming soon title"
+  },
+  "account_comingSoonDesc": {
+    "message": "我们正在开发云端数据同步功能，让您可以在多设备间同步数据。敬请期待！",
+    "description": "Coming soon description"
+  },
+  "account_feature1": {
+    "message": "云端数据备份",
+    "description": "Feature 1: Cloud backup"
+  },
+  "account_feature2": {
+    "message": "多设备同步",
+    "description": "Feature 2: Multi-device sync"
+  },
+  "account_feature3": {
+    "message": "Google 账号登录",
+    "description": "Feature 3: Google sign in"
+  },
+
   "loginPrompt_title": {
     "message": "需要登录才能发送邮件通知",
     "description": "Login prompt title"
@@ -1512,7 +1535,7 @@
     "message": "点击「稍后再说」可以继续添加联系人，但无法发送邮件通知",
     "description": "Login prompt note"
   },
-  
+
   "gameplay_title": {
     "message": "玩法说明",
     "description": "Gameplay guide title"

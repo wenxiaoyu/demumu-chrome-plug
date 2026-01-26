@@ -1441,6 +1441,30 @@
     "message": "Sign in to backup your data to the cloud and sync across devices",
     "description": "Sign in hint"
   },
+  "account_title": {
+    "message": "Account Settings",
+    "description": "Account settings title"
+  },
+  "account_comingSoon": {
+    "message": "Cloud Sync Coming Soon",
+    "description": "Coming soon title"
+  },
+  "account_comingSoonDesc": {
+    "message": "We're developing cloud data sync feature that allows you to sync data across multiple devices. Stay tuned!",
+    "description": "Coming soon description"
+  },
+  "account_feature1": {
+    "message": "Cloud Data Backup",
+    "description": "Feature 1: Cloud backup"
+  },
+  "account_feature2": {
+    "message": "Multi-Device Sync",
+    "description": "Feature 2: Multi-device sync"
+  },
+  "account_feature3": {
+    "message": "Google Account Sign In",
+    "description": "Feature 3: Google sign in"
+  },
   "loginPrompt_title": {
     "message": "Sign in required to send email notifications",
     "description": "Login prompt title"
