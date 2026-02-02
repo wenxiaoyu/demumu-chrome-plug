@@ -1,6 +1,6 @@
 {
   "name": "alive-checker",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "还活着吗 - 用游戏化的方式追踪你的存活状态",
   "type": "module",
   "scripts": {
@@ -38,12 +38,12 @@
     "husky": "^9.1.7",
     "lint-staged": "^16.2.7",
     "prettier": "^3.8.0",
+    "sharp": "^0.34.5",
     "typescript": "^5.9.3",
     "vite": "^7.3.1",
     "vite-plugin-web-extension": "^4.5.0"
   },
   "dependencies": {
-    "firebase": "^12.8.0",
     "react": "^19.2.3",
     "react-dom": "^19.2.3"
   },
