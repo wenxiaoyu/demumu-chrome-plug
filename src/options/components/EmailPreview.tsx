@@ -46,13 +46,13 @@ export const EmailPreview: React.FC<EmailPreviewProps> = ({ variables, onSendTes
       const { authService } = await import('../../shared/services/auth-service')
       const currentUser = authService.getCurrentUser()
 
-      if (currentUser) {
+      if (currentUser && currentUser.idToken) {
         setIsSignedIn(true)
 
         // 尝试从 Firestore 加载自定义显示名称
         try {
           const { firestoreService } = await import('../../shared/services/firestore-service')
-          const userData = await firestoreService.getUserData(currentUser.uid)
+          const userData = await firestoreService.getUserData(currentUser.uid, currentUser.idToken)
 
           if (userData?.displayName) {
             console.log('[EmailPreview] Using custom display name:', userData.displayName)

@@ -16,6 +16,10 @@ export interface User {
   photoURL: string | null;
   /** 邮箱是否已验证 */
   emailVerified: boolean;
+  /** ID Token (用于 API 认证) */
+  idToken?: string;
+  /** Refresh Token (用于刷新 ID Token) */
+  refreshToken?: string;
 }
 
 /**

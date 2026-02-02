@@ -50,7 +50,7 @@ export class SyncService {
   async syncUserData(): Promise<SyncResult> {
     try {
       const user = authService.getCurrentUser()
-      if (!user) {
+      if (!user || !user.idToken) {
         return { success: false, error: 'Not signed in' }
       }
 
@@ -63,15 +63,15 @@ export class SyncService {
       }
 
       // 获取云端数据
-      const cloudData = await firestoreService.getUserData(user.uid)
+      const cloudData = await firestoreService.getUserData(user.uid, user.idToken)
 
       if (!cloudData) {
         // 云端无数据，上传本地数据
-        await firestoreService.setUserData(user.uid, localData)
+        await firestoreService.setUserData(user.uid, localData, user.idToken)
         console.log('[SyncService] User data uploaded to cloud')
       } else if (localData.updatedAt > cloudData.updatedAt) {
         // 本地数据更新，上传到云端
-        await firestoreService.setUserData(user.uid, localData)
+        await firestoreService.setUserData(user.uid, localData, user.idToken)
         console.log('[SyncService] User data uploaded (local newer)')
       } else if (cloudData.updatedAt > localData.updatedAt) {
         // 云端数据更新，下载到本地
@@ -106,7 +106,7 @@ export class SyncService {
   async syncEmergencyContacts(): Promise<SyncResult> {
     try {
       const user = authService.getCurrentUser()
-      if (!user) {
+      if (!user || !user.idToken) {
         return { success: false, error: 'Not signed in' }
       }
 
@@ -124,17 +124,17 @@ export class SyncService {
       const localUpdatedAt = (await storage.get<number>('contactsUpdatedAt')) || 0
 
       // 获取云端联系人
-      const cloudData = await firestoreService.getEmergencyContacts(user.uid)
+      const cloudData = await firestoreService.getEmergencyContacts(user.uid, user.idToken)
 
       if (!cloudData) {
         // 云端无数据，上传本地数据
         if (localContacts.length > 0) {
-          await firestoreService.setEmergencyContacts(user.uid, localContacts, localVersion)
+          await firestoreService.setEmergencyContacts(user.uid, localContacts, localVersion, user.idToken)
           console.log('[SyncService] Emergency contacts uploaded to cloud')
         }
       } else if (localUpdatedAt > cloudData.updatedAt) {
         // 本地数据更新，上传到云端
-        await firestoreService.setEmergencyContacts(user.uid, localContacts, localVersion)
+        await firestoreService.setEmergencyContacts(user.uid, localContacts, localVersion, user.idToken)
         console.log('[SyncService] Emergency contacts uploaded (local newer)')
       } else if (cloudData.updatedAt > localUpdatedAt) {
         // 云端数据更新，下载到本地
@@ -163,7 +163,7 @@ export class SyncService {
   async syncKnockRecords(): Promise<SyncResult> {
     try {
       const user = authService.getCurrentUser()
-      if (!user) {
+      if (!user || !user.idToken) {
         return { success: false, error: 'Not signed in' }
       }
 
@@ -178,7 +178,7 @@ export class SyncService {
       }
 
       // 批量上传记录
-      await firestoreService.batchAddKnockRecords(user.uid, unsyncedRecords)
+      await firestoreService.batchAddKnockRecords(user.uid, unsyncedRecords, user.idToken)
 
       // 清空未同步记录
       await storage.set('unsyncedKnockRecords', [])
@@ -197,7 +197,7 @@ export class SyncService {
   async syncDailyStats(): Promise<SyncResult> {
     try {
       const user = authService.getCurrentUser()
-      if (!user) {
+      if (!user || !user.idToken) {
         return { success: false, error: 'Not signed in' }
       }
 
@@ -212,7 +212,7 @@ export class SyncService {
       }
 
       // 批量上传统计
-      await firestoreService.batchSetDailyStats(user.uid, unsyncedStats)
+      await firestoreService.batchSetDailyStats(user.uid, unsyncedStats, user.idToken)
 
       // 清空未同步统计
       await storage.set('unsyncedDailyStats', [])
@@ -231,7 +231,7 @@ export class SyncService {
   async syncUserSettings(): Promise<SyncResult> {
     try {
       const user = authService.getCurrentUser()
-      if (!user) {
+      if (!user || !user.idToken) {
         return { success: false, error: 'Not signed in' }
       }
 
@@ -269,18 +269,18 @@ export class SyncService {
       }
 
       // 获取云端配置
-      const cloudSettings = await firestoreService.getUserSettings(user.uid)
+      const cloudSettings = await firestoreService.getUserSettings(user.uid, user.idToken)
 
       if (!cloudSettings) {
         // 云端无数据，上传本地配置
-        await firestoreService.setUserSettings(user.uid, localSettings)
+        await firestoreService.setUserSettings(user.uid, localSettings, user.idToken)
         await storage.set('settingsUpdatedAt', Date.now())
         console.log(
           '[SyncService] User settings uploaded to cloud (including multi-language email template)'
         )
       } else if (localUpdatedAt > cloudSettings.updatedAt) {
         // 本地配置更新，上传到云端
-        await firestoreService.setUserSettings(user.uid, localSettings)
+        await firestoreService.setUserSettings(user.uid, localSettings, user.idToken)
         console.log('[SyncService] User settings uploaded (local newer)')
       } else if (cloudSettings.updatedAt > localUpdatedAt) {
         // 云端配置更新，下载到本地

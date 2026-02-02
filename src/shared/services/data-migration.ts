@@ -43,7 +43,7 @@ export async function isMigrated(): Promise<boolean> {
 /**
  * 迁移本地数据到云端
  */
-export async function migrateLocalDataToCloud(uid: string): Promise<MigrationResult> {
+export async function migrateLocalDataToCloud(uid: string, idToken: string): Promise<MigrationResult> {
   const result: MigrationResult = {
     success: false,
     migratedItems: {
@@ -61,7 +61,7 @@ export async function migrateLocalDataToCloud(uid: string): Promise<MigrationRes
     // 1. 迁移用户数据
     const userData = await storage.get<UserData>(STORAGE_KEYS.USER_DATA)
     if (userData) {
-      await firestoreService.setUserData(uid, userData)
+      await firestoreService.setUserData(uid, userData, idToken)
       result.migratedItems.userData = true
       console.log('[DataMigration] User data migrated')
     }
@@ -116,7 +116,7 @@ export async function migrateLocalDataToCloud(uid: string): Promise<MigrationRes
       updatedAt: Date.now(),
     }
 
-    await firestoreService.setUserSettings(uid, userSettings)
+    await firestoreService.setUserSettings(uid, userSettings, idToken)
     result.migratedItems.userSettings = true
     console.log('[DataMigration] User settings migrated (including multi-language email template)')
 
@@ -128,7 +128,8 @@ export async function migrateLocalDataToCloud(uid: string): Promise<MigrationRes
       await firestoreService.setEmergencyContacts(
         uid,
         contactsData.contacts,
-        contactsData.version || 1
+        contactsData.version || 1,
+        idToken
       )
       result.migratedItems.contacts = true
       console.log('[DataMigration] Emergency contacts migrated')
@@ -139,7 +140,7 @@ export async function migrateLocalDataToCloud(uid: string): Promise<MigrationRes
     if (knockRecords.length > 0) {
       // 只迁移最近 100 条记录
       const recentRecords = knockRecords.slice(-100)
-      await firestoreService.batchAddKnockRecords(uid, recentRecords)
+      await firestoreService.batchAddKnockRecords(uid, recentRecords, idToken)
       result.migratedItems.knockRecords = recentRecords.length
       console.log(`[DataMigration] ${recentRecords.length} knock records migrated`)
     }
@@ -149,7 +150,7 @@ export async function migrateLocalDataToCloud(uid: string): Promise<MigrationRes
     if (dailyStats.length > 0) {
       // 只迁移最近 30 天的统计
       const recentStats = dailyStats.slice(-30)
-      await firestoreService.batchSetDailyStats(uid, recentStats)
+      await firestoreService.batchSetDailyStats(uid, recentStats, idToken)
       result.migratedItems.dailyStats = recentStats.length
       console.log(`[DataMigration] ${recentStats.length} daily stats migrated`)
     }

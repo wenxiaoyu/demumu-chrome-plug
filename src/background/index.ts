@@ -29,7 +29,13 @@ initLanguage()
   })
 
 // 初始化认证服务
-console.log('[Background] Auth service initialized')
+authService.initialize()
+  .then(() => {
+    console.log('[Background] Auth service initialized')
+  })
+  .catch((error) => {
+    console.error('[Background] Failed to initialize auth service:', error)
+  })
 
 // 初始化同步调度器
 syncScheduler

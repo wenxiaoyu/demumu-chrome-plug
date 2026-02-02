@@ -108,15 +108,15 @@ export class EmailService {
 
     // 获取当前用户
     const currentUser = authService.getCurrentUser()
-    if (!currentUser) {
-      throw new Error('Failed to get current user')
+    if (!currentUser || !currentUser.idToken) {
+      throw new Error('Failed to get current user or idToken')
     }
 
     // 获取自定义显示名称
     let userName = variables.userName
     try {
       const { firestoreService } = await import('../../shared/services/firestore-service')
-      const userData = await firestoreService.getUserData(currentUser.uid)
+      const userData = await firestoreService.getUserData(currentUser.uid, currentUser.idToken)
       if (userData?.displayName) {
         userName = userData.displayName
       } else if (currentUser.displayName) {

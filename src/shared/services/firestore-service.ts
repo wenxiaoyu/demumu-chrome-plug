@@ -1,21 +1,10 @@
 /**
- * Firestore 数据服务
- * 负责与 Firebase Firestore 交互，实现数据的 CRUD 操作
+ * Firestore 数据服务 - REST API 版本
+ * 使用 Firebase REST API 替代 SDK，符合 Manifest V3 规范
  */
 
-import {
-  getFirestore,
-  doc,
-  getDoc,
-  setDoc,
-  collection,
-  query,
-  orderBy,
-  limit,
-  getDocs,
-  addDoc,
-  type Firestore,
-} from 'firebase/firestore'
+import { FirestoreRest } from './firestore-rest'
+import { firebaseConfig } from '../config/firebase'
 import type { UserData, KnockRecord, DailyStats, EmergencyContact, UserSettings } from '../types'
 
 /**
@@ -23,7 +12,7 @@ import type { UserData, KnockRecord, DailyStats, EmergencyContact, UserSettings 
  */
 interface FirestoreUserData {
   uid: string
-  displayName?: string // 用户自定义显示名称
+  displayName?: string
   totalKnocks: number
   todayKnocks: number
   lastKnockTime: number
@@ -76,219 +65,279 @@ interface FirestoreUserSettings {
  * Firestore 服务类
  */
 export class FirestoreService {
-  private db: Firestore
+  private firestoreRest: FirestoreRest
 
   constructor() {
-    this.db = getFirestore()
+    this.firestoreRest = new FirestoreRest(firebaseConfig.projectId)
   }
 
   /**
    * 获取用户数据
    */
-  async getUserData(uid: string): Promise<FirestoreUserData | null> {
+  async getUserData(uid: string, idToken: string): Promise<FirestoreUserData | null> {
     try {
-      const docRef = doc(this.db, 'userData', uid)
-      const docSnap = await getDoc(docRef)
-
-      if (docSnap.exists()) {
-        return docSnap.data() as FirestoreUserData
+      const data = await this.firestoreRest.getDocument(`userData/${uid}`, idToken)
+      return data as FirestoreUserData
+    } catch (error: any) {
+      if (error.message?.includes('404') || error.message?.includes('NOT_FOUND')) {
+        return null
       }
-      return null
-    } catch (error) {
       console.error('[FirestoreService] Get user data failed:', error)
       throw error
     }
   }
 
   /**
-   * 设置用户数据
+   * 保存用户数据
    */
-  async setUserData(
-    uid: string,
-    data: Partial<UserData> & { displayName?: string }
-  ): Promise<void> {
+  async saveUserData(uid: string, data: Partial<FirestoreUserData>, idToken: string): Promise<void> {
     try {
-      const docRef = doc(this.db, 'userData', uid)
-      const firestoreData: Partial<FirestoreUserData> = {
+      const userData: FirestoreUserData = {
         uid,
+        totalKnocks: data.totalKnocks ?? 0,
+        todayKnocks: data.todayKnocks ?? 0,
+        lastKnockTime: data.lastKnockTime ?? Date.now(),
+        merit: data.merit ?? 0,
+        hp: data.hp ?? 100,
+        consecutiveDays: data.consecutiveDays ?? 0,
+        status: data.status ?? 'alive',
+        updatedAt: Date.now(),
+        ...(data.displayName && { displayName: data.displayName }),
+      }
+
+      await this.firestoreRest.setDocument(`userData/${uid}`, userData, idToken)
+      console.log('[FirestoreService] User data saved')
+    } catch (error) {
+      console.error('[FirestoreService] Save user data failed:', error)
+      throw error
+    }
+  }
+
+  /**
+   * 获取联系人数据
+   */
+  async getContacts(uid: string, idToken: string): Promise<EmergencyContact[]> {
+    try {
+      const data = await this.firestoreRest.getDocument(`contacts/${uid}`, idToken)
+      if (data && data.contacts) {
+        return data.contacts as EmergencyContact[]
+      }
+      return []
+    } catch (error: any) {
+      if (error.message?.includes('404') || error.message?.includes('NOT_FOUND')) {
+        return []
+      }
+      console.error('[FirestoreService] Get contacts failed:', error)
+      throw error
+    }
+  }
+
+  /**
+   * 保存联系人数据
+   */
+  async saveContacts(uid: string, contacts: EmergencyContact[], idToken: string): Promise<void> {
+    try {
+      const contactsData: FirestoreContactsData = {
+        uid,
+        contacts,
+        version: 1,
         updatedAt: Date.now(),
       }
 
-      // 只更新提供的字段
-      if (data.displayName !== undefined) firestoreData.displayName = data.displayName
-      if (data.totalKnocks !== undefined) firestoreData.totalKnocks = data.totalKnocks
-      if (data.todayKnocks !== undefined) firestoreData.todayKnocks = data.todayKnocks
-      if (data.lastKnockTime !== undefined) firestoreData.lastKnockTime = data.lastKnockTime
-      if (data.merit !== undefined) firestoreData.merit = data.merit
-      if (data.hp !== undefined) firestoreData.hp = data.hp
-      if (data.consecutiveDays !== undefined) firestoreData.consecutiveDays = data.consecutiveDays
-      if (data.status !== undefined) firestoreData.status = data.status
-
-      await setDoc(docRef, firestoreData, { merge: true })
-      console.log('[FirestoreService] User data saved')
+      await this.firestoreRest.setDocument(`contacts/${uid}`, contactsData, idToken)
+      console.log('[FirestoreService] Contacts saved')
     } catch (error) {
-      console.error('[FirestoreService] Set user data failed:', error)
+      console.error('[FirestoreService] Save contacts failed:', error)
       throw error
     }
   }
 
   /**
-   * 更新用户显示名称
+   * 获取用户设置
    */
-  async updateDisplayName(uid: string, displayName: string): Promise<void> {
+  async getUserSettings(uid: string, idToken: string): Promise<UserSettings | null> {
     try {
-      const docRef = doc(this.db, 'userData', uid)
-      await setDoc(
-        docRef,
-        {
-          uid,
-          displayName,
-          updatedAt: Date.now(),
-        },
-        { merge: true }
-      )
-      console.log('[FirestoreService] Display name updated')
-    } catch (error) {
-      console.error('[FirestoreService] Update display name failed:', error)
-      throw error
-    }
-  }
-
-  /**
-   * 获取紧急联系人
-   */
-  async getEmergencyContacts(uid: string): Promise<FirestoreContactsData | null> {
-    try {
-      const docRef = doc(this.db, 'emergencyContacts', uid)
-      const docSnap = await getDoc(docRef)
-
-      if (docSnap.exists()) {
-        return docSnap.data() as FirestoreContactsData
+      const data = await this.firestoreRest.getDocument(`userSettings/${uid}`, idToken)
+      if (data) {
+        return {
+          language: data.language,
+          deathDetectionConfig: data.deathDetectionConfig,
+          emailTemplate: data.emailTemplate,
+        } as UserSettings
       }
       return null
+    } catch (error: any) {
+      if (error.message?.includes('404') || error.message?.includes('NOT_FOUND')) {
+        return null
+      }
+      console.error('[FirestoreService] Get user settings failed:', error)
+      throw error
+    }
+  }
+
+  /**
+   * 保存用户设置
+   */
+  async saveUserSettings(uid: string, settings: UserSettings, idToken: string): Promise<void> {
+    try {
+      const settingsData: FirestoreUserSettings = {
+        uid,
+        language: settings.language,
+        deathDetectionConfig: settings.deathDetectionConfig,
+        emailTemplate: settings.emailTemplate,
+        version: 1,
+        updatedAt: Date.now(),
+      }
+
+      await this.firestoreRest.setDocument(`userSettings/${uid}`, settingsData, idToken)
+      console.log('[FirestoreService] User settings saved')
     } catch (error) {
+      console.error('[FirestoreService] Save user settings failed:', error)
+      throw error
+    }
+  }
+
+  /**
+   * 保存敲击记录
+   */
+  async saveKnockRecord(uid: string, record: KnockRecord, idToken: string): Promise<void> {
+    try {
+      const recordPath = `userData/${uid}/knockRecords/${record.id}`
+      await this.firestoreRest.setDocument(recordPath, record, idToken)
+      console.log('[FirestoreService] Knock record saved')
+    } catch (error) {
+      console.error('[FirestoreService] Save knock record failed:', error)
+      throw error
+    }
+  }
+
+  /**
+   * 获取敲击记录
+   */
+  async getKnockRecords(
+    uid: string,
+    idToken: string,
+    limitCount: number = 100
+  ): Promise<KnockRecord[]> {
+    try {
+      const records = await this.firestoreRest.queryCollection(
+        `userData/${uid}/knockRecords`,
+        idToken,
+        {
+          orderBy: 'timestamp',
+          limit: limitCount,
+        }
+      )
+      return records as KnockRecord[]
+    } catch (error) {
+      console.error('[FirestoreService] Get knock records failed:', error)
+      return []
+    }
+  }
+
+  /**
+   * 保存每日统计
+   */
+  async saveDailyStats(uid: string, stats: DailyStats, idToken: string): Promise<void> {
+    try {
+      const statsPath = `userData/${uid}/dailyStats/${stats.date}`
+      await this.firestoreRest.setDocument(statsPath, stats, idToken)
+      console.log('[FirestoreService] Daily stats saved')
+    } catch (error) {
+      console.error('[FirestoreService] Save daily stats failed:', error)
+      throw error
+    }
+  }
+
+  /**
+   * 获取每日统计
+   */
+  async getDailyStats(
+    uid: string,
+    idToken: string,
+    limitCount: number = 365
+  ): Promise<DailyStats[]> {
+    try {
+      const stats = await this.firestoreRest.queryCollection(
+        `userData/${uid}/dailyStats`,
+        idToken,
+        {
+          orderBy: 'date',
+          limit: limitCount,
+        }
+      )
+      return stats as DailyStats[]
+    } catch (error) {
+      console.error('[FirestoreService] Get daily stats failed:', error)
+      return []
+    }
+  }
+
+  /**
+   * 设置用户数据（别名方法，用于兼容）
+   */
+  async setUserData(uid: string, data: UserData, idToken: string): Promise<void> {
+    return this.saveUserData(uid, data, idToken)
+  }
+
+  /**
+   * 获取紧急联系人（别名方法，用于兼容）
+   */
+  async getEmergencyContacts(uid: string, idToken: string): Promise<FirestoreContactsData | null> {
+    try {
+      const data = await this.firestoreRest.getDocument(`contacts/${uid}`, idToken)
+      return data as FirestoreContactsData
+    } catch (error: any) {
+      if (error.message?.includes('404') || error.message?.includes('NOT_FOUND')) {
+        return null
+      }
       console.error('[FirestoreService] Get emergency contacts failed:', error)
       throw error
     }
   }
 
   /**
-   * 设置紧急联系人
+   * 设置紧急联系人（别名方法，用于兼容）
    */
   async setEmergencyContacts(
     uid: string,
     contacts: EmergencyContact[],
-    version: number
+    version: number,
+    idToken: string
   ): Promise<void> {
     try {
-      const docRef = doc(this.db, 'emergencyContacts', uid)
-      const data: FirestoreContactsData = {
+      const contactsData: FirestoreContactsData = {
         uid,
         contacts,
         version,
         updatedAt: Date.now(),
       }
-
-      await setDoc(docRef, data)
+      await this.firestoreRest.setDocument(`contacts/${uid}`, contactsData, idToken)
       console.log('[FirestoreService] Emergency contacts saved')
     } catch (error) {
-      console.error('[FirestoreService] Set emergency contacts failed:', error)
+      console.error('[FirestoreService] Save emergency contacts failed:', error)
       throw error
     }
   }
 
   /**
-   * 获取敲击记录（最近 N 条）
+   * 设置用户设置（别名方法，用于兼容）
    */
-  async getKnockRecords(uid: string, limitCount: number = 100): Promise<KnockRecord[]> {
-    try {
-      const recordsRef = collection(this.db, 'knockRecords', uid, 'records')
-      const q = query(recordsRef, orderBy('timestamp', 'desc'), limit(limitCount))
-      const querySnapshot = await getDocs(q)
-
-      const records: KnockRecord[] = []
-      querySnapshot.forEach((doc) => {
-        records.push(doc.data() as KnockRecord)
-      })
-
-      return records
-    } catch (error) {
-      console.error('[FirestoreService] Get knock records failed:', error)
-      throw error
-    }
-  }
-
-  /**
-   * 添加敲击记录
-   */
-  async addKnockRecord(uid: string, record: KnockRecord): Promise<void> {
-    try {
-      const recordsRef = collection(this.db, 'knockRecords', uid, 'records')
-      await addDoc(recordsRef, record)
-      console.log('[FirestoreService] Knock record added')
-    } catch (error) {
-      console.error('[FirestoreService] Add knock record failed:', error)
-      throw error
-    }
-  }
-
-  /**
-   * 获取每日统计（最近 N 天）
-   */
-  async getDailyStats(uid: string, limitCount: number = 30): Promise<DailyStats[]> {
-    try {
-      const statsRef = collection(this.db, 'dailyStats', uid, 'stats')
-      const q = query(statsRef, orderBy('date', 'desc'), limit(limitCount))
-      const querySnapshot = await getDocs(q)
-
-      const stats: DailyStats[] = []
-      querySnapshot.forEach((doc) => {
-        stats.push(doc.data() as DailyStats)
-      })
-
-      return stats
-    } catch (error) {
-      console.error('[FirestoreService] Get daily stats failed:', error)
-      throw error
-    }
-  }
-
-  /**
-   * 设置每日统计
-   */
-  async setDailyStats(uid: string, date: string, stats: DailyStats): Promise<void> {
-    try {
-      const docRef = doc(this.db, 'dailyStats', uid, 'stats', date)
-      await setDoc(docRef, stats)
-      console.log('[FirestoreService] Daily stats saved')
-    } catch (error) {
-      console.error('[FirestoreService] Set daily stats failed:', error)
-      throw error
-    }
-  }
-
-  /**
-   * 批量设置每日统计
-   */
-  async batchSetDailyStats(uid: string, statsList: DailyStats[]): Promise<void> {
-    try {
-      const promises = statsList.map((stats) => this.setDailyStats(uid, stats.date, stats))
-      await Promise.all(promises)
-      console.log('[FirestoreService] Batch daily stats saved')
-    } catch (error) {
-      console.error('[FirestoreService] Batch set daily stats failed:', error)
-      throw error
-    }
+  async setUserSettings(uid: string, settings: UserSettings, idToken: string): Promise<void> {
+    return this.saveUserSettings(uid, settings, idToken)
   }
 
   /**
    * 批量添加敲击记录
    */
-  async batchAddKnockRecords(uid: string, records: KnockRecord[]): Promise<void> {
+  async batchAddKnockRecords(uid: string, records: KnockRecord[], idToken: string): Promise<void> {
     try {
-      const promises = records.map((record) => this.addKnockRecord(uid, record))
-      await Promise.all(promises)
-      console.log('[FirestoreService] Batch knock records added')
+      const writes = records.map((record) => ({
+        path: `userData/${uid}/knockRecords/${record.id}`,
+        data: record,
+      }))
+      await this.firestoreRest.batchWrite(writes, idToken)
+      console.log('[FirestoreService] Batch knock records saved:', records.length)
     } catch (error) {
       console.error('[FirestoreService] Batch add knock records failed:', error)
       throw error
@@ -296,46 +345,107 @@ export class FirestoreService {
   }
 
   /**
-   * 获取用户配置
+   * 批量设置每日统计
    */
-  async getUserSettings(uid: string): Promise<FirestoreUserSettings | null> {
+  async batchSetDailyStats(uid: string, stats: DailyStats[], idToken: string): Promise<void> {
     try {
-      const docRef = doc(this.db, 'userSettings', uid)
-      const docSnap = await getDoc(docRef)
-
-      if (docSnap.exists()) {
-        return docSnap.data() as FirestoreUserSettings
-      }
-      return null
+      const writes = stats.map((stat) => ({
+        path: `userData/${uid}/dailyStats/${stat.date}`,
+        data: stat,
+      }))
+      await this.firestoreRest.batchWrite(writes, idToken)
+      console.log('[FirestoreService] Batch daily stats saved:', stats.length)
     } catch (error) {
-      console.error('[FirestoreService] Get user settings failed:', error)
+      console.error('[FirestoreService] Batch set daily stats failed:', error)
       throw error
     }
   }
 
   /**
-   * 设置用户配置
+   * 批量同步数据
    */
-  async setUserSettings(uid: string, settings: UserSettings): Promise<void> {
+  async batchSync(
+    uid: string,
+    data: {
+      userData?: Partial<FirestoreUserData>
+      contacts?: EmergencyContact[]
+      settings?: UserSettings
+      knockRecords?: KnockRecord[]
+      dailyStats?: DailyStats[]
+    },
+    idToken: string
+  ): Promise<void> {
     try {
-      const docRef = doc(this.db, 'userSettings', uid)
-      const firestoreData: Partial<FirestoreUserSettings> = {
-        uid,
-        language: settings.language,
-        deathDetectionConfig: settings.deathDetectionConfig,
-        version: settings.version,
-        updatedAt: Date.now(),
+      const writes: Array<{ path: string; data: any }> = []
+
+      // 用户数据
+      if (data.userData) {
+        const userData: FirestoreUserData = {
+          uid,
+          totalKnocks: data.userData.totalKnocks ?? 0,
+          todayKnocks: data.userData.todayKnocks ?? 0,
+          lastKnockTime: data.userData.lastKnockTime ?? Date.now(),
+          merit: data.userData.merit ?? 0,
+          hp: data.userData.hp ?? 100,
+          consecutiveDays: data.userData.consecutiveDays ?? 0,
+          status: data.userData.status ?? 'alive',
+          updatedAt: Date.now(),
+          ...(data.userData.displayName && { displayName: data.userData.displayName }),
+        }
+        writes.push({ path: `userData/${uid}`, data: userData })
       }
 
-      // 只有当 emailTemplate 存在时才添加到数据中
-      if (settings.emailTemplate) {
-        firestoreData.emailTemplate = settings.emailTemplate
+      // 联系人
+      if (data.contacts) {
+        const contactsData: FirestoreContactsData = {
+          uid,
+          contacts: data.contacts,
+          version: 1,
+          updatedAt: Date.now(),
+        }
+        writes.push({ path: `contacts/${uid}`, data: contactsData })
       }
 
-      await setDoc(docRef, firestoreData as FirestoreUserSettings)
-      console.log('[FirestoreService] User settings saved')
+      // 设置
+      if (data.settings) {
+        const settingsData: FirestoreUserSettings = {
+          uid,
+          language: data.settings.language,
+          deathDetectionConfig: data.settings.deathDetectionConfig,
+          emailTemplate: data.settings.emailTemplate,
+          version: 1,
+          updatedAt: Date.now(),
+        }
+        writes.push({ path: `userSettings/${uid}`, data: settingsData })
+      }
+
+      // 敲击记录
+      if (data.knockRecords) {
+        data.knockRecords.forEach((record) => {
+          writes.push({
+            path: `userData/${uid}/knockRecords/${record.id}`,
+            data: record,
+          })
+        })
+      }
+
+      // 每日统计
+      if (data.dailyStats) {
+        data.dailyStats.forEach((stats) => {
+          writes.push({
+            path: `userData/${uid}/dailyStats/${stats.date}`,
+            data: stats,
+          })
+        })
+      }
+
+      // 批量写入
+      if (writes.length > 0) {
+        await this.firestoreRest.batchWrite(writes, idToken)
+        console.log('[FirestoreService] Batch sync completed:', writes.length, 'writes')
+      }
     } catch (error) {
-      console.error('[FirestoreService] Set user settings failed:', error)
+      console.error('[FirestoreService] Batch sync failed:', error)
       throw error
     }
   }

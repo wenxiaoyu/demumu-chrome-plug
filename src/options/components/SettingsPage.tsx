@@ -69,11 +69,11 @@ export function SettingsPage() {
           const { authService } = await import('../../shared/services/auth-service')
           const currentUser = authService.getCurrentUser()
 
-          if (currentUser) {
+          if (currentUser && currentUser.idToken) {
             // 尝试从 Firestore 获取自定义显示名称
             try {
               const { firestoreService } = await import('../../shared/services/firestore-service')
-              const firestoreUserData = await firestoreService.getUserData(currentUser.uid)
+              const firestoreUserData = await firestoreService.getUserData(currentUser.uid, currentUser.idToken)
 
               if (firestoreUserData?.displayName) {
                 userName = firestoreUserData.displayName
