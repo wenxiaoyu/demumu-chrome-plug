@@ -53,6 +53,13 @@ export const firebaseConfig = {
 console.log('[Firebase] Configuration loaded (REST API mode)');
 `;
 
+// Ensure directory exists
+const configDir = path.dirname(configPath);
+if (!fs.existsSync(configDir)) {
+  fs.mkdirSync(configDir, { recursive: true });
+  console.log('[Firebase Config] Created config directory');
+}
+
 // Write the file
 fs.writeFileSync(configPath, fileContent, 'utf8');
 console.log('[Firebase Config] Created firebase.ts successfully (REST API version)');
