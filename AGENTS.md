@@ -1,22 +1,22 @@
 <!-- OPENSPEC:START -->
 
-# OpenSpec Instructions
+# OpenSpec 强制规则
 
-These instructions are for AI assistants working in this project.
+本项目使用 OpenSpec 进行规范驱动开发（SDD）。**所有新功能、架构变更、重大重构必须通过 OpenSpec 流程管理。**
 
-Always open `@/openspec/AGENTS.md` when the request:
+当用户请求涉及以下内容时，**必须**先创建 OpenSpec change：
 
-- Mentions planning or proposals (words like proposal, spec, change, plan)
-- Introduces new capabilities, breaking changes, architecture shifts, or big performance/security work
-- Sounds ambiguous and you need the authoritative spec before coding
+- 新增功能或能力
+- 修改现有功能行为
+- 架构调整或技术迁移
+- 跨多文件重构
+- 数据模型变更
 
-Use `@/openspec/AGENTS.md` to learn:
+**工作流程：** `/opsx:ff` 或 `/opsx:new` → proposal → specs → design → tasks → `/opsx:apply` → `/opsx:archive`
 
-- How to create and apply change proposals
-- Spec format and conventions
-- Project structure and guidelines
+**例外（可直接修改代码）：** 单文件 bug 修复（< 20 行）、文档更新、依赖升级、格式化修复、翻译更新。
 
-Keep this managed block so 'openspec update' can refresh the instructions.
+详细指引：`openspec/AGENTS.md` | 项目配置：`openspec/config.yaml`
 
 <!-- OPENSPEC:END -->
 
@@ -68,9 +68,9 @@ import { t } from '../../shared/utils/i18n';
 ```javascript
 const translations = {
   // ... 其他翻译
-  "sync_syncNow": "Sync Now",
-  "sync_info1": "💡 Data syncs automatically every 30 minutes",
-};
+  sync_syncNow: 'Sync Now',
+  sync_info1: '💡 Data syncs automatically every 30 minutes',
+}
 ```
 
 **步骤 3：生成英文翻译**
@@ -105,6 +105,7 @@ node scripts/translate-en.js
 使用占位符处理动态内容：
 
 **中文翻译：**
+
 ```json
 {
   "sync_minutesAgo": {
@@ -121,6 +122,7 @@ node scripts/translate-en.js
 ```
 
 **使用方式：**
+
 ```typescript
 t('sync_minutesAgo', String(minutes))
 ```
@@ -139,11 +141,13 @@ t('sync_minutesAgo', String(minutes))
 #### 6. 常见错误
 
 ❌ **错误 1：硬编码文本**
+
 ```typescript
-<h3>数据同步</h3>  // 错误
+<h3>数据同步 < /h3>  / / 错误
 ```
 
 ✅ **正确：**
+
 ```typescript
 <h3>{t('sync_title')}</h3>
 ```
@@ -151,31 +155,35 @@ t('sync_minutesAgo', String(minutes))
 ---
 
 ❌ **错误 2：忘记更新翻译脚本**
+
 ```javascript
 // translate-en.js 中缺少新增的键
 // 导致英文翻译显示中文
 ```
 
 ✅ **正确：**
+
 ```javascript
 const translations = {
   // 添加所有新增的翻译键
-  "sync_title": "Data Sync",
-  "sync_syncNow": "Sync Now",
-};
+  sync_title: 'Data Sync',
+  sync_syncNow: 'Sync Now',
+}
 ```
 
 ---
 
 ❌ **错误 3：翻译键命名不规范**
+
 ```json
 {
-  "button1": "立即同步",  // 不清晰
-  "text": "状态"         // 太通用
+  "button1": "立即同步", // 不清晰
+  "text": "状态" // 太通用
 }
 ```
 
 ✅ **正确：**
+
 ```json
 {
   "sync_syncNow": "立即同步",

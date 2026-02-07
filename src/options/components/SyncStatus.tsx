@@ -4,8 +4,8 @@
  */
 
 import React, { useState, useEffect } from 'react'
-import { syncService, SyncStatus as SyncStatusEnum } from '../../shared/services/sync-service'
-import { authService } from '../../shared/services/auth-service'
+import { SyncStatus as SyncStatusEnum } from '../../shared/services/sync-service'
+import type { AuthState } from '../../shared/types/auth'
 import { t } from '../../shared/utils/i18n'
 import './SyncStatus.css'
 
@@ -16,49 +16,70 @@ export const SyncStatus: React.FC = () => {
   const [isSignedIn, setIsSignedIn] = useState(false)
 
   useEffect(() => {
-    // 加载初始状态
-    loadSyncStatus()
+    loadSyncTime()
+    checkAuthState()
 
-    // 检查登录状态
-    const user = authService.getCurrentUser()
-    setIsSignedIn(!!user)
-
-    // 监听认证状态变化
-    const unsubscribe = authService.onAuthStateChanged((state) => {
-      setIsSignedIn(state.isSignedIn)
-      if (state.isSignedIn) {
-        loadSyncStatus()
+    const handleStorageChange = (changes: { [key: string]: chrome.storage.StorageChange }) => {
+      if (changes.authState) {
+        const newState = changes.authState.newValue as AuthState | undefined
+        setIsSignedIn(newState?.isSignedIn ?? false)
       }
-    })
+      if (changes.lastSyncTime) {
+        const time = changes.lastSyncTime.newValue as number
+        setLastSyncTime(time || 0)
+        if (time) {
+          setSyncStatus(SyncStatusEnum.Success)
+        }
+      }
+    }
 
-    // 定时刷新状态
-    const interval = window.setInterval(loadSyncStatus, 5000)
+    chrome.storage.onChanged.addListener(handleStorageChange)
 
     return () => {
-      unsubscribe()
-      window.clearInterval(interval)
+      chrome.storage.onChanged.removeListener(handleStorageChange)
     }
   }, [])
 
-  const loadSyncStatus = async () => {
-    const status = syncService.getSyncStatus()
-    await syncService.loadLastSyncTime()
+  const loadSyncTime = async () => {
+    try {
+      const result = await chrome.storage.local.get('lastSyncTime')
+      const time = result.lastSyncTime as number
+      if (time) {
+        setLastSyncTime(time)
+        setSyncStatus(SyncStatusEnum.Success)
+      }
+    } catch {
+      // ignore
+    }
+  }
 
-    setSyncStatus(status)
-    setLastSyncTime(syncService.getLastSyncTime())
+  const checkAuthState = async () => {
+    try {
+      const response = await chrome.runtime.sendMessage({ type: 'GET_AUTH_STATE' })
+      if (response.success) {
+        setIsSignedIn(response.data?.isSignedIn ?? false)
+      }
+    } catch {
+      setIsSignedIn(false)
+    }
   }
 
   const handleSyncNow = async () => {
     if (isSyncing || !isSignedIn) return
 
     setIsSyncing(true)
+    setSyncStatus(SyncStatusEnum.Syncing)
     try {
-      const result = await syncService.syncAll()
-      if (result.success) {
-        await loadSyncStatus()
+      const response = await chrome.runtime.sendMessage({ type: 'SYNC_NOW' })
+      if (response.success) {
+        setSyncStatus(SyncStatusEnum.Success)
+        await loadSyncTime()
+      } else {
+        setSyncStatus(SyncStatusEnum.Error)
       }
     } catch (error) {
       console.error('[SyncStatus] Manual sync failed:', error)
+      setSyncStatus(SyncStatusEnum.Error)
     } finally {
       setIsSyncing(false)
     }
@@ -116,9 +137,6 @@ export const SyncStatus: React.FC = () => {
   if (!isSignedIn) {
     return (
       <div className="sync-status">
-        <div className="sync-status-header">
-          <h3>{t('sync_title')}</h3>
-        </div>
         <div className="sync-status-content">
           <p className="sync-status-message">{t('sync_loginRequired')}</p>
         </div>
@@ -129,7 +147,7 @@ export const SyncStatus: React.FC = () => {
   return (
     <div className="sync-status">
       <div className="sync-status-header">
-        <h3>{t('sync_title')}</h3>
+        <span></span>
         <button
           className="sync-now-button"
           onClick={handleSyncNow}

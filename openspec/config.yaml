@@ -1,0 +1,46 @@
+schema: spec-driven
+
+context: |
+  # 还活着吗 (Demumu) - Chrome 插件
+
+  ## 项目概述
+  借鉴"死了么"APP，通过 Chrome 插件实现轻量化的"存活监控"系统，采用敲木鱼的禅意交互方式。
+  核心理念：用禅意的敲木鱼方式让用户保持活跃，通过功德值、生命值等机制增强用户粘性，并提供云端同步和自动邮件通知功能。
+
+  ## 产品定位
+  - 目标用户：关注自己"存活状态"的年轻用户（18-35 岁），喜欢禅意文化
+  - 核心价值：禅意的敲木鱼交互 + 功德值累积 + 生命值系统 + 趣味性
+  - 差异化优势：浏览器原生集成、禅意交互、功德值系统、自动检测活跃度、本地优先隐私友好
+
+  ## 技术栈
+  - 语言：TypeScript (Strict Mode)
+  - 框架：React 19
+  - 构建工具：Vite 7
+  - 插件框架：Chrome Extension Manifest V3
+  - 状态管理：Chrome Storage API
+  - 样式：CSS Modules
+  - 后端：Firebase (Firestore, Authentication, REST API)
+  - 邮件服务：SendGrid
+  - 代码规范：ESLint + Prettier
+  - 国际化：中英文双语（所有 UI 文本必须使用 t() 函数）
+
+  ## 开发阶段
+  - 阶段 0（项目搭建）：100% ✅
+  - 阶段 1（MVP 本地版）：约 85%
+    - M1-M6：100% ✅（核心功能、功德值、HP、可视化、死亡通知、国际化）
+    - M7：认证和同步完成，云端死亡检测和自动邮件通知待完成
+  - 阶段 2（游戏化升级）：计划中
+  - 阶段 3（社交功能）：计划中
+
+  ## 当前版本
+  v1.1.2，已发布到 Chrome Web Store
+
+  ## 团队
+  项目负责人：wenxy，开发：wenxy + AI 助手
+
+# Per-artifact rules (optional)
+# rules:
+#   proposal:
+#     - Keep proposals under 500 words
+#   tasks:
+#     - Break tasks into chunks of max 2 hours

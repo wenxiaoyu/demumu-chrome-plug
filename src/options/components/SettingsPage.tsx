@@ -3,7 +3,6 @@ import type { DeathDetectionConfig, EmailTemplateVariables, UserData } from '../
 import { STORAGE_KEYS } from '../../shared/constants'
 import { EmailPreview } from './EmailPreview'
 import { LanguageSelector } from './LanguageSelector'
-import { SyncStatus } from './SyncStatus'
 import { t } from '../../shared/utils/i18n'
 import './SettingsPage.css'
 
@@ -73,7 +72,10 @@ export function SettingsPage() {
             // 尝试从 Firestore 获取自定义显示名称
             try {
               const { firestoreService } = await import('../../shared/services/firestore-service')
-              const firestoreUserData = await firestoreService.getUserData(currentUser.uid, currentUser.idToken)
+              const firestoreUserData = await firestoreService.getUserData(
+                currentUser.uid,
+                currentUser.idToken
+              )
 
               if (firestoreUserData?.displayName) {
                 userName = firestoreUserData.displayName
@@ -279,9 +281,6 @@ export function SettingsPage() {
 
       {/* 语言选择器 */}
       <LanguageSelector />
-
-      {/* 同步状态 */}
-      <SyncStatus />
 
       {/* 邮件预览 */}
       {emailVariables && <EmailPreview variables={emailVariables} onSendTest={sendTestEmail} />}

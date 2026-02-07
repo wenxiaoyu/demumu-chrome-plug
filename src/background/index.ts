@@ -3,7 +3,7 @@
  *
  * 负责：
  * 1. 状态检测和更新
- * 2. Badge 更新
+ * 2. Badge 更新1
  * 3. 消息处理
  */
 
@@ -29,7 +29,8 @@ initLanguage()
   })
 
 // 初始化认证服务
-authService.initialize()
+authService
+  .initialize()
   .then(() => {
     console.log('[Background] Auth service initialized')
   })

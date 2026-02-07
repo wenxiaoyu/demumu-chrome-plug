@@ -1,7 +1,7 @@
 /**
  * 认证服务 - REST API 版本
  * 使用 Firebase REST API 替代 SDK，符合 Manifest V3 规范
- * 
+ *
  * 负责：
  * 1. Google 登录/登出
  * 2. 用户状态管理
@@ -37,11 +37,11 @@ class AuthServiceRest {
    */
   async initialize(): Promise<void> {
     console.log('[AuthService] Initializing REST API version...')
-    
+
     // 加载保存的认证状态
     const savedState = await this.loadAuthState()
     this.cachedAuthState = savedState
-    
+
     if (savedState.isSignedIn && savedState.user) {
       // 验证 token 是否有效
       if (this.firebaseAuth.isTokenValid(savedState.user.idToken!)) {
@@ -106,7 +106,7 @@ class AuthServiceRest {
   private async launchWebAuthFlow(): Promise<string> {
     const redirectUrl = chrome.identity.getRedirectURL()
     const clientId = '681396856351-la69jc71l4b3msoop2ckuo6jt5ao2q3t.apps.googleusercontent.com'
-    
+
     // 构建 OAuth2 URL
     const authUrl = new URL('https://accounts.google.com/o/oauth2/v2/auth')
     authUrl.searchParams.set('client_id', clientId)
@@ -159,7 +159,7 @@ class AuthServiceRest {
   private generateNonce(): string {
     const array = new Uint8Array(16)
     crypto.getRandomValues(array)
-    return Array.from(array, byte => byte.toString(16).padStart(2, '0')).join('')
+    return Array.from(array, (byte) => byte.toString(16).padStart(2, '0')).join('')
   }
 
   /**
@@ -183,7 +183,7 @@ class AuthServiceRest {
   private async refreshToken(refreshToken: string): Promise<void> {
     try {
       const response = await this.firebaseAuth.refreshToken(refreshToken)
-      
+
       const savedState = await this.loadAuthState()
       if (savedState.user) {
         savedState.user.idToken = response.id_token
@@ -226,7 +226,7 @@ class AuthServiceRest {
       const refreshIn = expiresAt - now - 10 * 60 * 1000 // 提前 10 分钟刷新
 
       if (refreshIn > 0) {
-        this.tokenRefreshTimer = window.setTimeout(async () => {
+        this.tokenRefreshTimer = globalThis.setTimeout(async () => {
           const state = await this.loadAuthState()
           if (state.user?.refreshToken) {
             try {
@@ -238,7 +238,9 @@ class AuthServiceRest {
           }
         }, refreshIn)
 
-        console.log(`[AuthService] Token refresh scheduled in ${Math.round(refreshIn / 1000 / 60)} minutes`)
+        console.log(
+          `[AuthService] Token refresh scheduled in ${Math.round(refreshIn / 1000 / 60)} minutes`
+        )
       }
     } catch (error) {
       console.error('[AuthService] Failed to schedule token refresh:', error)
@@ -294,7 +296,7 @@ class AuthServiceRest {
    */
   async getAuthState(): Promise<AuthState> {
     const state = await this.loadAuthState()
-    
+
     // 检查 token 是否有效
     if (state.isSignedIn && state.user?.idToken) {
       if (!this.firebaseAuth.isTokenValid(state.user.idToken)) {
@@ -320,7 +322,7 @@ class AuthServiceRest {
    */
   async updateDisplayName(displayName: string): Promise<void> {
     const state = await this.loadAuthState()
-    
+
     if (!state.isSignedIn || !state.user?.idToken) {
       throw new Error('Not signed in')
     }
@@ -463,11 +465,11 @@ class AuthServiceRest {
 
       // 检查是否已迁移
       const migrated = await isMigrated()
-      
+
       if (!migrated) {
         console.log('[AuthService] First login detected, migrating data...')
         const result = await migrateLocalDataToCloud(uid, user.idToken)
-        
+
         if (result.success) {
           console.log('[AuthService] Data migration completed:', result.migratedItems)
         } else {

@@ -1,9 +1,5 @@
 .sync-status {
-  background: white;
-  border-radius: 8px;
-  padding: 20px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  margin-bottom: 20px;
+  padding: 0;
 }
 
 .sync-status-header {
@@ -11,42 +7,43 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 16px;
-  padding-bottom: 12px;
-  border-bottom: 1px solid #e5e7eb;
 }
 
 .sync-status-header h3 {
   margin: 0;
-  font-size: 18px;
-  font-weight: 600;
-  color: #1f2937;
+  font-size: 16px;
+  font-weight: 500;
+  color: #4a4035;
 }
 
 .sync-now-button {
   padding: 8px 16px;
-  background: #8b7355;
+  background: #239a3b;
   color: white;
   border: none;
   border-radius: 6px;
   font-size: 14px;
+  font-weight: 500;
   cursor: pointer;
   transition: all 0.2s;
 }
 
 .sync-now-button:hover:not(:disabled) {
-  background: #6d5a44;
+  background: #1c7d30;
   transform: translateY(-1px);
+  box-shadow: 0 2px 6px rgba(35, 154, 59, 0.25);
 }
 
 .sync-now-button:disabled {
-  background: #d1d5db;
+  background: rgba(139, 115, 85, 0.2);
+  color: #8b7355;
   cursor: not-allowed;
 }
 
 .sync-status-content {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
 }
 
 .sync-status-item {
@@ -57,31 +54,34 @@
 
 .sync-status-label {
   font-weight: 500;
-  color: #6b7280;
+  color: #8b7355;
   min-width: 80px;
+  font-size: 14px;
 }
 
 .sync-status-value {
-  color: #1f2937;
+  color: #4a4035;
   font-weight: 500;
+  font-size: 14px;
 }
 
 .sync-status-message {
-  color: #6b7280;
+  color: #8b7355;
   text-align: center;
-  padding: 20px;
+  padding: 16px;
   margin: 0;
+  font-size: 14px;
 }
 
 .sync-status-info {
   margin-top: 12px;
   padding-top: 12px;
-  border-top: 1px solid #e5e7eb;
+  border-top: 1px solid rgba(139, 115, 85, 0.1);
 }
 
 .sync-status-info p {
   margin: 6px 0;
   font-size: 13px;
-  color: #6b7280;
+  color: #8b7355;
   line-height: 1.5;
 }

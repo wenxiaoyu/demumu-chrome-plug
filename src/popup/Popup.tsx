@@ -2,58 +2,58 @@ import './popup.css'
 import { WoodenFish } from './components/WoodenFish'
 import { HPBar } from './components/HPBar'
 import { StatCard } from './components/StatCard'
-// import { LoginButton } from './components/LoginButton';
-// import { UserProfile } from './components/UserProfile';
+import { LoginButton } from './components/LoginButton'
+import { UserProfile } from './components/UserProfile'
 import { useKnock } from './hooks/useKnock'
 import { t, initLanguage } from '../shared/utils/i18n'
 import { useEffect, useState } from 'react'
-// import type { AuthState } from '../shared/types/auth';
+import type { AuthState } from '../shared/types/auth'
 
 function Popup() {
   const { userData, loading, knock } = useKnock()
   const [langReady, setLangReady] = useState(false)
-  // const [authState, setAuthState] = useState<AuthState | null>(null);
-  // const [authLoading, setAuthLoading] = useState(true);
+  const [authState, setAuthState] = useState<AuthState | null>(null)
+  const [authLoading, setAuthLoading] = useState(true)
 
   // 初始化语言
   useEffect(() => {
     initLanguage().then(() => setLangReady(true))
   }, [])
 
-  // 加载认证状态 - 暂时禁用
-  // useEffect(() => {
-  //   loadAuthState();
+  // 加载认证状态
+  useEffect(() => {
+    loadAuthState()
 
-  //   // 监听认证状态变化
-  //   const handleStorageChange = (changes: { [key: string]: chrome.storage.StorageChange }) => {
-  //     if (changes.authState) {
-  //       setAuthState(changes.authState.newValue as AuthState);
-  //     }
-  //   };
+    // 监听认证状态变化
+    const handleStorageChange = (changes: { [key: string]: chrome.storage.StorageChange }) => {
+      if (changes.authState) {
+        setAuthState(changes.authState.newValue as AuthState)
+      }
+    }
 
-  //   chrome.storage.onChanged.addListener(handleStorageChange);
+    chrome.storage.onChanged.addListener(handleStorageChange)
 
-  //   return () => {
-  //     chrome.storage.onChanged.removeListener(handleStorageChange);
-  //   };
-  // }, []);
+    return () => {
+      chrome.storage.onChanged.removeListener(handleStorageChange)
+    }
+  }, [])
 
-  // const loadAuthState = async () => {
-  //   try {
-  //     const response = await chrome.runtime.sendMessage({ type: 'GET_AUTH_STATE' });
-  //     if (response.success) {
-  //       setAuthState(response.data);
-  //     }
-  //   } catch (err) {
-  //     console.error('[Popup] Failed to load auth state:', err);
-  //   } finally {
-  //     setAuthLoading(false);
-  //   }
-  // };
+  const loadAuthState = async () => {
+    try {
+      const response = await chrome.runtime.sendMessage({ type: 'GET_AUTH_STATE' })
+      if (response.success) {
+        setAuthState(response.data)
+      }
+    } catch (err) {
+      console.error('[Popup] Failed to load auth state:', err)
+    } finally {
+      setAuthLoading(false)
+    }
+  }
 
-  // const handleAuthChange = () => {
-  //   loadAuthState();
-  // };
+  const handleAuthChange = () => {
+    loadAuthState()
+  }
 
   if (!langReady || loading) {
     return (
@@ -73,14 +73,13 @@ function Popup() {
 
   return (
     <div className="popup-container">
-      {/* 用户信息区域 - 暂时禁用登录功能 */}
-      {/* {!authLoading && (
-        authState?.isSignedIn && authState.user ? (
+      {/* 用户信息区域 */}
+      {!authLoading &&
+        (authState?.isSignedIn && authState.user ? (
           <UserProfile user={authState.user} onSignOut={handleAuthChange} />
         ) : (
           <LoginButton onLoginSuccess={handleAuthChange} />
-        )
-      )} */}
+        ))}
 
       <main className="popup-main">
         {/* 状态和HP合并的卡片 */}

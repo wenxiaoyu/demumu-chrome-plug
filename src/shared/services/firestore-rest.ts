@@ -1,7 +1,7 @@
 /**
  * Firestore REST API 客户端
  * 符合 Manifest V3 规范
- * 
+ *
  * 参考：https://firebase.google.com/docs/firestore/use-rest-api
  */
 
@@ -20,13 +20,16 @@ export class FirestoreRest {
   async getDocument(path: string, idToken: string): Promise<any> {
     const response = await fetch(`${this.baseUrl}/${path}`, {
       headers: {
-        'Authorization': `Bearer ${idToken}`,
+        Authorization: `Bearer ${idToken}`,
         'Content-Type': 'application/json',
       },
     })
 
     if (!response.ok) {
-      throw new Error(`Failed to get document: ${response.statusText}`)
+      if (response.status === 404) {
+        throw new Error(`Failed to get document: 404 NOT_FOUND`)
+      }
+      throw new Error(`Failed to get document: ${response.status} ${response.statusText}`)
     }
 
     const data = await response.json()
@@ -42,7 +45,7 @@ export class FirestoreRest {
     const response = await fetch(`${this.baseUrl}/${path}`, {
       method: 'PATCH',
       headers: {
-        'Authorization': `Bearer ${idToken}`,
+        Authorization: `Bearer ${idToken}`,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
@@ -51,7 +54,7 @@ export class FirestoreRest {
     })
 
     if (!response.ok) {
-      throw new Error(`Failed to set document: ${response.statusText}`)
+      throw new Error(`Failed to set document: ${response.status} ${response.statusText}`)
     }
 
     return response.json()
@@ -61,7 +64,7 @@ export class FirestoreRest {
    * 批量写入文档
    */
   async batchWrite(writes: Array<{ path: string; data: any }>, idToken: string): Promise<void> {
-    const batchWrites = writes.map(write => ({
+    const batchWrites = writes.map((write) => ({
       update: {
         name: `${this.baseUrl}/${write.path}`,
         fields: this.convertToFirestoreFormat(write.data),
@@ -73,7 +76,7 @@ export class FirestoreRest {
       {
         method: 'POST',
         headers: {
-          'Authorization': `Bearer ${idToken}`,
+          Authorization: `Bearer ${idToken}`,
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ writes: batchWrites }),
@@ -81,7 +84,7 @@ export class FirestoreRest {
     )
 
     if (!response.ok) {
-      throw new Error(`Batch write failed: ${response.statusText}`)
+      throw new Error(`Batch write failed: ${response.status} ${response.statusText}`)
     }
   }
 
@@ -116,7 +119,7 @@ export class FirestoreRest {
         query.structuredQuery.where = {
           compositeFilter: {
             op: 'AND',
-            filters: options.where.map(w => ({
+            filters: options.where.map((w) => ({
               fieldFilter: {
                 field: { fieldPath: w.field },
                 op: w.op,
@@ -129,30 +132,29 @@ export class FirestoreRest {
     }
 
     if (options?.orderBy) {
-      query.structuredQuery.orderBy = [{
-        field: { fieldPath: options.orderBy },
-        direction: 'DESCENDING',
-      }]
+      query.structuredQuery.orderBy = [
+        {
+          field: { fieldPath: options.orderBy },
+          direction: 'DESCENDING',
+        },
+      ]
     }
 
     if (options?.limit) {
       query.structuredQuery.limit = options.limit
     }
 
-    const response = await fetch(
-      `${this.baseUrl.replace('/documents', '')}:runQuery`,
-      {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${idToken}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(query),
-      }
-    )
+    const response = await fetch(`${this.baseUrl.replace('/documents', '')}:runQuery`, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${idToken}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(query),
+    })
 
     if (!response.ok) {
-      throw new Error(`Failed to query collection: ${response.statusText}`)
+      throw new Error(`Failed to query collection: ${response.status} ${response.statusText}`)
     }
 
     const results = await response.json()
@@ -168,12 +170,12 @@ export class FirestoreRest {
     const response = await fetch(`${this.baseUrl}/${path}`, {
       method: 'DELETE',
       headers: {
-        'Authorization': `Bearer ${idToken}`,
+        Authorization: `Bearer ${idToken}`,
       },
     })
 
     if (!response.ok) {
-      throw new Error(`Failed to delete document: ${response.statusText}`)
+      throw new Error(`Failed to delete document: ${response.status} ${response.statusText}`)
     }
   }
 
@@ -201,9 +203,7 @@ export class FirestoreRest {
       return { booleanValue: value }
     }
     if (typeof value === 'number') {
-      return Number.isInteger(value)
-        ? { integerValue: value.toString() }
-        : { doubleValue: value }
+      return Number.isInteger(value) ? { integerValue: value.toString() } : { doubleValue: value }
     }
     if (typeof value === 'string') {
       return { stringValue: value }
@@ -214,7 +214,7 @@ export class FirestoreRest {
     if (Array.isArray(value)) {
       return {
         arrayValue: {
-          values: value.map(v => this.convertValue(v)),
+          values: value.map((v) => this.convertValue(v)),
         },
       }
     }

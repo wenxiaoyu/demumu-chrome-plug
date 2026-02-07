@@ -443,11 +443,6 @@ const translations = {
   "account_signInHint": "Sign in to backup your data to the cloud and sync across devices",
   
   "account_title": "Account Settings",
-  "account_comingSoon": "Cloud Sync Coming Soon",
-  "account_comingSoonDesc": "We're developing cloud data sync feature that allows you to sync data across multiple devices. Stay tuned!",
-  "account_feature1": "Cloud Data Backup",
-  "account_feature2": "Multi-Device Sync",
-  "account_feature3": "Google Account Sign In",
   
   // Login Prompt
   "loginPrompt_title": "Sign in required to send email notifications",

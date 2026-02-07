@@ -204,6 +204,7 @@ function getChineseHtmlBody(): string {
     
     <div class="footer">
       <p>此邮件由"还活着吗"扩展自动发送</p>
+      <p style="margin: 16px 0 8px;"><a href="https://chromewebstore.google.com/detail/demumu/licgifodfmamlcloeobdpcckbcijekgn" style="display: inline-block; padding: 8px 20px; background-color: #239a3b; color: #ffffff; text-decoration: none; border-radius: 6px; font-size: 14px;">安装「还活着吗」守护你关心的人</a></p>
       <p>© 2025 还活着吗 | 关心每一个生命</p>
     </div>
   </div>
@@ -339,6 +340,7 @@ function getEnglishHtmlBody(): string {
     
     <div class="footer">
       <p>This email was automatically sent by "Are You Still Alive" extension</p>
+      <p style="margin: 16px 0 8px;"><a href="https://chromewebstore.google.com/detail/demumu/licgifodfmamlcloeobdpcckbcijekgn" style="display: inline-block; padding: 8px 20px; background-color: #239a3b; color: #ffffff; text-decoration: none; border-radius: 6px; font-size: 14px;">Install "Demumu" to watch over your loved ones</a></p>
       <p>© 2025 Are You Still Alive | Caring for Every Life</p>
     </div>
   </div>
@@ -374,6 +376,7 @@ function getChineseTextBody(): string {
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 此邮件由"还活着吗"扩展自动发送
+安装「还活着吗」守护你关心的人：https://chromewebstore.google.com/detail/demumu/licgifodfmamlcloeobdpcckbcijekgn
 © 2025 还活着吗 | 关心每一个生命
   `.trim()
 }
@@ -405,6 +408,7 @@ If you're concerned about their safety, we recommend contacting them as soon as 
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 This email was automatically sent by "Are You Still Alive" extension
+Install "Demumu" to watch over your loved ones: https://chromewebstore.google.com/detail/demumu/licgifodfmamlcloeobdpcckbcijekgn
 © 2025 Are You Still Alive | Caring for Every Life
   `.trim()
 }

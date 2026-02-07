@@ -90,7 +90,11 @@ export class FirestoreService {
   /**
    * 保存用户数据
    */
-  async saveUserData(uid: string, data: Partial<FirestoreUserData>, idToken: string): Promise<void> {
+  async saveUserData(
+    uid: string,
+    data: Partial<FirestoreUserData>,
+    idToken: string
+  ): Promise<void> {
     try {
       const userData: FirestoreUserData = {
         uid,
@@ -118,7 +122,7 @@ export class FirestoreService {
    */
   async getContacts(uid: string, idToken: string): Promise<EmergencyContact[]> {
     try {
-      const data = await this.firestoreRest.getDocument(`contacts/${uid}`, idToken)
+      const data = await this.firestoreRest.getDocument(`emergencyContacts/${uid}`, idToken)
       if (data && data.contacts) {
         return data.contacts as EmergencyContact[]
       }
@@ -144,7 +148,7 @@ export class FirestoreService {
         updatedAt: Date.now(),
       }
 
-      await this.firestoreRest.setDocument(`contacts/${uid}`, contactsData, idToken)
+      await this.firestoreRest.setDocument(`emergencyContacts/${uid}`, contactsData, idToken)
       console.log('[FirestoreService] Contacts saved')
     } catch (error) {
       console.error('[FirestoreService] Save contacts failed:', error)
@@ -285,7 +289,7 @@ export class FirestoreService {
    */
   async getEmergencyContacts(uid: string, idToken: string): Promise<FirestoreContactsData | null> {
     try {
-      const data = await this.firestoreRest.getDocument(`contacts/${uid}`, idToken)
+      const data = await this.firestoreRest.getDocument(`emergencyContacts/${uid}`, idToken)
       return data as FirestoreContactsData
     } catch (error: any) {
       if (error.message?.includes('404') || error.message?.includes('NOT_FOUND')) {
@@ -312,7 +316,7 @@ export class FirestoreService {
         version,
         updatedAt: Date.now(),
       }
-      await this.firestoreRest.setDocument(`contacts/${uid}`, contactsData, idToken)
+      await this.firestoreRest.setDocument(`emergencyContacts/${uid}`, contactsData, idToken)
       console.log('[FirestoreService] Emergency contacts saved')
     } catch (error) {
       console.error('[FirestoreService] Save emergency contacts failed:', error)
@@ -403,7 +407,7 @@ export class FirestoreService {
           version: 1,
           updatedAt: Date.now(),
         }
-        writes.push({ path: `contacts/${uid}`, data: contactsData })
+        writes.push({ path: `emergencyContacts/${uid}`, data: contactsData })
       }
 
       // 设置
